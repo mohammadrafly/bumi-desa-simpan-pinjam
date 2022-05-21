@@ -12,9 +12,13 @@
                     </li>
                   </ul>
                   <div>
+                  <?php if(session()->get('role') === 'superadmin'): ?>
+
+                  <?php elseif(session()->get('role') === 'admin'): ?>
                     <div class="btn-wrapper">
                       <a href="<?= base_url('dashboard/transaksi/simpanan/add/'.$user); ?>" class="btn btn-otline-dark align-items-center"><i class="icon-plus"></i> Add simpanan</a>
                     </div>
+                  <?php endif ?>
                   </div>
                 </div>
               </div>
@@ -31,7 +35,11 @@
                                 <th>Jenis simpanan</th>
                                 <th>Kode Penarikan</th>
                                 <th>Status simpanan</th>
+                                <?php if(session()->get('role') === 'superadmin'): ?>
+
+                                <?php elseif(session()->get('role') === 'admin'): ?>
                                 <th>Option</th>
+                                <?php endif ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,9 +61,13 @@
                                     <?php endif ?>
                                 </td>
                                 <td>
+                                <?php if(session()->get('role') === 'superadmin'): ?>
+
+                                <?php elseif(session()->get('role') === 'admin'): ?>
                                     <a href="<?= base_url('dashboard/transaksi/simpanan/edit/'.$row->id_simpanan); ?>" class="btn-sm btn-warning text-white"><i class="mdi mdi-table-edit"></i></a>
                                     <a href="<?= base_url('dashboard/transaksi/simpanan/delete/'.$row->id_simpanan); ?>" class="btn-sm btn-danger text-white"><i class="mdi mdi-delete-forever"></i></a>
                                     <a href="<?= base_url('dashboard/transaksi/simpanan/view/'.$row->id_simpanan); ?>" class="btn-sm btn-primary text-white"><i class="mdi mdi-eye"></i></a>
+                                <?php endif ?>
                                 </td>
                             </tr>
                             <?php endforeach; ?>

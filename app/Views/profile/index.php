@@ -46,9 +46,23 @@
                       </div>
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Email</label>
+                          <label class="col-sm-3 col-form-label">Alamat</label>
                           <div class="col-sm-9">
-                            <input class="form-control" placeholder="email" name="email" value="<?= $content['email']; ?>"/>
+                            <select name="alamat" class="form-control" id="exampleSelectGender">
+                              <option selected value="<?= $content['alamat']; ?>"><?= $content['alamat']; ?></option>
+                              <option value="Sarpaan RT 01/RW 01">Sarpaan RT 01/RW 01</option>
+                              <option value="Sarpaan RT 02/RW 01">Sarpaan RT 02/RW 01</option>
+                              <option value="Sarpaan RT 03/RW 01">Sarpaan RT 03/RW 01</option>
+                              <option value="Tal Bantal RT 03/RW 01">Tal Bantal RT 03/RW 01</option>
+                              <option value="Tal Bantal RT 02/RW 02">Tal Bantal RT 02/RW 02</option>
+                              <option value="Tal Bantal RT 03/RW 02">Tal Bantal RT 03/RW 02</option>
+                              <option value="Podak RT 01/RW 03">Podak RT 01/RW 03</option>
+                              <option value="Podak RT 02/RW 03">Podak RT 02/RW 03</option>
+                              <option value="Griya Mapan RT 01/RW 04">Griya Mapan RT 01/RW 04</option>
+                              <option value="Griya Mapan RT 02/RW 04">Griya Mapan RT 02/RW 04</option>
+                              <option value="Griya Mapan RT 03/RW 04">Griya Mapan RT 03/RW 04</option>
+                              <option value="Griya Mapan RT 04/RW 04">Griya Mapan RT 04/RW 04</option>
+                            </select>
                           </div>
                         </div>
                       </div>
@@ -59,14 +73,6 @@
                           <label class="col-sm-3 col-form-label">NIK</label>
                           <div class="col-sm-9">
                             <input class="form-control" placeholder="NIK" name="nik" value="<?= $content['nik']; ?>" disabled/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Alamat</label>
-                          <div class="col-sm-9">
-                            <input class="form-control" placeholder="alamat" name="alamat" value="<?= $content['alamat']; ?>"/>
                           </div>
                         </div>
                       </div>

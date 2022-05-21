@@ -23,10 +23,6 @@
                       <input type="number" name="nominal_permohonan" class="form-control" id="exampleInputName1" placeholder="Nominal">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputName1">Deskripsi</label>
-                      <textarea type="text" name="deskripsi_permohonan" class="form-control" id="exampleInputName1" placeholder="Deskripsi"></textarea>
-                    </div>
-                    <div class="form-group">
                       <label for="exampleSelectGender">Jenis Permohonan</label>
                         <select name="jenis_permohonan" class="form-control" id="exampleSelectGender">
                           <option value="SIMPAN">SIMPAN</option>

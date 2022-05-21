@@ -40,7 +40,9 @@ $routes->group('dashboard', ['filter' => 'authGuard'], function ($routes) {
     $routes->group('profile', function ($routes) {
         $routes->get('u/(:num)', 'ProfileController::index/$1');
         $routes->post('update', 'ProfileController::update');
+        $routes->get('faq', 'ProfileController::faq');
     });
+    $routes->get('laporan', 'DashboardController::laporan' );
     $routes->group('my/permohonan', function ($routes) {
         $routes->get('u/(:num)', 'PermohonanController::indexPersonal/$1');
         $routes->get('u/(:num)/new', 'PermohonanController::addPersonal/$1');
@@ -53,7 +55,7 @@ $routes->group('dashboard', ['filter' => 'authGuard'], function ($routes) {
         $routes->get('u/(:num)/penarikan', 'PenarikanController::indexPersonal/$1');
         $routes->get('u/(:num)/pembayaran', 'PembayaranController::indexPersonal/$1');
     });
-    $routes->group('pengguna', ['filter' => 'backEndGuardAdmin'], function ($routes) {
+    $routes->group('pengguna', ['filter' => 'backEndGuard'], function ($routes) {
         $routes->get('/', 'PenggunaController::index');
         $routes->get('add', 'PenggunaController::add');
         $routes->post('store', 'PenggunaController::store');

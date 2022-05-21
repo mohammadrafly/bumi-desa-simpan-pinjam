@@ -11,13 +11,6 @@
                       <a class="nav-link" id="home-tab" data-bs-toggle="tab" role="tab" aria-controls="overview" aria-selected="true"><?= $pages; ?></a>
                     </li>
                   </ul>
-                  <div>
-                    <div class="btn-wrapper">
-                      <a href="<?= base_url('dashboard/pengguna/add'); ?>" class="btn btn-otline-dark align-items-center"><i class="icon-plus"></i> Add Pengguna</a>
-                      <a href="<?= base_url('#'); ?>" class="btn btn-otline-dark"><i class="icon-printer"></i> Print</a>
-                      <a href="<?= base_url('dashboard/pengguna/export'); ?>" class="btn btn-primary text-white me-0"><i class="icon-download"></i> Export</a>
-                    </div>
-                  </div>
                 </div>
               </div>
               <div class="col-lg-12 grid-margin stretch-card">

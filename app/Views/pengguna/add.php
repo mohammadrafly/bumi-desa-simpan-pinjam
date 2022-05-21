@@ -17,10 +17,6 @@
                       <input type="text" name="username" class="form-control" id="exampleInputName1" placeholder="Username">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputEmail3">Email address</label>
-                      <input type="email" name="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
-                    </div>
-                    <div class="form-group">
                       <label for="exampleInputPassword4">Password</label>
                       <input type="password" name="password" class="form-control" id="exampleInputPassword4" placeholder="Password">
                     </div>
@@ -44,8 +40,21 @@
                         </select>
                     </div>
                     <div class="form-group">
-                      <label for="exampleTextarea1">Alamat</label>
-                      <textarea name="alamat" class="form-control" id="exampleTextarea1" rows="4"></textarea>
+                      <label for="exampleSelectGender">Alamat</label>
+                        <select name="alamat" class="form-control" id="exampleSelectGender">
+                          <option value="Sarpaan RT 01/RW 01">Sarpaan RT 01/RW 01</option>
+                          <option value="Sarpaan RT 02/RW 01">Sarpaan RT 02/RW 01</option>
+                          <option value="Sarpaan RT 03/RW 01">Sarpaan RT 03/RW 01</option>
+                          <option value="Tal Bantal RT 03/RW 01">Tal Bantal RT 03/RW 01</option>
+                          <option value="Tal Bantal RT 02/RW 02">Tal Bantal RT 02/RW 02</option>
+                          <option value="Tal Bantal RT 03/RW 02">Tal Bantal RT 03/RW 02</option>
+                          <option value="Podak RT 01/RW 03">Podak RT 01/RW 03</option>
+                          <option value="Podak RT 02/RW 03">Podak RT 02/RW 03</option>
+                          <option value="Griya Mapan RT 01/RW 04">Griya Mapan RT 01/RW 04</option>
+                          <option value="Griya Mapan RT 02/RW 04">Griya Mapan RT 02/RW 04</option>
+                          <option value="Griya Mapan RT 03/RW 04">Griya Mapan RT 03/RW 04</option>
+                          <option value="Griya Mapan RT 04/RW 04">Griya Mapan RT 04/RW 04</option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary me-2">Submit</button>
                     <button class="btn btn-light">Cancel</button>

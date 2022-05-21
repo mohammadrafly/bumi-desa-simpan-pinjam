@@ -12,11 +12,13 @@
                     </li>
                   </ul>
                   <div>
+                  <?php if(session()->get('role') === 'superadmin'): ?>
+
+                  <?php elseif(session()->get('role') === 'admin'): ?>
                     <div class="btn-wrapper">
                       <a href="<?= base_url('dashboard/pengguna/add'); ?>" class="btn btn-otline-dark align-items-center"><i class="icon-plus"></i> Add Pengguna</a>
-                      <a href="<?= base_url('#'); ?>" class="btn btn-otline-dark"><i class="icon-printer"></i> Print</a>
-                      <a href="<?= base_url('dashboard/pengguna/export'); ?>" class="btn btn-primary text-white me-0"><i class="icon-download"></i> Export</a>
                     </div>
+                  <?php endif ?>
                   </div>
                 </div>
               </div>
@@ -33,9 +35,12 @@
                                 <th>Gender</th>
                                 <th>NIK</th>
                                 <th>Role</th>
-                                <th>Email</th>
                                 <th>Joined</th>
+                                <?php if(session()->get('role') === 'superadmin'): ?>
+
+                                <?php elseif(session()->get('role') === 'admin'): ?>
                                 <th>Option</th>
+                                <?php endif ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,12 +55,15 @@
                                 <td><?php echo $row['gender']; ?></td>
                                 <td><?php echo $row['nik']; ?></td>
                                 <td><?php echo $row['role']; ?></td>
-                                <td><?php echo $row['email']; ?></td>
-                                <td><?= $row['created_at']; ?></td>
+                                <td><?= $row['created']; ?></td>
+                                <?php if(session()->get('role') === 'superadmin'): ?>
+
+                                <?php elseif(session()->get('role') === 'admin'): ?>
                                 <td>
                                     <a href="<?= base_url('dashboard/pengguna/edit/'.$row['id']); ?>" class="btn-sm btn-warning text-white"><i class="mdi mdi-table-edit"></i></a>
                                     <a href="<?= base_url('dashboard/pengguna/delete/'.$row['id']); ?>" class="btn-sm btn-danger text-white"><i class="mdi mdi-delete-forever"></i></a>
                                 </td>
+                                <?php endif ?>
                             </tr>
                             <?php endforeach; ?>
                             <?php endif; ?>

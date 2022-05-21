@@ -27,9 +27,8 @@ class UserController extends BaseController
                     'password'  => $dataUser['password'],
                     'id'        => $dataUser['id'],
                     'name'      => $dataUser['name'],
-                    'email'     => $dataUser['email'],
                     'nik'       => $dataUser['nik'],
-                    'created_at'=> $dataUser['created_at'],
+                    'created'=> $dataUser['created'],
                     'WesLogin'  => TRUE,
                     'role'      => $dataUser['role'],
                 ]);

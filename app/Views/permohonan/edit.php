@@ -22,10 +22,6 @@
                       <input type="number" name="nominal_permohonan" class="form-control" id="exampleInputName1" placeholder="Nominal" value="<?= $data['nominal_permohonan']; ?>" disabled>
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputName1">Deskripsi</label>
-                      <textarea type="text" name="deskripsi_permohonan" class="form-control" id="exampleInputName1" placeholder="Deskripsi" disabled><?= $data['deskripsi_permohonan']; ?></textarea>
-                    </div>
-                    <div class="form-group">
                       <label for="exampleSelectGender">Jenis Permohonan</label>
                         <select name="jenis_permohonan" class="form-control" id="exampleSelectGender" disabled>
                           <option selected value="<?= $data['jenis_permohonan']; ?>"><?= $data['jenis_permohonan']; ?></option>

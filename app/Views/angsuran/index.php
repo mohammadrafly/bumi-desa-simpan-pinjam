@@ -12,9 +12,13 @@
                     </li>
                   </ul>
                   <div>
+                  <?php if(session()->get('role') === 'superadmin'): ?>
+
+                  <?php elseif(session()->get('role') === 'admin'): ?>
                     <div class="btn-wrapper">
                       <a href="<?= base_url('dashboard/transaksi/angsuran/add/'.$user); ?>" class="btn btn-otline-dark align-items-center"><i class="icon-plus"></i> Add angsuran</a>
                     </div>
+                  <?php endif ?>
                   </div>
                 </div>
               </div>
@@ -53,10 +57,14 @@
                                     <?php endif ?>
                                 </td>
                                 <td>
+                                <?php if(session()->get('role') === 'superadmin'): ?>
+                                    <a href="<?= base_url('dashboard/transaksi/pembayaran/angsuran/'.$row->id_angsuran); ?>" class="btn-sm btn-secondary text-black"><i class="mdi mdi-credit-card-multiple"></i></a>
+                                <?php elseif(session()->get('role') === 'admin'): ?>
                                     <a href="<?= base_url('dashboard/transaksi/angsuran/edit/'.$row->id_angsuran); ?>" class="btn-sm btn-warning text-white"><i class="mdi mdi-table-edit"></i></a>
                                     <a href="<?= base_url('dashboard/transaksi/angsuran/delete/'.$row->id_angsuran); ?>" class="btn-sm btn-danger text-white"><i class="mdi mdi-delete-forever"></i></a>
                                     <a href="<?= base_url('dashboard/transaksi/angsuran/view/'.$row->id_angsuran); ?>" class="btn-sm btn-primary text-white"><i class="mdi mdi-eye"></i></a>
                                     <a href="<?= base_url('dashboard/transaksi/pembayaran/angsuran/'.$row->id_angsuran); ?>" class="btn-sm btn-secondary text-black"><i class="mdi mdi-credit-card-multiple"></i></a>
+                                <?php endif ?>
                                 </td>
                             </tr>
                             <?php endforeach; ?>

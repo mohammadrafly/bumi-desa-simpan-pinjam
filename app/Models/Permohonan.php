@@ -18,7 +18,6 @@ class permohonan extends Model
         'nik',
         'judul_permohonan',
         'nominal_permohonan',
-        'deskripsi_permohonan',
         'jenis_permohonan',
         'status_permohonan',
     ];

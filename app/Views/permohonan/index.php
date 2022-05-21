@@ -12,10 +12,13 @@
                     </li>
                   </ul>
                   <div>
+                  <?php if(session()->get('role') === 'superadmin'): ?>
+
+                  <?php elseif(session()->get('role') === 'admin'): ?>
                     <div class="btn-wrapper">
                       <a href="<?= base_url('dashboard/permohonan/add'); ?>" class="btn btn-otline-dark align-items-center"><i class="icon-plus"></i> Add permohonan</a>
-                      <a href="<?= base_url('dashboard/permohonan/export'); ?>" class="btn btn-primary text-white me-0"><i class="icon-download"></i> Export</a>
                     </div>
+                  <?php endif ?>
                   </div>
                 </div>
               </div>
@@ -29,13 +32,16 @@
                                 <th>No</th>
                                 <th>ID permohonan</th>
                                 <th>Judul</th>
-                                <th>Deskripsi</th>
                                 <th>Nominal</th>
                                 <th>NIK</th>
                                 <th>Jenis Permohonan</th>
                                 <th>Status Permohonan</th>
                                 <th>Waktu Dikirim</th>
+                                <?php if(session()->get('role') === 'superadmin'): ?>
+
+                                <?php elseif(session()->get('role') === 'admin'): ?>
                                 <th>Option</th>
+                                <?php endif ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,7 +53,6 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $row['id_permohonan']; ?></td>
                                 <td><?= $row['judul_permohonan']; ?></td>
-                                <td><?= $row['deskripsi_permohonan']; ?></td>
                                 <td><?= $row['nominal_permohonan']; ?></td>
                                 <td><?= $row['nik']; ?></td>
                                 <td><?= $row['jenis_permohonan']; ?></td>
@@ -62,8 +67,12 @@
                                 </td>
                                 <td><?= $row['created_at']; ?></td>
                                 <td>
+                                <?php if(session()->get('role') === 'superadmin'): ?>
+
+                                <?php elseif(session()->get('role') === 'admin'): ?>
                                     <a href="<?= base_url('dashboard/permohonan/edit/'.$row['id_permohonan']); ?>" class="btn-sm btn-warning text-white"><i class="mdi mdi-table-edit"></i></a>
                                     <a href="<?= base_url('dashboard/permohonan/delete/'.$row['id_permohonan']); ?>" class="btn-sm btn-danger text-white"><i class="mdi mdi-delete-forever"></i></a>
+                                <?php endif ?>
                                 </td>
                             </tr>
                             <?php endforeach; ?>

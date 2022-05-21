@@ -5,6 +5,8 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\Permohonan;
 use App\Models\User;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class PermohonanController extends BaseController
 {
@@ -55,12 +57,6 @@ class PermohonanController extends BaseController
                     'required' => '{field} harus diisi',
                 ],
             ],
-            'deskripsi_permohonan' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} Harus diisi',
-                ]
-            ],
             'jenis_permohonan' => [
                 'rules' => 'required',
                 'errors' => [
@@ -76,7 +72,6 @@ class PermohonanController extends BaseController
             'nik' => $this->request->getVar('nik'),
             'judul_permohonan' => $this->request->getVar('judul_permohonan'),
             'nominal_permohonan'   => $this->request->getVar('nominal_permohonan'),
-            'deskripsi_permohonan' => $this->request->getVar('deskripsi_permohonan'),
             'jenis_permohonan' => $this->request->getVar('jenis_permohonan'),
             'statu_permohonan' => 'HOLD',
         ]);
@@ -134,36 +129,34 @@ class PermohonanController extends BaseController
         $spreadsheet = new Spreadsheet();
         // tulis header/nama kolom 
         $spreadsheet->setActiveSheetIndex(0)
-                    ->setCellValue('A1', 'ID permohonan')
-                    ->setCellValue('B1', 'judul_permohonan')
-                    ->setCellValue('C1', 'Nama')
-                    ->setCellValue('D1', 'jenis_permohonan')
-                    ->setCellValue('E1', 'statu_permohonan')
-                    ->setCellValue('F1', 'deskripsi_permohonan')
-                    ->setCellValue('G1', 'NIK')
-                    ->setCellValue('H1', 'Join');
+                    ->setCellValue('A1', 'ID')
+                    ->setCellValue('B1', 'NIK')
+                    ->setCellValue('C1', 'Judul')
+                    ->setCellValue('D1', 'Nominal')
+                    ->setCellValue('E1', 'Jenis')
+                    ->setCellValue('F1', 'Status')
+                    ->setCellValue('G1', 'Dibuat');
         
         $column = 2;
-        // tulis data permohonan ke cell
+        // tulis data pinjaman ke cell
         foreach($data as $data) {
             $spreadsheet->setActiveSheetIndex(0)
-                        ->setCellValue('A' . $column, $data['id'])
-                        ->setCellValue('B' . $column, $data['judul_permohonan'])
-                        ->setCellValue('C' . $column, $data['nik'])
-                        ->setCellValue('D' . $column, $data['jenis_permohonan'])
-                        ->setCellValue('E' . $column, $data['statu_permohonan'])
-                        ->setCellValue('F' . $column, $data['deskripsi_permohonan'])
-                        ->setCellValue('G' . $column, $data['nik'])
-                        ->setCellValue('H' . $column, $data['created_at']);
+                        ->setCellValue('A' . $column, $data['id_permohonan'])
+                        ->setCellValue('B' . $column, $data['nik'])
+                        ->setCellValue('C' . $column, $data['judul_permohonan'])
+                        ->setCellValue('D' . $column, $data['nominal_permohonan'])
+                        ->setCellValue('E' . $column, $data['jenis_permohonan'])
+                        ->setCellValue('F' . $column, $data['status_permohonan'])
+                        ->setCellValue('G' . $column, $data['created_at']);
             $column++;
         }
         // tulis dalam format .xlsx
         $writer = new Xlsx($spreadsheet);
-        $filenik = 'Rekap permohonan';
+        $fileName = 'Rekap Permohonan';
 
         // Redirect hasil generate xlsx ke web client
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filenik='.$filenik.'.xlsx');
+        header('Content-Disposition: attachment;filename='.$fileName.'.xlsx');
         header('Cache-Control: max-age=0');
 
         $writer->save('php://output');
@@ -218,12 +211,6 @@ class PermohonanController extends BaseController
                     'required' => '{field} harus diisi',
                 ],
             ],
-            'deskripsi_permohonan' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} Harus diisi',
-                ]
-            ],
             'jenis_permohonan' => [
                 'rules' => 'required',
                 'errors' => [
@@ -239,7 +226,6 @@ class PermohonanController extends BaseController
             'nik' => $this->request->getVar('nik'),
             'judul_permohonan' => $this->request->getVar('judul_permohonan'),
             'nominal_permohonan'   => $this->request->getVar('nominal_permohonan'),
-            'deskripsi_permohonan' => $this->request->getVar('deskripsi_permohonan'),
             'jenis_permohonan' => $this->request->getVar('jenis_permohonan'),
             'statu_permohonan' => 'HOLD',
         ]);

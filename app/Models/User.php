@@ -20,7 +20,6 @@ class User extends Model
         'password',
         'nik',
         'role',
-        'email',
         'alamat'
     ];
 

@@ -29,7 +29,6 @@
                                 <th>No</th>
                                 <th>ID permohonan</th>
                                 <th>Judul</th>
-                                <th>Deskripsi</th>
                                 <th>Nominal</th>
                                 <th>NIK</th>
                                 <th>Jenis Permohonan</th>
@@ -46,7 +45,6 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $row->id_permohonan; ?></td>
                                 <td><?= $row->judul_permohonan; ?></td>
-                                <td><?= $row->deskripsi_permohonan; ?></td>
                                 <td><?= number_to_currency($row->nominal_permohonan, 'IDR'); ?></td>
                                 <td><?= $row->nik; ?></td>
                                 <td><?= $row->jenis_permohonan; ?></td>

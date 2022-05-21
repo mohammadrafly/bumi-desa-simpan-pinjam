@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\Angsuran;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class AngsuranController extends BaseController
 {
@@ -125,7 +127,6 @@ class AngsuranController extends BaseController
         // tulis header/nama kolom 
         $spreadsheet->setActiveSheetIndex(0)
                     ->setCellValue('A1', 'ID angsuran')
-                    ->setCellValue('B1', 'Nama')
                     ->setCellValue('C1', 'Waktu')
                     ->setCellValue('D1', 'Status Angsuran')
                     ->setCellValue('E1', 'Nominal')
@@ -137,8 +138,7 @@ class AngsuranController extends BaseController
         // tulis data angsuran ke cell
         foreach($data as $data) {
             $spreadsheet->setActiveSheetIndex(0)
-                        ->setCellValue('A' . $column, $data['id'])
-                        ->setCellValue('B' . $column, $data['name'])
+                        ->setCellValue('A' . $column, $data['id_angsuran'])
                         ->setCellValue('C' . $column, $data['waktu'])
                         ->setCellValue('D' . $column, $data['status_angsuran'])
                         ->setCellValue('E' . $column, $data['nominal'])

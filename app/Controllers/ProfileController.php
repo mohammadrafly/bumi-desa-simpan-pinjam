@@ -17,6 +17,14 @@ class ProfileController extends BaseController
         return view('profile/index', $data);
     }
 
+    public function faq()
+    {
+        $data = [
+            'pages'   => 'FAQ'
+        ];
+        return view('profile/faq', $data);
+    }
+
     public function update()
     {
         if (!$this->validate([
@@ -55,7 +63,6 @@ class ProfileController extends BaseController
             'name' => $this->request->getVar('name'),
             'username' => $this->request->getVar('username'),
             'alamat' => $this->request->getVar('alamat'),
-            'email' => $this->request->getVar('email'),
         ];
         $model->update($id, $data);
         session()->setFlashData('berhasil','Pengguna telah diupdate!');

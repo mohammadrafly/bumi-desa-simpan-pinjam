@@ -12,6 +12,14 @@ use App\Models\Penarikan;
 
 class DashboardController extends BaseController
 {
+    public function laporan()
+    {
+        $data = [
+            'pages' => 'Laporan'
+        ];
+        return view('laporan/index', $data);
+    }
+
     public function index()
     {
         helper('number');
@@ -48,6 +56,15 @@ class DashboardController extends BaseController
         $resultPenarikan = $penarikan->select('sum(nominal) as sumQuantities')->first();
         $totalPenarikan = $resultPenarikan['sumQuantities'];
 
+        $usersSimpanan = $simpanan->select('MONTH(simpanan.created_at) AS time, COUNT(id_simpanan) AS total')
+        ->join('users', 'users.nik = simpanan.nik')
+        ->groupBy('MONTH(simpanan.created_at)')
+        ->get();
+        $usersPinjaman = $pinjaman->select('MONTH(pinjaman.created_at) AS waktu, COUNT(id_pinjaman) AS jumlah')
+        ->join('users', 'users.nik = pinjaman.nik')
+        ->groupBy('MONTH(pinjaman.created_at)')
+        ->get();
+
         $data = [
             'pages' => 'Dashboard',
             'total_pinjaman' => $totalPinjaman,
@@ -55,6 +72,10 @@ class DashboardController extends BaseController
             'total_angsuran' => $totalAngsuran,
             'total_pembayaran' => $totalPembayaran,
             'total_penarikan' => $totalPenarikan,
+            'pinjaman' => $pinjaman->getPinjamanLimit6()->getResult(),
+            'simpanan' => $simpanan->getSimpananLimit6()->getResult(),
+            'grafikSimpanan' => $usersSimpanan,
+            'grafikPinjaman' => $usersPinjaman,
         ];
         return view('dashboard/index', $data);
     }

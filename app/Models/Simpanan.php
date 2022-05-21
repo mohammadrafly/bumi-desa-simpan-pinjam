@@ -67,7 +67,7 @@ class Simpanan extends Model
     {
         $query = $this->db->table('simpanan')
             ->join('users', 'users.nik = simpanan.nik')
-            ->orderBy('created_at', 'DESC')
+            ->orderBy('simpanan.created_at', 'DESC')
             ->limit(6)
             ->get();
         return $query;
