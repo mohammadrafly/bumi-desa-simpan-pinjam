@@ -69,7 +69,7 @@ class Pinjaman extends Model
         $query = $this->db->table('pinjaman')
             ->join('users', 'users.nik = pinjaman.nik')
             ->orderBy('pinjaman.created_at', 'DESC')
-            ->limit(6)
+            ->limit(10)
             ->get();
         return $query;
     }

@@ -33,11 +33,7 @@
                                 <th>Id pembayaran</th>
                                 <th>Nominal</th>
                                 <th>Waktu Transaksi</th>
-                                <?php if(session()->get('role') === 'superadmin'): ?>
-
-                                <?php elseif(session()->get('role') === 'admin'): ?>
                                 <th>Option</th>
-                                <?php endif ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,13 +46,9 @@
                                 <td><?= $row->id_pembayaran; ?></td>
                                 <td><?= number_to_currency($row->nominal, 'IDR'); ?></td>
                                 <td><?= $row->created_at; ?></td>
-                                <?php if(session()->get('role') === 'superadmin'): ?>
-
-                                <?php elseif(session()->get('role') === 'admin'): ?>
                                 <td>
                                     <a href="<?= base_url('dashboard/transaksi/pembayaran/view/'.$row->id_pembayaran); ?>" class="btn-sm btn-primary text-white"><i class="mdi mdi-eye"></i></a>
                                 </td>
-                                <?php endif ?>
                             </tr>
                             <?php endforeach; ?>
                             <?php endif; ?>

@@ -58,6 +58,7 @@
                                 </td>
                                 <td>
                                 <?php if(session()->get('role') === 'superadmin'): ?>
+                                    <a href="<?= base_url('dashboard/transaksi/angsuran/view/'.$row->id_angsuran); ?>" class="btn-sm btn-primary text-white"><i class="mdi mdi-eye"></i></a>
                                     <a href="<?= base_url('dashboard/transaksi/pembayaran/angsuran/'.$row->id_angsuran); ?>" class="btn-sm btn-secondary text-black"><i class="mdi mdi-credit-card-multiple"></i></a>
                                 <?php elseif(session()->get('role') === 'admin'): ?>
                                     <a href="<?= base_url('dashboard/transaksi/angsuran/edit/'.$row->id_angsuran); ?>" class="btn-sm btn-warning text-white"><i class="mdi mdi-table-edit"></i></a>

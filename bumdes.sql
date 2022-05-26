@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 15, 2022 at 03:46 AM
+-- Generation Time: May 23, 2022 at 08:58 AM
 -- Server version: 5.7.33
--- PHP Version: 7.4.19
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -128,7 +127,6 @@ CREATE TABLE `permohonan` (
   `nik` varchar(255) NOT NULL,
   `judul_permohonan` varchar(255) NOT NULL,
   `nominal_permohonan` varchar(255) NOT NULL,
-  `deskripsi_permohonan` text NOT NULL,
   `jenis_permohonan` enum('SIMPAN','PINJAM','PENARIKAN') NOT NULL,
   `status_permohonan` enum('HOLD','DITERIMA','DITOLAK') NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -139,13 +137,13 @@ CREATE TABLE `permohonan` (
 -- Dumping data for table `permohonan`
 --
 
-INSERT INTO `permohonan` (`id_permohonan`, `nik`, `judul_permohonan`, `nominal_permohonan`, `deskripsi_permohonan`, `jenis_permohonan`, `status_permohonan`, `created_at`, `updated_at`) VALUES
-(1, '351589729823728', 'test', '1500000', 'dest', 'SIMPAN', 'DITOLAK', '2022-05-12 03:07:41', '2022-05-12 03:07:41'),
-(4, '3512323423423', 'test', '150000', 'test', 'PENARIKAN', 'HOLD', '2022-05-12 08:51:05', '2022-05-12 08:51:05'),
-(3, '3512361231826318', 'test', '150000', 'test', 'PENARIKAN', 'HOLD', '2022-05-12 03:22:10', '2022-05-12 03:22:10'),
-(5, '3512323423423', 'test', '15000', 'test', 'PINJAM', 'HOLD', '2022-05-12 09:09:48', '2022-05-12 09:09:48'),
-(6, '3512323423423', 'test', '156000', 'test', 'SIMPAN', 'HOLD', '2022-05-12 09:12:56', '2022-05-12 09:12:56'),
-(7, '3512323423423', 'test', '12312312', 'testttt', 'PINJAM', 'HOLD', '2022-05-12 09:53:03', '2022-05-12 09:53:03');
+INSERT INTO `permohonan` (`id_permohonan`, `nik`, `judul_permohonan`, `nominal_permohonan`, `jenis_permohonan`, `status_permohonan`, `created_at`, `updated_at`) VALUES
+(1, '351589729823728', 'test', '1500000', 'SIMPAN', 'DITOLAK', '2022-05-12 03:07:41', '2022-05-12 03:07:41'),
+(4, '3512323423423', 'test', '150000', 'PENARIKAN', 'HOLD', '2022-05-12 08:51:05', '2022-05-12 08:51:05'),
+(3, '3512361231826318', 'test', '150000', 'PENARIKAN', 'HOLD', '2022-05-12 03:22:10', '2022-05-12 03:22:10'),
+(5, '3512323423423', 'test', '15000', 'PINJAM', 'HOLD', '2022-05-12 09:09:48', '2022-05-12 09:09:48'),
+(6, '3512323423423', 'test', '156000', 'SIMPAN', 'HOLD', '2022-05-12 09:12:56', '2022-05-12 09:12:56'),
+(7, '3512323423423', 'test', '12312312', 'PINJAM', 'HOLD', '2022-05-12 09:53:03', '2022-05-12 09:53:03');
 
 -- --------------------------------------------------------
 
@@ -212,9 +210,8 @@ CREATE TABLE `users` (
   `role` enum('superadmin','admin','customer') NOT NULL,
   `gender` enum('laki-laki','perempuan') NOT NULL,
   `password` varchar(255) NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
   `alamat` text NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -222,10 +219,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `username`, `nik`, `role`, `gender`, `password`, `email`, `alamat`, `created_at`, `updated_at`) VALUES
-(7, 'customer', 'customer', '3512323423423', 'customer', 'laki-laki', '$2y$10$Ck593/ybbwnN6ysN8EdjpeKhJXQv.zWvY6TSU5hkkZ5drXzyc8KGO', 'customer@gmail.com', 'Madura', '2022-05-12 07:07:25', '2022-05-12 07:07:25'),
-(8, 'admin bumdes', 'admin', '3512361293182639', 'admin', 'laki-laki', '$2y$10$1k2bogNCgGvGSZAJHqGpCOEgXXDDeLYYokXmcs9ygldr4q2IhFJz2', 'adminbumdes@gmail.com', 'Madura', '2022-05-12 07:34:45', '2022-05-12 07:34:45'),
-(5, 'bumdes', 'superadmin', '3512361231826318', 'superadmin', 'laki-laki', '$2a$12$VztwJpBNyGlt2IopJmP.VuleiZThrfUCg1nJ4WO0BOVVvTyHqWS4O', 'bumdes@gmail.com', 'Madura', '2022-05-11 03:04:03', '2022-05-11 03:04:03');
+INSERT INTO `users` (`id`, `name`, `username`, `nik`, `role`, `gender`, `password`, `alamat`, `created`, `updated_at`) VALUES
+(7, 'customer', 'customer', '3512323423423', 'customer', 'laki-laki', '$2y$10$Ck593/ybbwnN6ysN8EdjpeKhJXQv.zWvY6TSU5hkkZ5drXzyc8KGO', 'Madura', '2022-05-12 07:07:25', '2022-05-12 07:07:25'),
+(8, 'admin bumdes', 'admin', '3512361293182639', 'admin', 'laki-laki', '$2y$10$1k2bogNCgGvGSZAJHqGpCOEgXXDDeLYYokXmcs9ygldr4q2IhFJz2', 'Sarpaan RT 03/RW 01', '2022-05-12 07:34:45', '2022-05-12 07:34:45'),
+(5, 'bumdes', 'superadmin', '3512361231826318', 'superadmin', 'laki-laki', '$2a$12$VztwJpBNyGlt2IopJmP.VuleiZThrfUCg1nJ4WO0BOVVvTyHqWS4O', 'Sarpaan RT 01/RW 01', '2022-05-11 03:04:03', '2022-05-11 03:04:03');
 
 --
 -- Indexes for dumped tables

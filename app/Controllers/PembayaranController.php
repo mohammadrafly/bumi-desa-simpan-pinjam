@@ -37,12 +37,6 @@ class PembayaranController extends BaseController
     public function store()
     {
         if (!$this->validate([
-            'id_pembayaran' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} Harus diisi',
-                ]
-            ],
             'nominal' => [
                 'rules' => 'required',
                 'errors' => [
@@ -55,7 +49,7 @@ class PembayaranController extends BaseController
         }
         $model = new pembayaran();
         $model->insert([
-            'id_pembayaran'   => $this->request->getVar('id_pembayaran'),
+            'id_angsuran'   => $this->request->getVar('id_angsuran'),
             'nominal' => $this->request->getVar('nominal'),
         ]);
         session()->setFlashData('message','Berhasil menambah pembayaran');

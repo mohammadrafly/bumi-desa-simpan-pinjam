@@ -8,16 +8,16 @@
                   <h4 class="card-title"><?= $pages; ?></h4>
                   <form class="forms-sample" method="POST" action="<?= base_url('dashboard/transaksi/pembayaran/store'); ?>">
                   <?= csrf_field() ?>
+                    <input hidden name="id_angsuran"  value="<?= $id; ?>" placeholder="<?= $id; ?>">
                     <div class="form-group">
                       <label for="exampleInputName1">ID Angsuran</label>
-                      <input type="number" name="id_angsuran" class="form-control" id="exampleInputName1" placeholder="<?= $id; ?>" value="<?= $id; ?>">
+                      <input type="number" name="id_angsuran" class="form-control" id="exampleInputName1" placeholder="<?= $id; ?>" disabled>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputName1">Nominal</label>
                       <input type="number" name="nominal" class="form-control" id="exampleInputName1" placeholder="Nominal">
                     </div>
                     <button type="submit" class="btn btn-primary me-2">Submit</button>
-                    <button class="btn btn-light">Cancel</button>
                   </form>
                 </div>
               </div>
