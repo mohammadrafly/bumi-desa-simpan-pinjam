@@ -21,7 +21,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="<?= base_url('css/vertical-layout-light/style.css'); ?>">
   <!-- endinject -->
-  <link rel="shortcut icon" href="<?= base_url('images/favicon.png'); ?>" />
+  <link rel="shortcut icon" href="<?= base_url('images/logo.png'); ?>" />
 </head>
 <body>
   <div class="container-scroller">
@@ -35,18 +35,17 @@
         </div>
         <div>
           <a class="navbar-brand brand-logo" href="<?= base_url('dashboard'); ?>">
-            <img src="<?= base_url('images/logo.svg'); ?>" alt="logo" />
+            <img src="<?= base_url('images/logo.png'); ?>" alt="logo" />
           </a>
           <a class="navbar-brand brand-logo-mini" href="<?= base_url('dashboard'); ?>">
-            <img src="<?= base_url('images/logo-mini.svg'); ?>" alt="logo" />
+            <img src="<?= base_url('images/logo.png'); ?>" alt="logo" />
           </a>
         </div>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-top"> 
         <ul class="navbar-nav">
           <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-            <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold"><?= session()->get('name'); ?></span></h1>
-            <h3 class="welcome-sub-text">Your performance summary this week </h3>
+            <h1 class="welcome-text">Hai! <span class="text-black fw-bold"><?= session()->get('name'); ?></span></h1>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
@@ -61,10 +60,18 @@
           </li>
           <li class="nav-item dropdown d-none d-lg-block user-dropdown">
             <a class="nav-link" id="UserDropdown" href="<?= base_url('#'); ?>" data-bs-toggle="dropdown" aria-expanded="false">
-              <img class="img-xs rounded-circle" src="<?= base_url('images/faces/face8.jpg'); ?>" alt="Profile image"> </a>
+                          <?php if(session()->get('foto_diri') === NULL): ?>
+                            <img class="img-xs rounded-circle" src="<?= base_url('images/default.png') ;?>"> </a>
+                          <?php elseif(session()->get('foto_diri')): ?>
+                            <img class="img-xs rounded-circle" src="<?= base_url('profile/'.session()->get('foto_diri')) ?>"> </a>
+                          <?php endif ?>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <div class="dropdown-header text-center">
-                <img class="img-md rounded-circle" src="<?= base_url('images/faces/face8.jpg'); ?>" alt="Profile image">
+                          <?php if(session()->get('foto_diri') === NULL): ?>
+                            <img class="img-xs rounded-circle" src="<?= base_url('images/default.png') ;?>"> </a>
+                          <?php elseif(session()->get('foto_diri')): ?>
+                            <img class="img-xs rounded-circle" src="<?= base_url('profile/'.session()->get('foto_diri')) ?>"> </a>
+                          <?php endif ?>
                 <p class="mb-1 mt-3 font-weight-semibold"><?= session()->get('name'); ?></p>
                 <p class="fw-light text-muted mb-0"><?= session()->get('email'); ?></p>
               </div>
@@ -196,7 +203,7 @@
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Made with ❤️ by BUMDES </a></span>
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Made with ❤️ by BUMDes </a></span>
             <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright                © <script>
                   document.write(new Date().getFullYear())
                 </script>. All rights reserved.</span>

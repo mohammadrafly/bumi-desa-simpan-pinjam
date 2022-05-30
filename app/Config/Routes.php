@@ -120,8 +120,8 @@ $routes->group('dashboard', ['filter' => 'authGuard'], function ($routes) {
             $routes->get('pdf/(:num)', 'PembayaranController::pdf/$1');
         });
         $routes->group('penarikan', function ($routes) {
-            $routes->get('pengguna/(:num)', 'PenarikanController::index/$1');
-            $routes->get('add/(:num)', 'PenarikanController::add/$1');
+            $routes->get('simpanan/(:num)', 'PenarikanController::index/$1');
+            $routes->get('add/(:num)/(:num)/(:num)', 'PenarikanController::add/$1/$2/$3');
             $routes->post('store', 'PenarikanController::store');
             $routes->get('edit/(:num)', 'PenarikanController::edit/$1');
             $routes->post('update', 'PenarikanController::update');

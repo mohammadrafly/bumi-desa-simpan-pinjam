@@ -6,6 +6,8 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use App\Controllers\BaseController;
 use App\Models\Penarikan;
+use App\Models\Simpanan;
+use App\Models\User;
 
 class PenarikanController extends BaseController
 {
@@ -14,6 +16,7 @@ class PenarikanController extends BaseController
         helper('number');
         $pager = \Config\Services::pager();
         $model = new Penarikan();
+        $users = new User();
         $content = $model->getPRbyID($id)->getResult();
         $data = [
             'content'   => $content,
@@ -25,11 +28,13 @@ class PenarikanController extends BaseController
         return view('penarikan/index', $data);
     }
 
-    public function add($id = null)
+    public function add($id, $nominal, $nik)
     {
         $data = [
             'pages' => 'Add penarikan',
-            'nik'   => $id
+            'id'   => $id,
+            'nominal' => $nominal,
+            'nik' => $nik
         ];
         return view('penarikan/add', $data);
     }
@@ -55,15 +60,29 @@ class PenarikanController extends BaseController
             return redirect()->back()->withInput();
         }
         $kode = substr(str_shuffle(str_repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 6)), 0, 6);
+        $nominal_simpanan = $this->request->getVar('nominal_simpanan');
+        $nominal_penarikan = $this->request->getVar('nominal');
+        $nik = $this->request->getVar('nik');
         $model = new Penarikan();
-        $model->insert([
-            'nik'   => $this->request->getVar('nik'),
+        $data = [
+            'id_simpanan'   => $this->request->getVar('id_simpanan'),
             'nominal' => $this->request->getVar('nominal'),
             'status_penarikan' => 'BELUM DIAMBIL',
             'kode_penarikan' => $kode
-        ]);
-        session()->setFlashData('message','Berhasil menambah penarikan');
-        return redirect()->to('dashboard/transaksi');
+        ];
+        if ($model->insert($data)){
+            $simpanan = new Simpanan();
+            $result = $nominal_simpanan - $nominal_penarikan;
+            $id = $this->request->getVar('id_simpanan');
+            $data = [
+                'nominal' => $result
+            ];
+            $simpanan->update($id,$data);
+            session()->setFlashData('message','Berhasil menambah penarikan');
+            return redirect()->to('dashboard/transaksi/simpanan/pengguna/'.$nik);
+        } else {
+            echo 'Error';
+        }
     }
 
     public function edit($id = null)

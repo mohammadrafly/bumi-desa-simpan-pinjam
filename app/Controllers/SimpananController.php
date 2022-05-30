@@ -6,6 +6,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use App\Controllers\BaseController;
 use App\Models\Simpanan;
+use App\Models\User;
 
 class SimpananController extends BaseController
 {
@@ -14,12 +15,14 @@ class SimpananController extends BaseController
         helper('number');
         $pager = \Config\Services::pager();
         $model = new Simpanan();
+        $users = new User();
         $content = $model->getSbyID($id)->getResult();
         $data = [
             'content'   => $content,
             'pages'     => 'Data Simpanan',
             'pager'     => $model->pager,
-            'user'      => $id
+            'user'      => $users->where('nik', $id)->first(),
+            'nik'       => $id
         ];
         //dd($content);
         return view('simpanan/index', $data);

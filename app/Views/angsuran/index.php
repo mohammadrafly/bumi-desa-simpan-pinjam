@@ -8,7 +8,7 @@
                 <div class="d-sm-flex align-items-center justify-content-between border-bottom">
                   <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
-                      <a class="nav-link" id="home-tab" data-bs-toggle="tab" role="tab" aria-controls="overview" aria-selected="true"><?= $pages; ?> <p name="nik"><?= $user ?></p></a>
+                      <a class="nav-link" id="home-tab" data-bs-toggle="tab" role="tab" aria-controls="overview" aria-selected="true"><?= $pages; ?> <p name="nik"><?= $user['name'] ?></p></a>
                     </li>
                   </ul>
                   <div>
@@ -16,7 +16,7 @@
 
                   <?php elseif(session()->get('role') === 'admin'): ?>
                     <div class="btn-wrapper">
-                      <a href="<?= base_url('dashboard/transaksi/angsuran/add/'.$user); ?>" class="btn btn-otline-dark align-items-center"><i class="icon-plus"></i> Add angsuran</a>
+                      <a href="<?= base_url('dashboard/transaksi/angsuran/add/'.$user['name']); ?>" class="btn btn-otline-dark align-items-center"><i class="icon-plus"></i> Add angsuran</a>
                     </div>
                   <?php endif ?>
                   </div>

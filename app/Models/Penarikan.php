@@ -15,7 +15,7 @@ class Penarikan extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'nik',
+        'id_simpanan',
         'nominal',
         'kode_penarikan',
         'status_penarikan'
@@ -48,7 +48,7 @@ class Penarikan extends Model
     public function getPenarikan()
     {
         $query = $this->db->table('penarikan')
-            ->join('users', 'users.nik = penarikan.nik')
+            ->join('simpanan', 'simpanan.id_simpanan = penarikan.id_simpanan')
             ->get();
         return $query;
     }
@@ -56,8 +56,9 @@ class Penarikan extends Model
     public function getPRbyID($id)
     {
         $query = $this->db->table('penarikan')
-            ->join('users', 'users.nik = penarikan.nik', 'left')
-            ->where('penarikan.nik', $id)
+            ->select('penarikan.*, simpanan.nominal AS nominal_simpanan')
+            ->join('simpanan', 'simpanan.id_simpanan = penarikan.id_simpanan', 'left')
+            ->where('penarikan.id_simpanan', $id)
             ->get();
         return $query;
     }
@@ -65,7 +66,7 @@ class Penarikan extends Model
     public function getPenarikanLimit6()
     {
         $query = $this->db->table('penarikan')
-            ->join('users', 'users.nik = penarikan.nik')
+            ->join('simpanan', 'simpanan.id_simpanan = penarikan.id_simpanan')
             ->orderBy('created_at', 'DESC')
             ->limit(6)
             ->get();

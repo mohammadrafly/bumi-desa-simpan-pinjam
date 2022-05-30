@@ -6,7 +6,7 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">My Profile</h4>
-                  <form class="form-sample" method="POST" action="<?= base_url('dashboard/profile/update'); ?>">
+                  <form class="form-sample" method="POST" action="<?= base_url('dashboard/profile/update'); ?>" enctype="multipart/form-data">
                   <?= csrf_field() ?>
                     <p class="card-description">
                       Personal info 
@@ -73,6 +73,19 @@
                           <label class="col-sm-3 col-form-label">NIK</label>
                           <div class="col-sm-9">
                             <input class="form-control" placeholder="NIK" name="nik" value="<?= $content['nik']; ?>" disabled/>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Foto Diri</label>
+                          <div class="col-sm-9">
+                          <?php if($content['foto_diri'] === NULL): ?>
+                            <img data-enlargeable width="100" style="cursor: zoom-in" src="<?= base_url('images/default.png') ;?>" width="100px">
+                          <?php elseif($content['foto_diri']): ?>
+                            <img data-enlargeable width="100" style="cursor: zoom-in" src="<?= base_url('profile/'.$content['foto_diri']) ?>" width="100px">
+                          <?php endif ?>
+                            <input class="form-control" type="file" name="foto_diri" value="<?= $content['foto_diri'] ?>"/>
                           </div>
                         </div>
                       </div>

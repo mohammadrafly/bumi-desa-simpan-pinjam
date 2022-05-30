@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\Angsuran;
+use App\Models\User;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -14,12 +15,13 @@ class AngsuranController extends BaseController
         helper('number');
         $pager = \Config\Services::pager();
         $model = new Angsuran();
+        $users = new User();
         $content = $model->getASbyID($id)->getResult();
         $data = [
             'content'   => $content,
             'pages'     => 'Data angsuran',
             'pager'     => $model->pager,
-            'user'      => $id
+            'user'      => $users->where('nik', $id)->first(),
         ];
         //dd($content);
         return view('angsuran/index', $data);

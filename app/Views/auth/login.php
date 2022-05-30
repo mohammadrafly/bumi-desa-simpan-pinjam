@@ -9,7 +9,7 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
-                <img src="<?= base_url('images/logo.svg'); ?>" alt="logo">
+                <img src="<?= base_url('images/logo.png'); ?>" alt="logo">
               </div> 
               <h4>Halo! Silahkan masuk terlebih dahulu.</h4>
               <h6 class="fw-light">Sign in to continue.</h6>

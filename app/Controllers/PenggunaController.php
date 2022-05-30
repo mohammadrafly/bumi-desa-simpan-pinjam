@@ -65,12 +65,6 @@ class PenggunaController extends BaseController
                     'max_length' => '{field} Maksimal 255 Karakter',
                 ]
             ],
-            'email' => [
-                'rules' => 'is_unique[users.email]',
-                'errors' => [
-                    'is_unique' => 'Email sudah digunakan sebelumnya',
-                ]
-            ],
             'role' => [
                 'rules' => 'required',
                 'error' => [
@@ -95,7 +89,6 @@ class PenggunaController extends BaseController
             'username' => $this->request->getVar('username'),
             'nik'   => $this->request->getVar('nik'),
             'alamat' => $this->request->getVar('alamat'),
-            'email' => $this->request->getVar('email'),
             'role' => $this->request->getVar('role'),
             'password' => password_hash($this->request->getVar('password'), PASSWORD_BCRYPT),
         ]);
@@ -157,7 +150,6 @@ class PenggunaController extends BaseController
             'name' => $this->request->getVar('name'),
             'username' => $this->request->getVar('username'),
             'alamat' => $this->request->getVar('alamat'),
-            'email' => $this->request->getVar('email'),
             'role' => $this->request->getVar('role'),
         ];
         $model->update($id, $data);

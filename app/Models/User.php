@@ -20,7 +20,8 @@ class User extends Model
         'password',
         'nik',
         'role',
-        'alamat'
+        'alamat',
+        'foto_diri'
     ];
 
     // Dates

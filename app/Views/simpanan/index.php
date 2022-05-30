@@ -8,7 +8,7 @@
                 <div class="d-sm-flex align-items-center justify-content-between border-bottom">
                   <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
-                      <a class="nav-link" id="home-tab" data-bs-toggle="tab" role="tab" aria-controls="overview" aria-selected="true"><?= $pages; ?> <p name="nik"><?= $user ?></p></a>
+                      <a class="nav-link" id="home-tab" data-bs-toggle="tab" role="tab" aria-controls="overview" aria-selected="true"><?= $pages; ?> <p name="nik"><?= $user['name'] ?></p></a>
                     </li>
                   </ul>
                   <div>
@@ -16,7 +16,12 @@
 
                   <?php elseif(session()->get('role') === 'admin'): ?>
                     <div class="btn-wrapper">
-                      <a href="<?= base_url('dashboard/transaksi/simpanan/add/'.$user); ?>" class="btn btn-otline-dark align-items-center"><i class="icon-plus"></i> Add simpanan</a>
+                            <?php foreach($content as $row): ?>
+                      <a href="<?= base_url('dashboard/transaksi/penarikan/simpanan/'.$row->id_simpanan); ?>" 
+                        class="btn btn-otline-dark align-items-center"><i class="icon-credit-card"></i>Penarikan</a>
+                            <?php endforeach; ?>
+                      <a href="<?= base_url('dashboard/transaksi/simpanan/add/'.$user['nik']); ?>" 
+                        class="btn btn-otline-dark align-items-center"><i class="icon-plus"></i> Add simpanan</a>
                     </div>
                   <?php endif ?>
                   </div>
@@ -30,7 +35,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Id simpanan</th>
+                                <th>ID simpanan</th>
                                 <th>Nominal</th>
                                 <th>Jenis simpanan</th>
                                 <th>Kode Penarikan</th>
@@ -58,11 +63,12 @@
                                 </td>
                                 <td>
                                 <?php if(session()->get('role') === 'superadmin'): ?>
-                                  <a href="<?= base_url('dashboard/transaksi/simpanan/view/'.$row->id_simpanan); ?>" class="btn-sm btn-primary text-white"><i class="mdi mdi-eye"></i></a>
+                                    <a href="<?= base_url('dashboard/transaksi/simpanan/view/'.$row->id_simpanan); ?>" class="btn-sm btn-primary text-white"><i class="mdi mdi-eye"></i></a>
                                 <?php elseif(session()->get('role') === 'admin'): ?>
                                     <a href="<?= base_url('dashboard/transaksi/simpanan/edit/'.$row->id_simpanan); ?>" class="btn-sm btn-warning text-white"><i class="mdi mdi-table-edit"></i></a>
                                     <a href="<?= base_url('dashboard/transaksi/simpanan/delete/'.$row->id_simpanan); ?>" class="btn-sm btn-danger text-white"><i class="mdi mdi-delete-forever"></i></a>
                                     <a href="<?= base_url('dashboard/transaksi/simpanan/view/'.$row->id_simpanan); ?>" class="btn-sm btn-primary text-white"><i class="mdi mdi-eye"></i></a>
+                                    <a href="<?= base_url('dashboard/transaksi/penarikan/add/'.$row->id_simpanan.'/'.$row->nominal.'/'.$nik); ?>" class="btn-sm btn-secondary text-black"><i class="mdi mdi-credit-card-multiple"></i></a>
                                 <?php endif ?>
                                 </td>
                             </tr>

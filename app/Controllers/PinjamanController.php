@@ -15,12 +15,13 @@ class PinjamanController extends BaseController
         helper('number');
         $pager = \Config\Services::pager();
         $model = new Pinjaman();
+        $users = new User();
         $content = $model->getPbyID($id)->getResult();
         $data = [
             'content'   => $content,
             'pages'     => 'Data pinjaman',
             'pager'     => $model->pager,
-            'user'      => $id
+            'user'      => $users->where('nik', $id)->first(),
         ];
         //dd($content);
         return view('pinjaman/index', $data);

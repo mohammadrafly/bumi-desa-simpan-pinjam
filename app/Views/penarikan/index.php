@@ -8,16 +8,13 @@
                 <div class="d-sm-flex align-items-center justify-content-between border-bottom">
                   <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
-                      <a class="nav-link" id="home-tab" data-bs-toggle="tab" role="tab" aria-controls="overview" aria-selected="true"><?= $pages; ?> <p name="nik"><?= $user ?></p></a>
+                      <a class="nav-link" id="home-tab" data-bs-toggle="tab" role="tab" aria-controls="overview" aria-selected="true"><?= $pages; ?> <p name="id">ID Simpanan: <?= $user ?></p></a>
                     </li>
                   </ul>
                   <div>
                   <?php if(session()->get('role') === 'superadmin'): ?>
 
                   <?php elseif(session()->get('role') === 'admin'): ?>
-                    <div class="btn-wrapper">
-                      <a href="<?= base_url('dashboard/transaksi/penarikan/add/'.$user); ?>" class="btn btn-otline-dark align-items-center"><i class="icon-plus"></i> Add penarikan</a>
-                    </div>
                   <?php endif ?>
                   </div>
                 </div>
@@ -30,7 +27,6 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Id penarikan</th>
                                 <th>Nominal</th>
                                 <th>Kode Penarikan</th>
                                 <th>Status penarikan</th>
@@ -44,7 +40,6 @@
                             foreach($content as $row): ?>
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td><?= $row->id_penarikan; ?></td>
                                 <td><?= number_to_currency($row->nominal, 'IDR'); ?></td>
                                 <td><?= $row->kode_penarikan; ?></td>
                                 <td>

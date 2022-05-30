@@ -39,7 +39,6 @@
                                     <a href="<?= base_url('dashboard/transaksi/simpanan/pengguna/'.$row['nik']); ?>" class="btn-sm btn-primary text-white">Simpanan</a>
                                     <a href="<?= base_url('dashboard/transaksi/pinjaman/pengguna/'.$row['nik']); ?>" class="btn-sm btn-primary text-white">Pinjaman</a>
                                     <a href="<?= base_url('dashboard/transaksi/angsuran/pengguna/'.$row['nik']); ?>" class="btn-sm btn-primary text-white">Angsuran</a>
-                                    <a href="<?= base_url('dashboard/transaksi/penarikan/pengguna/'.$row['nik']); ?>" class="btn-sm btn-primary text-white">Penarikan</a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
