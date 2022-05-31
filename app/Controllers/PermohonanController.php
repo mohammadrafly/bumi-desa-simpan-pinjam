@@ -15,7 +15,7 @@ class PermohonanController extends BaseController
         $pager = \Config\Services::pager();
         $model = new Permohonan();
         $data = [
-            'content' => $model->orderBY('created_at', 'DESC')->paginate(10, 'content'),
+            'content' => $model->getPermohonan(10),
             'pages'   => 'Data Permohonan',
             'permohonan'  => $model->pager,
         ];
@@ -75,7 +75,7 @@ class PermohonanController extends BaseController
             'jenis_permohonan' => $this->request->getVar('jenis_permohonan'),
             'statu_permohonan' => 'HOLD',
         ]);
-        session()->setFlashData('message','Berhasil menambah permohonan');
+        session()->setFlashData('success','Berhasil menambah permohonan');
         return redirect()->to('dashboard/permohonan');
     }
 
@@ -229,7 +229,7 @@ class PermohonanController extends BaseController
             'jenis_permohonan' => $this->request->getVar('jenis_permohonan'),
             'statu_permohonan' => 'HOLD',
         ]);
-        session()->setFlashData('message','Berhasil menambah permohonan');
+        session()->setFlashData('success','Berhasil menambah permohonan');
         return redirect()->to('dashboard/my/permohonan/u/'.$id);
     }
 }

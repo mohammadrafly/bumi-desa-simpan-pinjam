@@ -43,6 +43,12 @@ class PembayaranController extends BaseController
                     'required' => '{field} Harus diisi',
                 ]
             ],
+            'biaya_admin' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} Harus diisi',
+                ]
+            ],
         ])) {
             session()->setFlashdata('error', $this->validator->listErrors());
             return redirect()->back()->withInput();
@@ -51,6 +57,7 @@ class PembayaranController extends BaseController
         $model->insert([
             'id_angsuran'   => $this->request->getVar('id_angsuran'),
             'nominal' => $this->request->getVar('nominal'),
+            'biaya_admin' => $this->request->getVar('biaya_admin'),
         ]);
         session()->setFlashData('message','Berhasil menambah pembayaran');
         return redirect()->to('dashboard/transaksi');
@@ -118,5 +125,19 @@ class PembayaranController extends BaseController
         $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
         $dompdf->stream("pembayaran ID:".$id.".pdf");
+    }
+
+    public function indexPersonal($nik,$id)
+    {
+        helper('number');
+        $model = new Pembayaran();
+        $content = $model->getPBbyID($id)->getResult();
+        $data = [
+            'content' => $content,
+            'pages'   => 'My Pembayaran',
+            'user'    => $id,
+        ];
+        //dd($data);
+        return view('pembayaran/pembayaran', $data);
     }
 }

@@ -10,6 +10,18 @@
                     <li class="nav-item">
                       <a class="nav-link" id="home-tab" data-bs-toggle="tab" role="tab" aria-controls="overview" aria-selected="true"><?= $pages; ?></a>
                     </li>
+                    <li class="nav-item">
+                    <?php if (!empty(session()->getFlashdata('error'))) : ?>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <?php echo session()->getFlashdata('error'); ?>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (!empty(session()->getFlashdata('success'))) : ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <?php echo session()->getFlashdata('success'); ?>
+                        </div>
+                    <?php endif; ?>
+                    </li>
                   </ul>
                   <div>
                   <?php if(session()->get('role') === 'superadmin'): ?>
@@ -33,7 +45,7 @@
                                 <th>ID permohonan</th>
                                 <th>Judul</th>
                                 <th>Nominal</th>
-                                <th>NIK</th>
+                                <th>Nama</th>
                                 <th>Jenis Permohonan</th>
                                 <th>Status Permohonan</th>
                                 <th>Waktu Dikirim</th>
@@ -54,7 +66,7 @@
                                 <td><?= $row['id_permohonan']; ?></td>
                                 <td><?= $row['judul_permohonan']; ?></td>
                                 <td><?= $row['nominal_permohonan']; ?></td>
-                                <td><?= $row['nik']; ?></td>
+                                <td><?= $row['name']; ?></td>
                                 <td><?= $row['jenis_permohonan']; ?></td>
                                 <td>
                                     <?php if($row['status_permohonan'] === 'HOLD'): ?>

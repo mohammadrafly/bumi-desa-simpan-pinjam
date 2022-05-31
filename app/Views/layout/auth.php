@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>BUMDes</title>
+  <title>BUMDes | <?= $pages ?></title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="<?= base_url('vendors/feather/feather.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('vendors/mdi/css/materialdesignicons.min.css'); ?>">
@@ -24,7 +24,41 @@
   <link rel="shortcut icon" href="<?= base_url('images/logo.png'); ?>" />
 </head>
 <body>
-  <?= $this->renderSection('content') ?>
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth px-0">
+        <div class="row w-100 mx-0">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+              <div class="brand-logo">
+                <img src="<?= base_url('images/logo.png'); ?>" alt="logo">
+              </div> 
+              <?php if($Login === TRUE): ?>
+              <h4>Halo! mari kita mulai</h4>
+              <h6 class="font-weight-light">Masuk untuk melanjutkan.</h6>
+              <?php elseif($Login === FALSE): ?>
+              <h4>Baru disini?</h4>
+              <h6 class="font-weight-light">Mendaftar itu mudah. Hanya butuh beberapa langkah</h6>
+              <?php endif ?>
+                  <?php if (!empty(session()->getFlashdata('error'))) : ?>
+                      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                          <?php echo session()->getFlashdata('error'); ?>
+                      </div>
+                  <?php endif; ?>
+                  <?php if (!empty(session()->getFlashdata('success'))) : ?>
+                      <div class="alert alert-success alert-dismissible fade show" role="alert">
+                          <?php echo session()->getFlashdata('success'); ?>
+                      </div>
+                  <?php endif; ?>
+            <?= $this->renderSection('content') ?>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
   <!-- container-scroller -->
 
   <!-- plugins:js -->

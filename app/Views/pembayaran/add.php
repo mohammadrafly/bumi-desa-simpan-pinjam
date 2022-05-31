@@ -14,6 +14,10 @@
                       <input type="number" name="id_angsuran" class="form-control" id="exampleInputName1" placeholder="<?= $id; ?>" disabled>
                     </div>
                     <div class="form-group">
+                      <label for="exampleInputName1">Biaya Admin</label>
+                      <input type="number" name="biaya_admin" class="form-control" id="exampleInputName1" placeholder="Biaya Admin">
+                    </div>
+                    <div class="form-group">
                       <label for="exampleInputName1">Nominal</label>
                       <input type="number" name="nominal" class="form-control" id="exampleInputName1" placeholder="Nominal">
                     </div>

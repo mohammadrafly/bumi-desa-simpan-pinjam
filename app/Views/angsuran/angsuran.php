@@ -26,6 +26,7 @@
                                 <th>Kode Pembayaran</th>
                                 <th>Status Angsuran</th>
                                 <th>Waktu Dikirim</th>
+                                <th>Opsi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,6 +47,7 @@
                                     <?php endif ?>
                                 </td>
                                 <td><?= $row->created_at; ?></td>
+                                <td><a class="badge bg-secondary" href="<?= base_url('dashboard/my/transaksi/u/'.session()->get('nik').'/pembayaran/id/'.$row->id_angsuran) ;?>">Pembayaran</a></td>
                             </tr>
                             <?php endforeach; ?>
                             <?php endif; ?>

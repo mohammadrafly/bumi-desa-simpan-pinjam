@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 23, 2022 at 08:58 AM
+-- Generation Time: May 30, 2022 at 04:06 AM
 -- Server version: 5.7.33
 -- PHP Version: 8.1.6
 
@@ -43,32 +43,7 @@ CREATE TABLE `angsuran` (
 --
 
 INSERT INTO `angsuran` (`id_angsuran`, `nik`, `nominal`, `waktu`, `status_angsuran`, `kode_pembayaran`, `created_at`, `updated-at`) VALUES
-(4, '351589729823728', '1500000', 3, 'LUNAS', 'NXRMWT', '2022-05-11 08:25:26', '2022-05-11 08:25:26'),
-(7, '3512323423423', '15000000', 3, 'BELUM LUNAS', 'BDQLNT', '2022-05-12 07:36:35', '2022-05-12 07:36:35'),
-(6, '351589729823728', '500000', 2, 'LUNAS', 'CGMYNR', '2022-05-11 08:28:24', '2022-05-11 08:28:24');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `denda`
---
-
-CREATE TABLE `denda` (
-  `id_denda` int(11) NOT NULL,
-  `phone` varchar(255) NOT NULL,
-  `nominal` varchar(255) NOT NULL,
-  `status_denda` enum('BELUM LUNAS','LUNAS') NOT NULL,
-  `kode_pembayaran` varchar(6) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `denda`
---
-
-INSERT INTO `denda` (`id_denda`, `phone`, `nominal`, `status_denda`, `kode_pembayaran`, `created_at`, `updated_at`) VALUES
-(1, '1', '0', 'BELUM LUNAS', 'OOOOO', '2022-04-14 03:41:29', '2022-04-14 03:41:29');
+(1, '1', '0', 1, 'BELUM LUNAS', '000000', '2022-05-30 10:18:17', '2022-05-30 10:18:17');
 
 -- --------------------------------------------------------
 
@@ -89,8 +64,7 @@ CREATE TABLE `pembayaran` (
 --
 
 INSERT INTO `pembayaran` (`id_pembayaran`, `id_angsuran`, `nominal`, `created_at`, `updated_at`) VALUES
-(2, 4, '1500000', '2022-05-11 09:11:06', '2022-05-11 09:11:06'),
-(3, 6, '500000', '2022-05-11 09:13:24', '2022-05-11 09:13:24');
+(8, 0, '0', '2022-05-30 10:18:36', '2022-05-30 10:18:36');
 
 -- --------------------------------------------------------
 
@@ -100,7 +74,7 @@ INSERT INTO `pembayaran` (`id_pembayaran`, `id_angsuran`, `nominal`, `created_at
 
 CREATE TABLE `penarikan` (
   `id_penarikan` int(11) NOT NULL,
-  `nik` varchar(255) NOT NULL,
+  `id_simpanan` int(11) NOT NULL,
   `nominal` varchar(255) NOT NULL,
   `kode_penarikan` varchar(6) NOT NULL,
   `status_penarikan` enum('TELAH DIAMBIL','BELUM DIAMBIL') NOT NULL,
@@ -112,9 +86,10 @@ CREATE TABLE `penarikan` (
 -- Dumping data for table `penarikan`
 --
 
-INSERT INTO `penarikan` (`id_penarikan`, `nik`, `nominal`, `kode_penarikan`, `status_penarikan`, `created_at`, `updated_at`) VALUES
-(1, '0', '0', '000000', 'BELUM DIAMBIL', '2022-05-12 07:50:46', '2022-05-12 07:50:46'),
-(3, '3512323423423', '150000000', 'OVQGOQ', 'BELUM DIAMBIL', '2022-05-12 09:46:48', '2022-05-12 09:46:48');
+INSERT INTO `penarikan` (`id_penarikan`, `id_simpanan`, `nominal`, `kode_penarikan`, `status_penarikan`, `created_at`, `updated_at`) VALUES
+(1, 0, '0', '000000', 'BELUM DIAMBIL', '2022-05-12 07:50:46', '2022-05-12 07:50:46'),
+(4, 9, '4000000', 'ODVDED', 'BELUM DIAMBIL', '2022-05-30 10:55:08', '2022-05-30 10:55:08'),
+(6, 9, '50000', 'HLVQXT', 'BELUM DIAMBIL', '2022-05-30 11:03:50', '2022-05-30 11:03:50');
 
 -- --------------------------------------------------------
 
@@ -168,7 +143,6 @@ CREATE TABLE `pinjaman` (
 --
 
 INSERT INTO `pinjaman` (`id_pinjaman`, `nominal`, `biaya_admin`, `nik`, `kode_penarikan`, `jenis_pinjaman`, `status_pinjaman`, `created_at`, `updated_at`) VALUES
-(8, '15000000', 20000, '3512323423423', 'GPTEAS', 'BIASA', 'BELUM DIAMBIL', '2022-05-12 09:39:37', '2022-05-12 09:39:37'),
 (1, '0', 0, '0', '000000', 'BIASA', 'BELUM DIAMBIL', '2022-05-12 07:49:59', '2022-05-12 07:49:59');
 
 -- --------------------------------------------------------
@@ -193,7 +167,7 @@ CREATE TABLE `simpanan` (
 --
 
 INSERT INTO `simpanan` (`id_simpanan`, `nik`, `nominal`, `kode_deposit`, `jenis_simpanan`, `status_simpanan`, `created_at`, `updated_at`) VALUES
-(8, '3512323423423', '150000', 'UYFDUW', 'POKOK', 'BELUM DEPOSIT', '2022-05-12 09:28:25', '2022-05-12 09:28:25'),
+(9, '3512323423423', '950000', 'VYLHLO', 'POKOK', 'BELUM DEPOSIT', '2022-05-30 10:19:42', '2022-05-30 10:19:42'),
 (7, '0', '0', '000000', 'POKOK', 'BELUM DEPOSIT', '2022-05-12 07:51:06', '2022-05-12 07:51:06');
 
 -- --------------------------------------------------------
@@ -211,6 +185,7 @@ CREATE TABLE `users` (
   `gender` enum('laki-laki','perempuan') NOT NULL,
   `password` varchar(255) NOT NULL,
   `alamat` text NOT NULL,
+  `foto_diri` varchar(255) DEFAULT NULL,
   `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -219,10 +194,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `username`, `nik`, `role`, `gender`, `password`, `alamat`, `created`, `updated_at`) VALUES
-(7, 'customer', 'customer', '3512323423423', 'customer', 'laki-laki', '$2y$10$Ck593/ybbwnN6ysN8EdjpeKhJXQv.zWvY6TSU5hkkZ5drXzyc8KGO', 'Madura', '2022-05-12 07:07:25', '2022-05-12 07:07:25'),
-(8, 'admin bumdes', 'admin', '3512361293182639', 'admin', 'laki-laki', '$2y$10$1k2bogNCgGvGSZAJHqGpCOEgXXDDeLYYokXmcs9ygldr4q2IhFJz2', 'Sarpaan RT 03/RW 01', '2022-05-12 07:34:45', '2022-05-12 07:34:45'),
-(5, 'bumdes', 'superadmin', '3512361231826318', 'superadmin', 'laki-laki', '$2a$12$VztwJpBNyGlt2IopJmP.VuleiZThrfUCg1nJ4WO0BOVVvTyHqWS4O', 'Sarpaan RT 01/RW 01', '2022-05-11 03:04:03', '2022-05-11 03:04:03');
+INSERT INTO `users` (`id`, `name`, `username`, `nik`, `role`, `gender`, `password`, `alamat`, `foto_diri`, `created`, `updated_at`) VALUES
+(7, 'customer', 'customer', '3512323423423', 'customer', 'laki-laki', '$2y$10$Ck593/ybbwnN6ysN8EdjpeKhJXQv.zWvY6TSU5hkkZ5drXzyc8KGO', 'Madura', NULL, '2022-05-12 07:07:25', '2022-05-12 07:07:25'),
+(8, 'admin bumdes', 'admin', '3512361293182639', 'admin', 'laki-laki', '$2y$10$1k2bogNCgGvGSZAJHqGpCOEgXXDDeLYYokXmcs9ygldr4q2IhFJz2', 'Sarpaan RT 03/RW 01', '1653876143_f78d665cb2fa8b818ecc.png', '2022-05-12 07:34:45', '2022-05-12 07:34:45'),
+(5, 'bumdes', 'superadmin', '3512361231826318', 'superadmin', 'laki-laki', '$2a$12$VztwJpBNyGlt2IopJmP.VuleiZThrfUCg1nJ4WO0BOVVvTyHqWS4O', 'Sarpaan RT 01/RW 01', NULL, '2022-05-11 03:04:03', '2022-05-11 03:04:03');
 
 --
 -- Indexes for dumped tables
@@ -236,13 +211,6 @@ ALTER TABLE `angsuran`
   ADD KEY `phone` (`nik`);
 
 --
--- Indexes for table `denda`
---
-ALTER TABLE `denda`
-  ADD PRIMARY KEY (`id_denda`),
-  ADD KEY `phone` (`phone`);
-
---
 -- Indexes for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
@@ -254,7 +222,7 @@ ALTER TABLE `pembayaran`
 --
 ALTER TABLE `penarikan`
   ADD PRIMARY KEY (`id_penarikan`),
-  ADD KEY `nik` (`nik`);
+  ADD KEY `nik` (`id_simpanan`);
 
 --
 -- Indexes for table `permohonan`
@@ -291,25 +259,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `angsuran`
 --
 ALTER TABLE `angsuran`
-  MODIFY `id_angsuran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `denda`
---
-ALTER TABLE `denda`
-  MODIFY `id_denda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_angsuran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `penarikan`
 --
 ALTER TABLE `penarikan`
-  MODIFY `id_penarikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_penarikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `permohonan`
@@ -327,7 +289,7 @@ ALTER TABLE `pinjaman`
 -- AUTO_INCREMENT for table `simpanan`
 --
 ALTER TABLE `simpanan`
-  MODIFY `id_simpanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_simpanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -32,10 +32,10 @@
                                 <th>No</th>
                                 <th>Id Pinjaman</th>
                                 <th>Nominal</th>
-                                <th>Biaya Admin</th>
                                 <th>Jenis Pinjaman</th>
                                 <th>Kode Penarikan</th>
                                 <th>Status Pinjaman</th>
+                                <th>Tanggal</th>
                                 <th>Option</th>
                             </tr>
                         </thead>
@@ -48,7 +48,6 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $row->id_pinjaman; ?></td>
                                 <td><?= number_to_currency($row->nominal, 'IDR'); ?></td>
-                                <td><?= number_to_currency($row->biaya_admin, 'IDR'); ?></td>
                                 <td><?= $row->jenis_pinjaman; ?></td>
                                 <td><?= $row->kode_penarikan; ?></td>
                                 <td>
@@ -58,6 +57,7 @@
                                       <span class="badge bg-warning text-white"><?= $row->status_pinjaman ?></span>
                                     <?php endif ?>
                                 </td>
+                                <td><?= $row->created_at ?></td>
                                 <td>
                                 <?php if(session()->get('role') === 'superadmin'): ?>
                                     <a href="<?= base_url('dashboard/transaksi/pinjaman/view/'.$row->id_pinjaman); ?>" class="btn-sm btn-primary text-white"><i class="mdi mdi-eye"></i></a>

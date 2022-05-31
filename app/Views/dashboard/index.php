@@ -46,42 +46,45 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-lg-4 d-flex flex-column">
-                        <div class="row flex-grow">
-                          <div class="col-md-6 col-lg-12 grid-margin stretch-card">
-                            <div class="card bg-primary card-rounded">
-                              <div class="card-body pb-0">
-                                <h4 class="card-title card-title-dash text-white mb-4">Transaksi Terkini</h4>
-
-                                          <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link active btn btn-secondary" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Pinjaman</button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link btn btn-secondary" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Simpanan</button>
-                                            </li>
-                                          </ul>
-                                            <div class="tab-content" id="pills-tabContent">
-                                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                                <div class="card-body text-white">
-                                                    <?php if($pinjaman): ?>
-                                                    <?php 
-                                                    foreach($pinjaman as $row): ?>
-                                                        <h5 class="text white"><?= $row->created_at; ?> => <?= number_to_currency($row->nominal, 'IDR'); ?></h5>
-                                                    <?php endforeach; ?>
-                                                    <?php endif; ?>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div class="col-lg-12 d-flex flex-column">
+                            <div class="row flex-grow">
+                              <div class="col-md-6 col-lg-12 grid-margin stretch-card">
+                                <div class="card bg-primary card-rounded">
+                                  <div class="card-body pb-0">
+                                    <h4 class="card-title card-title-dash text-white mb-4">Transaksi Terkini</h4>
+                                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link active btn btn-secondary" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Pinjaman</button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link btn btn-secondary" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Simpanan</button>
+                                                </li>
+                                            </ul>
+                                                <div class="tab-content" id="pills-tabContent">
+                                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                    <div class="card-body text-white">
+                                                        <?php if($pinjaman): ?>
+                                                        <?php 
+                                                        foreach($pinjaman as $row): ?>
+                                                            <h5 class="text white"><?= $row->created_at; ?> => <?= number_to_currency($row->nominal, 'IDR'); ?></h5>
+                                                        <?php endforeach; ?>
+                                                        <?php endif; ?>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                                <div class="card-body text-white">
-                                                    <?php if($simpanan): ?>
-                                                    <?php 
-                                                    foreach($simpanan as $row): ?>
-                                                        <h5 class="text white"><?= $row->created_at; ?> => <?= number_to_currency($row->nominal, 'IDR'); ?></h5>
-                                                    <?php endforeach; ?>
-                                                    <?php endif; ?>
+                                                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                    <div class="card-body text-white">
+                                                        <?php if($simpanan): ?>
+                                                        <?php 
+                                                        foreach($simpanan as $row): ?>
+                                                            <h5 class="text white"><?= $row->created_at; ?> => <?= number_to_currency($row->nominal, 'IDR'); ?></h5>
+                                                        <?php endforeach; ?>
+                                                        <?php endif; ?>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -109,7 +112,7 @@
                   <div class="tab-content tab-content-basic">
                     <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
                       <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-sm-12">
                           
                           <div class="statistics-details d-flex align-items-center justify-content-between">
                             <div>
@@ -139,47 +142,51 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-lg-4 d-flex flex-column">
-                          <div class="row flex-grow">
-                            <div class="col-md-6 col-lg-12 grid-margin stretch-card">
-                              <div class="card bg-primary card-rounded">
-                                <div class="card-body pb-0">
-                                  <h4 class="card-title card-title-dash text-white mb-4">Transaksi Terkini</h4>
-                                  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                              <li class="nav-item" role="presentation">
-                                                  <button class="nav-link active btn btn-secondary" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Pinjaman</button>
-                                              </li>
-                                              <li class="nav-item" role="presentation">
-                                                  <button class="nav-link btn btn-secondary" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Simpanan</button>
-                                              </li>
-                                          </ul>
-                                              <div class="tab-content" id="pills-tabContent">
-                                              <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                                  <div class="card-body text-white">
-                                                      <?php if($pinjaman): ?>
-                                                      <?php 
-                                                      foreach($pinjaman as $row): ?>
-                                                          <h5 class="text white"><?= $row->created_at; ?> => <?= number_to_currency($row->nominal, 'IDR'); ?></h5>
-                                                      <?php endforeach; ?>
-                                                      <?php endif; ?>
-                                                  </div>
-                                              </div>
-                                              <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                                  <div class="card-body text-white">
-                                                      <?php if($simpanan): ?>
-                                                      <?php 
-                                                      foreach($simpanan as $row): ?>
-                                                          <h5 class="text white"><?= $row->created_at; ?> => <?= number_to_currency($row->nominal, 'IDR'); ?></h5>
-                                                      <?php endforeach; ?>
-                                                      <?php endif; ?>
-                                                  </div>
-                                              </div>
+                      </div> 
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div class="col-lg-12 d-flex flex-column">
+                            <div class="row flex-grow">
+                              <div class="col-md-6 col-lg-12 grid-margin stretch-card">
+                                <div class="card bg-primary card-rounded">
+                                  <div class="card-body pb-0">
+                                    <h4 class="card-title card-title-dash text-white mb-4">Transaksi Terkini</h4>
+                                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link active btn btn-secondary" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Pinjaman</button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link btn btn-secondary" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Simpanan</button>
+                                                </li>
+                                            </ul>
+                                                <div class="tab-content" id="pills-tabContent">
+                                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                    <div class="card-body text-white">
+                                                        <?php if($pinjaman): ?>
+                                                        <?php 
+                                                        foreach($pinjaman as $row): ?>
+                                                            <h5 class="text white"><?= $row->created_at; ?> => <?= number_to_currency($row->nominal, 'IDR'); ?></h5>
+                                                        <?php endforeach; ?>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                    <div class="card-body text-white">
+                                                        <?php if($simpanan): ?>
+                                                        <?php 
+                                                        foreach($simpanan as $row): ?>
+                                                            <h5 class="text white"><?= $row->created_at; ?> => <?= number_to_currency($row->nominal, 'IDR'); ?></h5>
+                                                        <?php endforeach; ?>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div> 
+                      </div>
                     </div>
                   </div>
                 <?php endif ?>

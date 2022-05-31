@@ -75,6 +75,7 @@ class ProfileController extends BaseController
                 'name' => $this->request->getVar('name'),
                 'username' => $this->request->getVar('username'),
                 'alamat' => $this->request->getVar('alamat'),
+                'gender' => $this->request->getVar('gender'),
                 'foto_diri' => $randName,
             ];
             $model->update($id, $data);
@@ -87,10 +88,65 @@ class ProfileController extends BaseController
                 'name' => $this->request->getVar('name'),
                 'username' => $this->request->getVar('username'),
                 'alamat' => $this->request->getVar('alamat'),
+                'gender' => $this->request->getVar('gender'),
             ];
             $model->update($id, $data);
             session()->setFlashData('success','Detail akun berhasil diupdate!');
             return $this->response->redirect(site_url('dashboard/profile/u/'.$nik));
+        }
+    }
+
+    public function updatePassword()
+    {
+        if (!$this->validate([
+            'old_password' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Password lama harus diisi'
+                ]
+            ],
+            'new_password' => [
+                'rules' => 'required|min_length[6]|max_length[50]|is_unique[users.password]',
+                'errors' => [
+                    'required' => 'Password baru harus diisi',
+                    'min_length' => 'Password minimal 6 Karakter',
+                    'max_length' => 'Password maksimal 50 Karakter',
+                    'is_unique' => 'Anda sudah menggunakan sandi ini baru-baru ini. Pilih yang lain.',
+                ]
+            ],
+            'new_password_conf' => [
+                'rules' => 'matches[new_password]|required',
+                'errors' => [
+                    'required' => 'Konfirmasi password baru harus diisi',
+                    'matches' => 'Konfirmasi password tidak sesuai dengan password di atas',
+                ]
+            ],
+        ])) {
+            session()->setFlashdata('error_password', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
+        $users = new User();
+        $nik = $this->request->getVar('nik');
+        $username = session()->get('username');
+        $password = $this->request->getVar('old_password');
+        $dataAdmin = $users->where(['username' => $username,])->first();
+
+        if ($dataAdmin) {
+            if (password_verify($password, $dataAdmin['password'])) {
+                $id = session()->get('id');
+                $data = [
+                    'password' => password_hash($this->request->getVar('new_password'), PASSWORD_BCRYPT),
+                ];
+                $users->update($id, $data);
+                session()->setFlashData('success_password', 'Password telah diupdate!, Silahkan Relog untuk melihat detail terbaru anda.');
+                return $this->response->redirect(site_url('dashboard/profile/u/'.$nik));
+            } else {
+                session()->setFlashdata('error_password', 'Password Salah');
+                return redirect()->back()->withInput();
+            }
+        } else {
+            session()->setFlashdata('error_password', 'Password Salah');
+            return redirect()->back()->withInput();
         }
     }
 }

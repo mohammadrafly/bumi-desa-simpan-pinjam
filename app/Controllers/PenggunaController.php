@@ -6,6 +6,12 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use App\Controllers\BaseController;
 use App\Models\User;
+use App\Models\Simpanan;
+use App\Models\Permohonan;
+use App\Models\Angsuran;
+use App\Models\Penarikan;
+use App\Models\Pinjaman;
+use App\Models\Pembayaran;
 
 class PenggunaController extends BaseController
 {
@@ -157,10 +163,10 @@ class PenggunaController extends BaseController
         return $this->response->redirect(site_url('dashboard/pengguna'));
     }
 
-    public function delete($id = null)
+    public function delete($id)
     {
-        $model = new User();
-        $model->where('id', $id)->delete($id);
+        $user = new User();
+        $user->where('id', $id)->delete($id);
         session()->setFlashData('berhasil', 'Pengguna berhasil dihapus!');
         return $this->response->redirect(site_url('dashboard/pengguna'));
     }

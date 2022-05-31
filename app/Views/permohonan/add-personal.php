@@ -6,6 +6,16 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title"><?= $pages; ?></h4>
+                  <?php if (!empty(session()->getFlashdata('error'))) : ?>
+                      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                          <?php echo session()->getFlashdata('error'); ?>
+                      </div>
+                  <?php endif; ?>
+                  <?php if (!empty(session()->getFlashdata('success'))) : ?>
+                      <div class="alert alert-success alert-dismissible fade show" role="alert">
+                          <?php echo session()->getFlashdata('success'); ?>
+                      </div>
+                  <?php endif; ?>
                   <form class="forms-sample" method="POST" action="<?= base_url('dashboard/my/permohonan/u/'.$id.'/new/store'); ?>">
                   <?= csrf_field() ?>
                     <div class="form-group">

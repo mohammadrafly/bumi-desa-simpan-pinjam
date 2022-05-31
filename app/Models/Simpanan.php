@@ -20,6 +20,7 @@ class Simpanan extends Model
         'kode_deposit',
         'jenis_simpanan',
         'status_simpanan',
+        'created_at'
     ];
 
     // Dates

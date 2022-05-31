@@ -16,10 +16,6 @@
 
                   <?php elseif(session()->get('role') === 'admin'): ?>
                     <div class="btn-wrapper">
-                            <?php foreach($content as $row): ?>
-                      <a href="<?= base_url('dashboard/transaksi/penarikan/simpanan/'.$row->id_simpanan); ?>" 
-                        class="btn btn-otline-dark align-items-center"><i class="icon-credit-card"></i>Penarikan</a>
-                            <?php endforeach; ?>
                       <a href="<?= base_url('dashboard/transaksi/simpanan/add/'.$user['nik']); ?>" 
                         class="btn btn-otline-dark align-items-center"><i class="icon-plus"></i> Add simpanan</a>
                     </div>
@@ -40,6 +36,7 @@
                                 <th>Jenis simpanan</th>
                                 <th>Kode Penarikan</th>
                                 <th>Status simpanan</th>
+                                <th>Tanggal</th>
                                 <th>Option</th>
                             </tr>
                         </thead>
@@ -61,6 +58,7 @@
                                       <span class="badge bg-warning text-white"><?= $row->status_simpanan ?></span>
                                     <?php endif ?>
                                 </td>
+                                <td><?= $row->created_at ?></td>
                                 <td>
                                 <?php if(session()->get('role') === 'superadmin'): ?>
                                     <a href="<?= base_url('dashboard/transaksi/simpanan/view/'.$row->id_simpanan); ?>" class="btn-sm btn-primary text-white"><i class="mdi mdi-eye"></i></a>
@@ -68,7 +66,9 @@
                                     <a href="<?= base_url('dashboard/transaksi/simpanan/edit/'.$row->id_simpanan); ?>" class="btn-sm btn-warning text-white"><i class="mdi mdi-table-edit"></i></a>
                                     <a href="<?= base_url('dashboard/transaksi/simpanan/delete/'.$row->id_simpanan); ?>" class="btn-sm btn-danger text-white"><i class="mdi mdi-delete-forever"></i></a>
                                     <a href="<?= base_url('dashboard/transaksi/simpanan/view/'.$row->id_simpanan); ?>" class="btn-sm btn-primary text-white"><i class="mdi mdi-eye"></i></a>
-                                    <a href="<?= base_url('dashboard/transaksi/penarikan/add/'.$row->id_simpanan.'/'.$row->nominal.'/'.$nik); ?>" class="btn-sm btn-secondary text-black"><i class="mdi mdi-credit-card-multiple"></i></a>
+                                    <a href="<?= base_url('dashboard/transaksi/penarikan/add/'.$row->id_simpanan.'/'.$row->nominal.'/'.$nik); ?>" class="btn-sm btn-secondary text-black"><i class="icon-plus"></i> Add Penarikan</a>
+                                    <a href="<?= base_url('dashboard/transaksi/penarikan/simpanan/'.$row->id_simpanan); ?>" 
+                                      class="btn-sm btn-secondary text-black"<i class="icon-credit-card"></i>Penarikan</a>
                                 <?php endif ?>
                                 </td>
                             </tr>

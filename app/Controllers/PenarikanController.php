@@ -195,7 +195,7 @@ class PenarikanController extends BaseController
         $dompdf->stream("penarikan ID:".$id.".pdf");
     }
 
-    public function indexPersonal($id = null)
+    public function indexPersonal($nik,$id)
     {
         helper('number');
         $model = new Penarikan();

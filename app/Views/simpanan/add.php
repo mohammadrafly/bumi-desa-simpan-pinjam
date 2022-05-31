@@ -23,6 +23,15 @@
                           <option value="SUKARELA">Sukarela</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                      <label for="exampleSelectGender">Tanggal</label>
+                        <div class="input-group date" data-provide="datepicker">
+                            <input type="text" name="created_at" class="form-control">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-primary me-2">Submit</button>
                     <button class="btn btn-light">Cancel</button>
                   </form>

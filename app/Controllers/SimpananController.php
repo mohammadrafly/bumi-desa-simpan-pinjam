@@ -60,6 +60,12 @@ class SimpananController extends BaseController
                     'required' => '{field} harus diisi',
                 ],
             ],
+            'created_at' => [
+                'rules' => 'required',
+                'error' => [
+                    'required' => '{field} harus diisi',
+                ],
+            ],
         ])) {
             session()->setFlashdata('error', $this->validator->listErrors());
             return redirect()->back()->withInput();
@@ -70,6 +76,7 @@ class SimpananController extends BaseController
             'nik'   => $this->request->getVar('nik'),
             'nominal' => $this->request->getVar('nominal'),
             'jenis_simpanan' => $this->request->getVar('jenis_simpanan'),
+            'created_at' => $this->request->getVar('created_at'),
             'status_simpanan' => 'BELUM DEPOSIT',
             'kode_deposit' => $kode
         ]);

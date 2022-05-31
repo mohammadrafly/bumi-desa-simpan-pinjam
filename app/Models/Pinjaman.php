@@ -17,10 +17,10 @@ class Pinjaman extends Model
     protected $allowedFields    = [
         'nik',
         'nominal',
-        'biaya_admin',
         'jenis_pinjaman',
         'status_pinjaman',
-        'kode_penarikan'
+        'kode_penarikan',
+        'created_at'
     ];
 
     // Dates

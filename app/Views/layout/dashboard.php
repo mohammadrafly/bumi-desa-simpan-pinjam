@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="<?= base_url('vendors/css/vendor.bundle.base.css'); ?>">
   <!-- endinject -->
   <!-- Plugin css for this page -->
+  
   <link rel="stylesheet" href="<?= base_url('vendors/datatables.net-bs4/dataTables.bootstrap4.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('js/select.dataTables.min.css'); ?>">
   <!-- End plugin css for this page -->
@@ -45,7 +46,7 @@
       <div class="navbar-menu-wrapper d-flex align-items-top"> 
         <ul class="navbar-nav">
           <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-            <h1 class="welcome-text">Hai! <span class="text-black fw-bold"><?= session()->get('name'); ?></span></h1>
+            <h1 class="welcome-text">Selamat Datang! <span class="text-black fw-bold"><?= session()->get('name'); ?></span></h1>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
@@ -142,7 +143,6 @@
                 <li class="nav-item"> <a class="nav-link" href="<?= base_url('dashboard/my/transaksi/u/'.session()->get('nik').'/simpanan') ;?>">Simpanan</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?= base_url('dashboard/my/transaksi/u/'.session()->get('nik').'/pinjaman') ;?>">Pinjaman</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?= base_url('dashboard/my/transaksi/u/'.session()->get('nik').'/angsuran') ;?>">Angsuran</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?= base_url('dashboard/my/transaksi/u/'.session()->get('nik').'/penarikan') ;?>">Penarikan</a></li>
               </ul>
             </div>
           </li>

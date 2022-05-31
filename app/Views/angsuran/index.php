@@ -16,7 +16,7 @@
 
                   <?php elseif(session()->get('role') === 'admin'): ?>
                     <div class="btn-wrapper">
-                      <a href="<?= base_url('dashboard/transaksi/angsuran/add/'.$user['name']); ?>" class="btn btn-otline-dark align-items-center"><i class="icon-plus"></i> Add angsuran</a>
+                      <a href="<?= base_url('dashboard/transaksi/angsuran/add/'.$user['nik']); ?>" class="btn btn-otline-dark align-items-center"><i class="icon-plus"></i> Add angsuran</a>
                     </div>
                   <?php endif ?>
                   </div>

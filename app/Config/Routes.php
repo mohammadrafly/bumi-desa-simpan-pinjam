@@ -33,6 +33,8 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'UserController::index');
 $routes->post('login', 'UserController::login');
+$routes->get('register', 'UserController::register');
+$routes->post('register', 'UserController::store');
 $routes->get('logout', 'UserController::logout');
 
 $routes->group('dashboard', ['filter' => 'authGuard'], function ($routes) {
@@ -52,8 +54,8 @@ $routes->group('dashboard', ['filter' => 'authGuard'], function ($routes) {
         $routes->get('u/(:num)/simpanan', 'SimpananController::indexPersonal/$1');
         $routes->get('u/(:num)/pinjaman', 'PinjamanController::indexPersonal/$1');
         $routes->get('u/(:num)/angsuran', 'AngsuranController::indexPersonal/$1');
-        $routes->get('u/(:num)/penarikan', 'PenarikanController::indexPersonal/$1');
-        $routes->get('u/(:num)/pembayaran', 'PembayaranController::indexPersonal/$1');
+        $routes->get('u/(:num)/penarikan/id/(:num)', 'PenarikanController::indexPersonal/$1/$2');
+        $routes->get('u/(:num)/pembayaran/id/(:num)', 'PembayaranController::indexPersonal/$1/$2');
     });
     $routes->group('pengguna', ['filter' => 'backEndGuard'], function ($routes) {
         $routes->get('/', 'PenggunaController::index');

@@ -10,6 +10,18 @@
                     <li class="nav-item">
                       <a class="nav-link" id="home-tab" data-bs-toggle="tab" role="tab" aria-controls="overview" aria-selected="true"><?= $pages; ?></a>
                     </li>
+                    <li class="nav-item">
+                    <?php if (!empty(session()->getFlashdata('error'))) : ?>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <?php echo session()->getFlashdata('error'); ?>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (!empty(session()->getFlashdata('success'))) : ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <?php echo session()->getFlashdata('success'); ?>
+                        </div>
+                    <?php endif; ?>
+                    </li>
                   </ul>
                   <div>
                     <div class="btn-wrapper">

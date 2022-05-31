@@ -53,13 +53,13 @@ class PinjamanController extends BaseController
                     'required' => '{field} Harus diisi',
                 ]
             ],
-            'biaya_admin' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} Harus diisi',
-                ]
-            ],
             'jenis_pinjaman' => [
+                'rules' => 'required',
+                'error' => [
+                    'required' => '{field} harus diisi',
+                ],
+            ],
+            'created_at' => [
                 'rules' => 'required',
                 'error' => [
                     'required' => '{field} harus diisi',
@@ -74,8 +74,8 @@ class PinjamanController extends BaseController
         $model->insert([
             'nik'   => $this->request->getVar('nik'),
             'nominal' => $this->request->getVar('nominal'),
-            'biaya_admin' => $this->request->getVar('biaya_admin'),
             'jenis_pinjaman' => $this->request->getVar('jenis_pinjaman'),
+            'created_at' => $this->request->getVar('created_at'),
             'status' => 'BELUM DIAMBIL',
             'kode_penarikan' => $kode
         ]);

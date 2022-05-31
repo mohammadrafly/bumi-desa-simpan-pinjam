@@ -21,6 +21,7 @@ class User extends Model
         'nik',
         'role',
         'alamat',
+        'gender',
         'foto_diri'
     ];
 

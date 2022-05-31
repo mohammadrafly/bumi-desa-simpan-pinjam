@@ -16,7 +16,8 @@ class Pembayaran extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'id_angsuran',
-        'nominal'
+        'nominal',
+        'biaya_admin'
     ];
 
     // Dates
@@ -54,6 +55,7 @@ class Pembayaran extends Model
     public function getPBbyID($id)
     {
         $query = $this->db->table('pembayaran')
+            ->select('pembayaran.*, angsuran.nominal AS nominal_angsuran')
             ->join('angsuran', 'angsuran.id_angsuran = pembayaran.id_angsuran', 'left')
             ->where('pembayaran.id_angsuran', $id)
             ->get();

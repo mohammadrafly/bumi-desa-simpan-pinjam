@@ -17,15 +17,21 @@
                       <input type="number" name="nominal" class="form-control" id="exampleInputName1" placeholder="Nominal">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputbiaya_dmin3">Biaya Admin</label>
-                      <input type="number" name="biaya_admin" class="form-control" id="exampleInputbiaya_dmin3" placeholder="Biaya Admin">
-                    </div>
-                    <div class="form-group">
                       <label for="exampleSelectGender">Jenis Pinjaman</label>
                         <select name="jenis_pinjaman" class="form-control" id="exampleSelectGender">
                           <option value="BIASA">Biasa</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                      <label for="exampleSelectGender">Tanggal</label>
+                        <div class="input-group date" data-provide="datepicker">
+                            <input type="text" name="created_at" class="form-control">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <button type="submit" class="btn btn-primary me-2">Submit</button>
                     <button class="btn btn-light">Cancel</button>
                   </form>
@@ -34,3 +40,4 @@
             </div>
 
 <?= $this->endSection() ?>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>

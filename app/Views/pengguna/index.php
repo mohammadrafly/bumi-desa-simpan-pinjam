@@ -60,8 +60,12 @@
 
                                 <?php elseif(session()->get('role') === 'admin'): ?>
                                 <td>
-                                    <a href="<?= base_url('dashboard/pengguna/edit/'.$row['id']); ?>" class="btn-sm btn-warning text-white"><i class="mdi mdi-table-edit"></i></a>
-                                    <a href="<?= base_url('dashboard/pengguna/delete/'.$row['id']); ?>" class="btn-sm btn-danger text-white"><i class="mdi mdi-delete-forever"></i></a>
+                                    <a href="<?= base_url('dashboard/pengguna/edit/'.$row['id']); ?>" 
+                                      class="btn-sm btn-warning text-white"><i class="mdi mdi-table-edit"></i>
+                                    </a>
+                                    <a href="<?= base_url('dashboard/pengguna/delete/'.$row['id']); ?>" 
+                                      class="btn-sm btn-danger text-white"><i class="mdi mdi-delete-forever"></i>
+                                    </a>
                                 </td>
                                 <?php endif ?>
                             </tr>

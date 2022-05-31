@@ -26,6 +26,7 @@
                                 <th>Jenis simpanan</th>
                                 <th>Status simpanan</th>
                                 <th>Waktu Dikirim</th>
+                                <th>Opsi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,6 +47,7 @@
                                     <?php endif ?>
                                 </td>
                                 <td><?= $row->created_at; ?></td>
+                                <td><a class="badge bg-secondary" href="<?= base_url('dashboard/my/transaksi/u/'.session()->get('nik').'/penarikan/id/'.$row->id_simpanan) ;?>">Penarikan</a></td>
                             </tr>
                             <?php endforeach; ?>
                             <?php endif; ?>

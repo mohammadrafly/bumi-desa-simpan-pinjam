@@ -14,10 +14,6 @@
                       <input type="text" name="nominal" class="form-control" id="exampleInputName1" placeholder="Nominal" value="<?= $data['nominal']; ?>">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputName1">Biaya Admin</label>
-                      <input type="text" name="biaya_admin" class="form-control" id="exampleInputName1" placeholder="Biaya Admin" value="<?= $data['biaya_admin']; ?>">
-                    </div>
-                    <div class="form-group">
                       <label for="exampleSelectstatu_pinjaman">Jenis Pinjaman</label>
                         <select name="jenis_pinjaman" value="<?= $data['jenis_pinjaman']; ?>" class="form-control" id="exampleSelectstatu_pinjaman">
                           <option selected value="<?= $data['jenis_pinjaman']; ?>"><?= $data['jenis_pinjaman']; ?></option>
