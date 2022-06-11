@@ -129,30 +129,31 @@ class PermohonanController extends BaseController
         $spreadsheet = new Spreadsheet();
         // tulis header/nama kolom 
         $spreadsheet->setActiveSheetIndex(0)
-                    ->setCellValue('A1', 'ID')
-                    ->setCellValue('B1', 'NIK')
-                    ->setCellValue('C1', 'Judul')
-                    ->setCellValue('D1', 'Nominal')
-                    ->setCellValue('E1', 'Jenis')
-                    ->setCellValue('F1', 'Status')
-                    ->setCellValue('G1', 'Dibuat');
+                    ->setCellValue('A1', 'Laporan Permohonan')
+                    ->setCellValue('B1', 'ID Permohonan')
+                    ->setCellValue('C1', 'Nik')
+                    ->setCellValue('D1', 'Judul')
+                    ->setCellValue('E1', 'Nominal')
+                    ->setCellValue('F1', 'Jenis')
+                    ->setCellValue('G1', 'Status')
+                    ->setCellValue('H1', 'Dibuat');
         
         $column = 2;
         // tulis data pinjaman ke cell
         foreach($data as $data) {
             $spreadsheet->setActiveSheetIndex(0)
-                        ->setCellValue('A' . $column, $data['id_permohonan'])
-                        ->setCellValue('B' . $column, $data['nik'])
-                        ->setCellValue('C' . $column, $data['judul_permohonan'])
-                        ->setCellValue('D' . $column, $data['nominal_permohonan'])
-                        ->setCellValue('E' . $column, $data['jenis_permohonan'])
-                        ->setCellValue('F' . $column, $data['status_permohonan'])
-                        ->setCellValue('G' . $column, $data['created_at']);
+                        ->setCellValue('B' . $column, $data['id_permohonan'])
+                        ->setCellValue('C' . $column, $data['nik'])
+                        ->setCellValue('D' . $column, $data['judul_permohonan'])
+                        ->setCellValue('E' . $column, $data['nominal_permohonan'])
+                        ->setCellValue('F' . $column, $data['jenis_permohonan'])
+                        ->setCellValue('G' . $column, $data['status_permohonan'])
+                        ->setCellValue('H' . $column, $data['created_at']);
             $column++;
         }
         // tulis dalam format .xlsx
         $writer = new Xlsx($spreadsheet);
-        $fileName = 'Rekap Permohonan';
+        $fileName = 'Rekap Permohonan_'.date('Y-m-d');
 
         // Redirect hasil generate xlsx ke web client
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

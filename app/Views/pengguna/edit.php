@@ -18,6 +18,10 @@
                       <input type="text" name="username" class="form-control" id="exampleInputName1" placeholder="Username" value="<?= $data['username']; ?>">
                     </div>
                     <div class="form-group">
+                      <label for="exampleInputPassword4">Nomor HP</label>
+                      <input type="number" name="phone" class="form-control" id="exampleInputPassword4" placeholder="Nomor HP" value="<?= $data['phone']; ?>">
+                    </div>
+                    <div class="form-group">
                       <label for="exampleInputName1">NIK</label>
                       <input type="text" name="nik" class="form-control" id="exampleInputName1" placeholder="NIK" value="<?= $data['nik']; ?>" disabled>
                     </div>
@@ -58,7 +62,6 @@
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary me-2">Submit</button>
-                    <button class="btn btn-light">Cancel</button>
                   </form>
                 </div>
               </div>

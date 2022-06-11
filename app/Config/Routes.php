@@ -63,8 +63,22 @@ $routes->group('dashboard', ['filter' => 'authGuard'], function ($routes) {
         $routes->post('store', 'PenggunaController::store');
         $routes->get('edit/(:num)', 'PenggunaController::edit/$1');
         $routes->post('update', 'PenggunaController::update');
-        $routes->get('delete/(:num)', 'PenggunaController::delete/$1');
+        $routes->get('delete/(:num)/', 'PenggunaController::delete/$1');
         $routes->get('export', 'PenggunaController::export');
+        $routes->get('ganti/password/(:num)', 'PenggunaController::gantiPassword/$1');
+        $routes->post('ganti/password/store', 'PenggunaController::updatePassword');
+    });
+    $routes->group('anggota', ['filter' => 'backEndGuard'], function ($routes) {
+        $routes->get('/', 'AnggotaController::index');
+        /*
+         *$routes->get('add', 'AnggotaController::add');
+         *$routes->post('store', 'AnggotaController::store');
+         *$routes->get('edit/(:num)', 'AnggotaController::edit/$1');
+         *$routes->post('update', 'AnggotaController::update');
+         *$routes->get('delete/(:num)/', 'AnggotaController::delete/$1');
+        */
+        $routes->get('export', 'AnggotaController::export');
+        
     });
     $routes->group('permohonan', ['filter' => 'backEndGuard'], function ($routes) {
         $routes->get('/', 'PermohonanController::index');
@@ -127,7 +141,7 @@ $routes->group('dashboard', ['filter' => 'authGuard'], function ($routes) {
             $routes->post('store', 'PenarikanController::store');
             $routes->get('edit/(:num)', 'PenarikanController::edit/$1');
             $routes->post('update', 'PenarikanController::update');
-            $routes->get('delete/(:num)', 'PenarikanController::delete/$1');
+            $routes->get('delete/(:num)/(:num)', 'PenarikanController::delete/$1/$2');
             $routes->get('export', 'PenarikanController::export');
             $routes->get('view/(:num)', 'PenarikanController::view/$1');
             $routes->get('pdf/(:num)', 'PenarikanController::pdf/$1');

@@ -128,19 +128,20 @@ class AngsuranController extends BaseController
         $spreadsheet = new Spreadsheet();
         // tulis header/nama kolom 
         $spreadsheet->setActiveSheetIndex(0)
-                    ->setCellValue('A1', 'ID angsuran')
-                    ->setCellValue('C1', 'Waktu')
-                    ->setCellValue('D1', 'Status Angsuran')
-                    ->setCellValue('E1', 'Nominal')
-                    ->setCellValue('F1', 'NIK')
-                    ->setCellValue('G1', 'Kode Pembayaran')
+                    ->setCellValue('A1', 'Laporan Angsuran')
+                    ->setCellValue('B1', 'ID Angsuran')
+                    ->setCellValue('C1', 'Nominal')
+                    ->setCellValue('D1', 'Nik')
+                    ->setCellValue('E1', 'Waktu')
+                    ->setCellValue('F1', 'Kode')
+                    ->setCellValue('G1', 'Status')
                     ->setCellValue('H1', 'Dibuat');
         
         $column = 2;
         // tulis data angsuran ke cell
         foreach($data as $data) {
             $spreadsheet->setActiveSheetIndex(0)
-                        ->setCellValue('A' . $column, $data['id_angsuran'])
+                        ->setCellValue('B' . $column, $data['id_angsuran'])
                         ->setCellValue('C' . $column, $data['waktu'])
                         ->setCellValue('D' . $column, $data['status_angsuran'])
                         ->setCellValue('E' . $column, $data['nominal'])
@@ -151,7 +152,7 @@ class AngsuranController extends BaseController
         }
         // tulis dalam format .xlsx
         $writer = new Xlsx($spreadsheet);
-        $fileName = 'Rekap angsuran';
+        $fileName = 'Rekap angsuran_'.date('Y-m-d');
 
         // Redirect hasil generate xlsx ke web client
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

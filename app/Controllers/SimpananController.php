@@ -143,18 +143,19 @@ class SimpananController extends BaseController
         $spreadsheet = new Spreadsheet();
         // tulis header/nama kolom 
         $spreadsheet->setActiveSheetIndex(0)
-                    ->setCellValue('A1', 'ID Simpanan')
-                    ->setCellValue('B1', 'NIK')
-                    ->setCellValue('C1', 'Jenis Simpanan')
-                    ->setCellValue('D1', 'Nominal')
-                    ->setCellValue('E1', 'Status Simpanan')
-                    ->setCellValue('F1', 'Dibuat');
+                    ->setCellValue('A1', 'Laporan Simpanan')
+                    ->setCellValue('B1', 'ID Simpanan')
+                    ->setCellValue('C1', 'Nik')
+                    ->setCellValue('D1', 'Jenis')
+                    ->setCellValue('E1', 'Nominal')
+                    ->setCellValue('F1', 'Status')
+                    ->setCellValue('G1', 'Dibuat');
         
         $column = 2;
         // tulis data simpanan ke cell
         foreach($data as $data) {
             $spreadsheet->setActiveSheetIndex(0)
-                        ->setCellValue('A' . $column, $data['id_simpanan'])
+                        ->setCellValue('B' . $column, $data['id_simpanan'])
                         ->setCellValue('C' . $column, $data['nik'])
                         ->setCellValue('D' . $column, $data['jenis_simpanan'])
                         ->setCellValue('E' . $column, $data['nominal'])
@@ -164,7 +165,7 @@ class SimpananController extends BaseController
         }
         // tulis dalam format .xlsx
         $writer = new Xlsx($spreadsheet);
-        $fileName = 'Rekap simpanan';
+        $fileName = 'Rekap simpanan_'.date('Y-m-d');
 
         // Redirect hasil generate xlsx ke web client
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

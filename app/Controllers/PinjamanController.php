@@ -143,10 +143,10 @@ class PinjamanController extends BaseController
         $spreadsheet = new Spreadsheet();
         // tulis header/nama kolom 
         $spreadsheet->setActiveSheetIndex(0)
-                    ->setCellValue('A1', 'ID Pinjaman')
-                    ->setCellValue('B1', 'NIK')
-                    ->setCellValue('C1', 'Biaya Admin')
-                    ->setCellValue('D1', 'Jenis Pinjaman')
+                    ->setCellValue('A1', 'Laporan Pinjaman')
+                    ->setCellValue('B1', 'ID Pinjaman')
+                    ->setCellValue('C1', 'Nik')
+                    ->setCellValue('D1', 'Jenis')
                     ->setCellValue('E1', 'Nominal')
                     ->setCellValue('F1', 'Kode Penarikan')
                     ->setCellValue('G1', 'Dibuat');
@@ -155,9 +155,8 @@ class PinjamanController extends BaseController
         // tulis data pinjaman ke cell
         foreach($data as $data) {
             $spreadsheet->setActiveSheetIndex(0)
-                        ->setCellValue('A' . $column, $data['id_pinjaman'])
-                        ->setCellValue('B' . $column, $data['nik'])
-                        ->setCellValue('C' . $column, $data['biaya_admin'])
+                        ->setCellValue('B' . $column, $data['id_pinjaman'])
+                        ->setCellValue('C' . $column, $data['nik'])
                         ->setCellValue('D' . $column, $data['jenis_pinjaman'])
                         ->setCellValue('E' . $column, $data['nominal'])
                         ->setCellValue('F' . $column, $data['kode_penarikan'])
@@ -166,7 +165,7 @@ class PinjamanController extends BaseController
         }
         // tulis dalam format .xlsx
         $writer = new Xlsx($spreadsheet);
-        $fileName = 'Rekap pinjaman';
+        $fileName = 'Rekap pinjaman_'.date('Y-m-d');
 
         // Redirect hasil generate xlsx ke web client
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

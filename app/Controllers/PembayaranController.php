@@ -13,7 +13,7 @@ class PembayaranController extends BaseController
     {
         helper('number');
         $pager = \Config\Services::pager();
-        $model = new pembayaran();
+        $model = new Pembayaran();
         $content = $model->getPBbyID($id)->getResult();
         $data = [
             'content'   => $content,
@@ -58,6 +58,7 @@ class PembayaranController extends BaseController
             'id_angsuran'   => $this->request->getVar('id_angsuran'),
             'nominal' => $this->request->getVar('nominal'),
             'biaya_admin' => $this->request->getVar('biaya_admin'),
+            'created_at' => $this->request->getVar('created_at'),
         ]);
         session()->setFlashData('message','Berhasil menambah pembayaran');
         return redirect()->to('dashboard/transaksi');
@@ -71,24 +72,25 @@ class PembayaranController extends BaseController
         $spreadsheet = new Spreadsheet();
         // tulis header/nama kolom 
         $spreadsheet->setActiveSheetIndex(0)
-                    ->setCellValue('A1', 'ID Pembayaran')
-                    ->setCellValue('B1', 'ID Angsuran')
-                    ->setCellValue('C1', 'Nominal')
-                    ->setCellValue('D1', 'Waktu Transaksi');
+                    ->setCellValue('A1', 'Laporan Pembayaran')
+                    ->setCellValue('B1', 'ID Pembayaran')
+                    ->setCellValue('C1', 'ID Angsuran')
+                    ->setCellValue('D1', 'Nominal')
+                    ->setCellValue('E1', 'Waktu Transaksi');
         
         $column = 2;
         // tulis data pembayaran ke cell
         foreach($data as $data) {
             $spreadsheet->setActiveSheetIndex(0)
-                        ->setCellValue('A' . $column, $data['id_pembayaran'])
-                        ->setCellValue('B' . $column, $data['id_angsuran'])
-                        ->setCellValue('C' . $column, $data['nominal'])
-                        ->setCellValue('D' . $column, $data['created_at']);
+                        ->setCellValue('B' . $column, $data['id_pembayaran'])
+                        ->setCellValue('C' . $column, $data['id_angsuran'])
+                        ->setCellValue('D' . $column, $data['nominal'])
+                        ->setCellValue('E' . $column, $data['created_at']);
             $column++;
         }
         // tulis dalam format .xlsx
         $writer = new Xlsx($spreadsheet);
-        $fileName = 'Rekap pembayaran';
+        $fileName = 'Rekap pembayaran_'.date('Y-m-d');
 
         // Redirect hasil generate xlsx ke web client
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

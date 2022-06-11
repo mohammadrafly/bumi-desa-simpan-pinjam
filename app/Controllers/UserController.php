@@ -46,11 +46,11 @@ class UserController extends BaseController
                 ]
             ],
             'nik' => [
-                'rules' => 'required|min_length[4]|max_length[50]',
+                'rules' => 'required|min_length[16]|max_length[16]',
                 'errors' => [
                     'required' => '{field} harus diisi',
-                    'min_length' => '{field} minimal 4 Karakter',
-                    'max_length' => '{field} maksimal 50 Karakter',
+                    'min_length' => '{field} minimal 16 Karakter',
+                    'max_length' => '{field} maksimal 16 Karakter',
                 ]
             ],
             'password' => [
@@ -75,8 +75,8 @@ class UserController extends BaseController
         $model = new User();
         $data = [
             'username'  => $this->request->getVar('username'),
-            'name'  => $this->request->getVar('name'),
-            'nik'  => $this->request->getVar('nik'),
+            'name'      => $this->request->getVar('name'),
+            'nik'       => $this->request->getVar('nik'),
             'password'  => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
             'role'      => 'customer',
         ];

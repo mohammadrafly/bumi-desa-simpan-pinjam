@@ -91,7 +91,7 @@
     <div class="container-fluid page-body-wrapper">
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
-            <?php if(session()->get('role') === 'superadmin'): ?>
+            <?php if(session()->get('role') === 'superadmin' || session()->get('role') === 'admin'): ?>
           <li class="nav-item">
             <a class="nav-link" href="<?= base_url('dashboard'); ?>">
               <i class="mdi mdi-grid-large menu-icon"></i>
@@ -103,6 +103,12 @@
             <a class="nav-link" href="<?= base_url('dashboard/pengguna'); ?>">
               <i class="menu-icon mdi mdi-account-circle-outline"></i>
               <span class="menu-title">Data Pengguna</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('dashboard/anggota'); ?>">
+              <i class="menu-icon mdi mdi-account-multiple"></i>
+              <span class="menu-title">Data Anggota</span>
             </a>
           </li>
           <li class="nav-item">
@@ -156,39 +162,6 @@
             <a class="nav-link" href="<?= base_url('dashboard/profile/u/'.session()->get('nik')); ?>">
               <i class="menu-icon mdi mdi-account-circle-outline"></i>
               <span class="menu-title">My Profile</span>
-            </a>
-          </li>
-            <?php elseif(session()->get('role') === 'admin'): ?>
-              <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('dashboard'); ?>">
-              <i class="mdi mdi-grid-large menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item nav-category">Data Master</li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('dashboard/pengguna'); ?>">
-              <i class="menu-icon mdi mdi-account-circle-outline"></i>
-              <span class="menu-title">Data Pengguna</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('dashboard/transaksi'); ?>">
-              <i class="menu-icon mdi mdi-cash-usd"></i>
-              <span class="menu-title">Data Transaksi</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('dashboard/permohonan'); ?>">
-              <i class="menu-icon mdi mdi-archive"></i>
-              <span class="menu-title">Data Permohonan</span>
-            </a>
-          </li>
-          <li class="nav-item nav-category">Lainnya</li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('dashboard/laporan'); ?>">
-              <i class="menu-icon mdi mdi-chart-bubble"></i>
-              <span class="menu-title">Laporan</span>
             </a>
           </li>
             <?php endif ?>

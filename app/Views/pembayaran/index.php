@@ -31,7 +31,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Id pembayaran</th>
-                                <th>Biaya Admin</th>
+                                <th>Nadzar</th>
                                 <th>Nominal</th>
                                 <th>Waktu Transaksi</th>
                                 <th>Option</th>

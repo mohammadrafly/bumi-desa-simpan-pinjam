@@ -12,13 +12,6 @@
                     </li>
                   </ul>
                   <div>
-                  <?php if(session()->get('role') === 'superadmin'): ?>
-
-                  <?php elseif(session()->get('role') === 'admin'): ?>
-                    <div class="btn-wrapper">
-                      <a href="<?= base_url('dashboard/pengguna/add'); ?>" class="btn btn-otline-dark align-items-center"><i class="icon-plus"></i> Add Pengguna</a>
-                    </div>
-                  <?php endif ?>
                   </div>
                 </div>
               </div>
@@ -30,12 +23,10 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Id Pengguna</th>
                                 <th>Nama</th>
-                                <th>Gender</th>
-                                <th>NIK</th>
-                                <th>Role</th>
-                                <th>Joined</th>
+                                <th>Phone</th>
+                                <th>Nik</th>
+                                <th>Alamat</th>
                                 <?php if(session()->get('role') === 'superadmin'): ?>
 
                                 <?php elseif(session()->get('role') === 'admin'): ?>
@@ -50,24 +41,22 @@
                             foreach($content as $row): ?>
                             <tr>
                                 <td><?php echo $no++; ?></td>
-                                <td><?php echo $row['id']; ?></td>
                                 <td><?php echo $row['name']; ?></td>
-                                <td><?php echo $row['gender']; ?></td>
+                                <td><?php echo $row['phone']; ?></td>
                                 <td><?php echo $row['nik']; ?></td>
-                                <td><?php echo $row['role']; ?></td>
-                                <td><?= $row['created']; ?></td>
+                                <td><?php echo $row['alamat']; ?></td>
                                 <?php if(session()->get('role') === 'superadmin'): ?>
 
                                 <?php elseif(session()->get('role') === 'admin'): ?>
                                 <td>
-                                  <a href="<?= base_url('dashboard/pengguna/ganti/password/'.$row['id']); ?>" 
-                                      class="btn-sm btn-primary"><i class="mdi mdi-account-convert"></i>
+                                    <a href="<?= base_url('dashboard/pengguna/ganti/password/'.$row['id']); ?>" 
+                                    class="btn-sm btn-primary"><i class="mdi mdi-account-convert"></i>
                                     </a>
                                     <a href="<?= base_url('dashboard/pengguna/edit/'.$row['id']); ?>" 
-                                      class="btn-sm btn-warning"><i class="mdi mdi-table-edit"></i>
+                                    class="btn-sm btn-warning"><i class="mdi mdi-table-edit"></i>
                                     </a>
                                     <a href="<?= base_url('dashboard/pengguna/delete/'.$row['id']); ?>" 
-                                      class="btn-sm btn-danger"><i class="mdi mdi-delete-forever"></i>
+                                    class="btn-sm btn-danger"><i class="mdi mdi-delete-forever"></i>
                                     </a>
                                 </td>
                                 <?php endif ?>
@@ -76,7 +65,7 @@
                             <?php endif; ?>
                         </tbody>
                       </table>
-                    <?= $pengguna->links('content', 'bootstrap_pagination'); ?>
+                    <?= $pengguna->links('data', 'bootstrap_pagination'); ?>
                     </div>
                   </div>
                 </div>

@@ -64,24 +64,32 @@ class PenarikanController extends BaseController
         $nominal_penarikan = $this->request->getVar('nominal');
         $nik = $this->request->getVar('nik');
         $model = new Penarikan();
+        $simpanan = new Simpanan();
         $data = [
             'id_simpanan'   => $this->request->getVar('id_simpanan'),
             'nominal' => $this->request->getVar('nominal'),
             'status_penarikan' => 'BELUM DIAMBIL',
             'kode_penarikan' => $kode
         ];
-        if ($model->insert($data)){
-            $simpanan = new Simpanan();
-            $result = $nominal_simpanan - $nominal_penarikan;
-            $id = $this->request->getVar('id_simpanan');
-            $data = [
-                'nominal' => $result
-            ];
-            $simpanan->update($id,$data);
-            session()->setFlashData('message','Berhasil menambah penarikan');
-            return redirect()->to('dashboard/transaksi/simpanan/pengguna/'.$nik);
+        $check = $simpanan->where('nik', $nik)->first();
+        if ($data['nominal'] < $check['nominal']){
+            if ($model->insert($data)){
+                $simpanan = new Simpanan();
+                $result = $nominal_simpanan - $nominal_penarikan;
+                $id = $this->request->getVar('id_simpanan');
+                $data = [
+                    'nominal' => $result
+                ];
+                $simpanan->update($id,$data);
+                session()->setFlashData('success','Berhasil menambah penarikan');
+                return redirect()->to('dashboard/transaksi/simpanan/pengguna/'.$nik);
+            } else {
+                session()->setFlashData('error_penarikan','Maaf nominal yang anda masukkan lebih dari simpanan yang ada!');
+                return redirect()->to('dashboard/transaksi/simpanan/pengguna/'.$nik);
+            }
         } else {
-            echo 'Error';
+            session()->setFlashData('error_penarikan','Error');
+                return redirect()->to('dashboard/transaksi/simpanan/pengguna/'.$nik);
         }
     }
 
@@ -121,12 +129,12 @@ class PenarikanController extends BaseController
         return $this->response->redirect(site_url('dashboard/transaksi'));
     }
 
-    public function delete($id = null)
+    public function delete($id = null, $id_simpanan = null)
     {
         $model = new Penarikan();
         $model->where('id_penarikan', $id)->delete();
         session()->setFlashData('berhasil', 'penarikan berhasil dihapus!');
-        return $this->response->redirect(site_url('dashboard/transaksi'));
+        return $this->response->redirect(site_url('dashboard/transaksi/penarikan/simpanan/'.$id_simpanan));
     }
 
     public function export()
@@ -137,26 +145,27 @@ class PenarikanController extends BaseController
         $spreadsheet = new Spreadsheet();
         // tulis header/nama kolom 
         $spreadsheet->setActiveSheetIndex(0)
-                    ->setCellValue('A1', 'ID penarikan')
-                    ->setCellValue('B1', 'NIK')
-                    ->setCellValue('C1', 'Nominal')
-                    ->setCellValue('D1', 'Kode Penarikan')
-                    ->setCellValue('E1', 'Dibuat');
+                    ->setCellValue('A1', 'Laporan Penarikan')
+                    ->setCellValue('B1', 'ID Penarikan')
+                    ->setCellValue('C1', 'Nik')
+                    ->setCellValue('D1', 'Nominal')
+                    ->setCellValue('E1', 'Kode')
+                    ->setCellValue('F1', 'Dibuat');
         
         $column = 2;
         // tulis data penarikan ke cell
         foreach($data as $data) {
             $spreadsheet->setActiveSheetIndex(0)
-                        ->setCellValue('A' . $column, $data['id_penarikan'])
-                        ->setCellValue('B' . $column, $data['nik'])
-                        ->setCellValue('C' . $column, $data['nominal'])
-                        ->setCellValue('D' . $column, $data['kode_penarikan'])
-                        ->setCellValue('E' . $column, $data['created_at']);
+                        ->setCellValue('B' . $column, $data['id_penarikan'])
+                        ->setCellValue('C' . $column, $data['nik'])
+                        ->setCellValue('D' . $column, $data['nominal'])
+                        ->setCellValue('E' . $column, $data['kode_penarikan'])
+                        ->setCellValue('F' . $column, $data['created_at']);
             $column++;
         }
         // tulis dalam format .xlsx
         $writer = new Xlsx($spreadsheet);
-        $fileName = 'Rekap penarikan';
+        $fileName = 'Rekap penarikan_'.date('Y-m-d');
 
         // Redirect hasil generate xlsx ke web client
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
