@@ -2,10 +2,12 @@
 
 namespace App\Controllers;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use App\Controllers\BaseController;
 use App\Models\User;
 
-class TransaksiController extends BaseController
+class AnggotaController extends BaseController
 {
     public function index()
     {
@@ -13,10 +15,10 @@ class TransaksiController extends BaseController
         $model = new User();
         $data = [
             'content' => $model->GetUserWithoutSU()->getResult(),
-            'pages'   => 'Data Transaksi',
-            'pager'  => $model->pager,
+            'pages'   => 'Data Anggota',
+            'pengguna'  => $model->pager,
         ];
         //dd($data);
-        return view('transaksi/index', $data);
+        return view('anggota/index', $data);
     }
 }

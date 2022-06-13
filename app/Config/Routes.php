@@ -63,8 +63,22 @@ $routes->group('dashboard', ['filter' => 'authGuard'], function ($routes) {
         $routes->post('store', 'PenggunaController::store');
         $routes->get('edit/(:num)', 'PenggunaController::edit/$1');
         $routes->post('update', 'PenggunaController::update');
-        $routes->get('delete/(:num)', 'PenggunaController::delete/$1');
+        $routes->get('delete/(:num)/', 'PenggunaController::delete/$1');
         $routes->get('export', 'PenggunaController::export');
+        $routes->get('ganti/password/(:num)', 'PenggunaController::gantiPassword/$1');
+        $routes->post('ganti/password/store', 'PenggunaController::updatePassword');
+    });
+    $routes->group('anggota', ['filter' => 'backEndGuard'], function ($routes) {
+        $routes->get('/', 'AnggotaController::index');
+        /*
+         *$routes->get('add', 'AnggotaController::add');
+         *$routes->post('store', 'AnggotaController::store');
+         *$routes->get('edit/(:num)', 'AnggotaController::edit/$1');
+         *$routes->post('update', 'AnggotaController::update');
+         *$routes->get('delete/(:num)/', 'AnggotaController::delete/$1');
+        */
+        $routes->get('export', 'AnggotaController::export');
+        
     });
     $routes->group('permohonan', ['filter' => 'backEndGuard'], function ($routes) {
         $routes->get('/', 'PermohonanController::index');
@@ -81,31 +95,31 @@ $routes->group('dashboard', ['filter' => 'authGuard'], function ($routes) {
             $routes->get('pengguna/(:num)', 'PinjamanController::index/$1');
             $routes->get('add/(:num)', 'PinjamanController::add/$1');
             $routes->post('store', 'PinjamanController::store');
-            $routes->get('edit/(:num)', 'PinjamanController::edit/$1');
+            $routes->get('edit/(:num)/(:num)', 'PinjamanController::edit/$1/$2');
             $routes->post('update', 'PinjamanController::update');
-            $routes->get('delete/(:num)', 'PinjamanController::delete/$1');
+            $routes->get('delete/(:num)/(:num)', 'PinjamanController::delete/$1/$2');
             $routes->get('export', 'PinjamanController::export');
-            $routes->get('view/(:num)', 'PinjamanController::view/$1');
+            $routes->get('view/(:num)/(:num)', 'PinjamanController::view/$1/$2');
             $routes->get('pdf/(:num)', 'PinjamanController::pdf/$1');
         });
         $routes->group('simpanan', function ($routes) {
             $routes->get('pengguna/(:num)', 'SimpananController::index/$1');
             $routes->get('add/(:num)', 'SimpananController::add/$1');
             $routes->post('store', 'SimpananController::store');
-            $routes->get('edit/(:num)', 'SimpananController::edit/$1');
-            $routes->post('update', 'SimpananController::update');
-            $routes->get('delete/(:num)', 'SimpananController::delete/$1');
+            $routes->get('edit/(:num)/(:num)', 'SimpananController::edit/$1/$2');
+            $routes->post('update/(:num)', 'SimpananController::update/$1');
+            $routes->get('delete/(:num)/(:num)', 'SimpananController::delete/$1/$2');
             $routes->get('export', 'SimpananController::export');
-            $routes->get('view/(:num)', 'SimpananController::view/$1');
+            $routes->get('view/(:num)/(:num)', 'SimpananController::view/$1/$2');
             $routes->get('pdf/(:num)', 'SimpananController::pdf/$1');
         });
         $routes->group('angsuran', function ($routes) {
             $routes->get('pengguna/(:num)', 'AngsuranController::index/$1');
             $routes->get('add/(:num)', 'AngsuranController::add/$1');
             $routes->post('store', 'AngsuranController::store');
-            $routes->get('edit/(:num)', 'AngsuranController::edit/$1');
+            $routes->get('edit/(:num)/(:num)', 'AngsuranController::edit/$1/$2');
             $routes->post('update', 'AngsuranController::update');
-            $routes->get('delete/(:num)', 'AngsuranController::delete/$1');
+            $routes->get('delete/(:num)/(:num)', 'AngsuranController::delete/$1/$2');
             $routes->get('export', 'AngsuranController::export');
             $routes->get('view/(:num)', 'AngsuranController::view/$1');
             $routes->get('pdf/(:num)', 'AngsuranController::pdf/$1');
@@ -127,9 +141,9 @@ $routes->group('dashboard', ['filter' => 'authGuard'], function ($routes) {
             $routes->post('store', 'PenarikanController::store');
             $routes->get('edit/(:num)', 'PenarikanController::edit/$1');
             $routes->post('update', 'PenarikanController::update');
-            $routes->get('delete/(:num)', 'PenarikanController::delete/$1');
+            $routes->get('delete/(:num)/(:num)', 'PenarikanController::delete/$1/$2');
             $routes->get('export', 'PenarikanController::export');
-            $routes->get('view/(:num)', 'PenarikanController::view/$1');
+            $routes->get('view/(:num)/(:num)', 'PenarikanController::view/$1/$2');
             $routes->get('pdf/(:num)', 'PenarikanController::pdf/$1');
         });
     });

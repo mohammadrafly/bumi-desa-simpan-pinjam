@@ -54,8 +54,8 @@
                                     <a href="<?= base_url('dashboard/transaksi/penarikan/view/'.$row->id_penarikan); ?>" class="btn-sm btn-primary text-white"><i class="mdi mdi-eye"></i></a>
                                 <?php elseif(session()->get('role') === 'admin'): ?>
                                     <a href="<?= base_url('dashboard/transaksi/penarikan/edit/'.$row->id_penarikan); ?>" class="btn-sm btn-warning text-white"><i class="mdi mdi-table-edit"></i></a>
-                                    <a href="<?= base_url('dashboard/transaksi/penarikan/delete/'.$row->id_penarikan); ?>" class="btn-sm btn-danger text-white"><i class="mdi mdi-delete-forever"></i></a>
-                                    <a href="<?= base_url('dashboard/transaksi/penarikan/view/'.$row->id_penarikan); ?>" class="btn-sm btn-primary text-white"><i class="mdi mdi-eye"></i></a>
+                                    <a href="<?= base_url('dashboard/transaksi/penarikan/delete/'.$row->id_penarikan.'/'.$user); ?>" class="btn-sm btn-danger text-white"><i class="mdi mdi-delete-forever"></i></a>
+                                    <a href="<?= base_url('dashboard/transaksi/penarikan/view/'.$row->id_penarikan.'/'.$row->id_simpanan); ?>" class="btn-sm btn-primary text-white"><i class="mdi mdi-eye"></i></a>
                                 <?php endif ?>
                                 </td>
                             </tr>

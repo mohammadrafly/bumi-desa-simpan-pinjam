@@ -302,8 +302,12 @@ a {
                                     </td>
                                 </tr>
                                 <tr>
+                                <input type="number" name="nik" class="form-control" id="exampleInputName1" placeholder="<?= $content['nik']; ?>" value="<?= $content['nik']; ?>" hidden>
                                     <td class="content-block">
                                         <a href="<?= base_url('dashboard/transaksi/simpanan/pdf/'.$content['id_simpanan']); ?>">Print</a>
+                                    </td>
+                                    <td class="content-block">
+                                        <a href="<?= base_url('dashboard/transaksi/simpanan/pengguna/'.$content['nik']); ?>">Kembali</a>
                                     </td>
                                 </tr>
                             </tbody></table>

@@ -62,9 +62,9 @@
                                 <?php if(session()->get('role') === 'superadmin'): ?>
                                     <a href="<?= base_url('dashboard/transaksi/pinjaman/view/'.$row->id_pinjaman); ?>" class="btn-sm btn-primary text-white"><i class="mdi mdi-eye"></i></a>
                                 <?php elseif(session()->get('role') === 'admin'): ?>
-                                    <a href="<?= base_url('dashboard/transaksi/pinjaman/edit/'.$row->id_pinjaman); ?>" class="btn-sm btn-warning text-white"><i class="mdi mdi-table-edit"></i></a>
-                                    <a href="<?= base_url('dashboard/transaksi/pinjaman/delete/'.$row->id_pinjaman); ?>" class="btn-sm btn-danger text-white"><i class="mdi mdi-delete-forever"></i></a>
-                                    <a href="<?= base_url('dashboard/transaksi/pinjaman/view/'.$row->id_pinjaman); ?>" class="btn-sm btn-primary text-white"><i class="mdi mdi-eye"></i></a>
+                                    <a href="<?= base_url('dashboard/transaksi/pinjaman/edit/'.$row->id_pinjaman.'/'.$user['nik']); ?>" class="btn-sm btn-warning text-white"><i class="mdi mdi-table-edit"></i></a>
+                                    <a href="<?= base_url('dashboard/transaksi/pinjaman/delete/'.$row->id_pinjaman.'/'.$user['nik']); ?>" class="btn-sm btn-danger text-white"><i class="mdi mdi-delete-forever"></i></a>
+                                    <a href="<?= base_url('dashboard/transaksi/pinjaman/view/'.$row->id_pinjaman.'/'.$user['nik']); ?>" class="btn-sm btn-primary text-white"><i class="mdi mdi-eye"></i></a>
                                 <?php endif ?>  
                                 </td>
                             </tr>

@@ -72,8 +72,9 @@ class SimpananController extends BaseController
         }
         $kode = substr(str_shuffle(str_repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 6)), 0, 6);
         $model = new simpanan();
+        $nik = $this->request->getVar('nik');
         $model->insert([
-            'nik'   => $this->request->getVar('nik'),
+            'nik'   => $nik,
             'nominal' => $this->request->getVar('nominal'),
             'jenis_simpanan' => $this->request->getVar('jenis_simpanan'),
             'created_at' => $this->request->getVar('created_at'),
@@ -81,20 +82,22 @@ class SimpananController extends BaseController
             'kode_deposit' => $kode
         ]);
         session()->setFlashData('message','Berhasil menambah simpanan');
-        return redirect()->to('dashboard/transaksi');
+        return redirect()->to('dashboard/transaksi/simpanan/pengguna/'.$nik);
     }
 
-    public function edit($id = null)
+    public function edit($id, $nik)
     {
         $model = new simpanan();
         $data = [
             'data' => $model->where('id_simpanan', $id)->first(),
             'pages'=> 'Edit Simpanan',
+            'nik'  => $nik,
         ];
+        //dd($data);
         return view('simpanan/edit', $data);
     }
 
-    public function update()
+    public function update($nik)
     {
         if (!$this->validate([
             'nominal' => [
@@ -124,15 +127,15 @@ class SimpananController extends BaseController
         ];
         $model->update($id, $data);
         session()->setFlashData('berhasil','Simpanan telah diupdate!');
-        return $this->response->redirect(site_url('dashboard/transaksi'));
+        return $this->response->redirect(site_url('dashboard/transaksi/simpanan/pengguna/'.$nik));
     }
 
-    public function delete($id = null)
+    public function delete($id, $nik)
     {
         $model = new Simpanan();
         $model->where('id_simpanan', $id)->delete();
         session()->setFlashData('berhasil', 'Simpanan berhasil dihapus!');
-        return $this->response->redirect(site_url('dashboard/transaksi'));
+        return $this->response->redirect(site_url('dashboard/transaksi/simpanan/pengguna/'.$nik));
     }
 
     public function export()
@@ -143,18 +146,19 @@ class SimpananController extends BaseController
         $spreadsheet = new Spreadsheet();
         // tulis header/nama kolom 
         $spreadsheet->setActiveSheetIndex(0)
-                    ->setCellValue('A1', 'ID Simpanan')
-                    ->setCellValue('B1', 'NIK')
-                    ->setCellValue('C1', 'Jenis Simpanan')
-                    ->setCellValue('D1', 'Nominal')
-                    ->setCellValue('E1', 'Status Simpanan')
-                    ->setCellValue('F1', 'Dibuat');
+                    ->setCellValue('A1', 'Laporan Simpanan')
+                    ->setCellValue('B1', 'ID Simpanan')
+                    ->setCellValue('C1', 'Nik')
+                    ->setCellValue('D1', 'Jenis')
+                    ->setCellValue('E1', 'Nominal')
+                    ->setCellValue('F1', 'Status')
+                    ->setCellValue('G1', 'Dibuat');
         
         $column = 2;
         // tulis data simpanan ke cell
         foreach($data as $data) {
             $spreadsheet->setActiveSheetIndex(0)
-                        ->setCellValue('A' . $column, $data['id_simpanan'])
+                        ->setCellValue('B' . $column, $data['id_simpanan'])
                         ->setCellValue('C' . $column, $data['nik'])
                         ->setCellValue('D' . $column, $data['jenis_simpanan'])
                         ->setCellValue('E' . $column, $data['nominal'])
@@ -164,7 +168,7 @@ class SimpananController extends BaseController
         }
         // tulis dalam format .xlsx
         $writer = new Xlsx($spreadsheet);
-        $fileName = 'Rekap simpanan';
+        $fileName = 'Rekap simpanan_'.date('Y-m-d');
 
         // Redirect hasil generate xlsx ke web client
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -174,16 +178,17 @@ class SimpananController extends BaseController
         $writer->save('php://output');
     }
 
-    public function view($id = null)
+    public function view($id, $nik)
     {
         helper('number');
         $model = new Simpanan();
         $content = $model->where('id_simpanan', $id)->first();
         $data = [
             'content' => $content,
-            'pages'   => 'Simpanan'
+            'pages'   => 'Simpanan',
+            'nik'   => $nik
         ];
-        //print_r($simpan);
+        //print_r($data);
         return view('simpanan/view', $data);
     }
 
@@ -192,6 +197,7 @@ class SimpananController extends BaseController
         helper('number');
         $dompdf = new \Dompdf\Dompdf();
         $model = new Simpanan();
+        $nik = $this->request->getVar('nik');
         $simpanan = $model->where('id_simpanan', $id)->first();
         $data = [
             'content' => $simpanan,
@@ -201,6 +207,8 @@ class SimpananController extends BaseController
         $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
         $dompdf->stream("Simpanan ID:".$id.".pdf");
+        session()->setFlashData('success', 'Berhasil print data!');
+        return $this->response->redirect(site_url('dashboard/transaksi/simpanan/pengguna/'.$nik));
     }
 
     public function indexPersonal($id = null)

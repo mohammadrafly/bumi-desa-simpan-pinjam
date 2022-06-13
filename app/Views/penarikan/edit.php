@@ -8,6 +8,7 @@
                   <h4 class="card-title"><?= $pages; ?></h4>
                   <form class="forms-sample" method="POST" action="<?= base_url('dashboard/transaksi/penarikan/update'); ?>">
                   <?= csrf_field() ?>
+                    <input type="text" hidden name="id_simpanan" class="form-control" id="exampleInputName1" value="<?= $data['id_simpanan']; ?>">
                     <input type="text" hidden name="id_penarikan" class="form-control" id="exampleInputName1" value="<?= $data['id_penarikan']; ?>">
                     <div class="form-group">
                       <label for="exampleInputName1">Nominal</label>

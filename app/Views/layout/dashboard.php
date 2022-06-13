@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>BUMDes</title>
   <!-- plugins:css -->
+  <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?= base_url('vendors/feather/feather.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('vendors/mdi/css/materialdesignicons.min.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('vendors/ti-icons/css/themify-icons.css'); ?>">
@@ -91,7 +93,7 @@
     <div class="container-fluid page-body-wrapper">
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
-            <?php if(session()->get('role') === 'superadmin'): ?>
+            <?php if(session()->get('role') === 'superadmin' || session()->get('role') === 'admin'): ?>
           <li class="nav-item">
             <a class="nav-link" href="<?= base_url('dashboard'); ?>">
               <i class="mdi mdi-grid-large menu-icon"></i>
@@ -103,6 +105,12 @@
             <a class="nav-link" href="<?= base_url('dashboard/pengguna'); ?>">
               <i class="menu-icon mdi mdi-account-circle-outline"></i>
               <span class="menu-title">Data Pengguna</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('dashboard/anggota'); ?>">
+              <i class="menu-icon mdi mdi-account-multiple"></i>
+              <span class="menu-title">Data Anggota</span>
             </a>
           </li>
           <li class="nav-item">
@@ -158,39 +166,6 @@
               <span class="menu-title">My Profile</span>
             </a>
           </li>
-            <?php elseif(session()->get('role') === 'admin'): ?>
-              <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('dashboard'); ?>">
-              <i class="mdi mdi-grid-large menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item nav-category">Data Master</li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('dashboard/pengguna'); ?>">
-              <i class="menu-icon mdi mdi-account-circle-outline"></i>
-              <span class="menu-title">Data Pengguna</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('dashboard/transaksi'); ?>">
-              <i class="menu-icon mdi mdi-cash-usd"></i>
-              <span class="menu-title">Data Transaksi</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('dashboard/permohonan'); ?>">
-              <i class="menu-icon mdi mdi-archive"></i>
-              <span class="menu-title">Data Permohonan</span>
-            </a>
-          </li>
-          <li class="nav-item nav-category">Lainnya</li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('dashboard/laporan'); ?>">
-              <i class="menu-icon mdi mdi-chart-bubble"></i>
-              <span class="menu-title">Laporan</span>
-            </a>
-          </li>
             <?php endif ?>
         </ul>
       </nav>
@@ -238,6 +213,14 @@
   <script src="<?= base_url('js/dashboard.js'); ?>"></script>
   <script src="<?= base_url('js/Chart.roundedBarCharts.js'); ?>"></script>
   <!-- End custom js for this page-->
+  <script>
+    $(document).ready(function () {
+    $('#example').DataTable();
+});
+  </script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 </body>
 
 </html>

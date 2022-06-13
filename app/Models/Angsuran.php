@@ -50,6 +50,7 @@ class Angsuran extends Model
     {
         $query = $this->db->table('angsuran')
             ->join('users', 'users.nik = angsuran.nik')
+            ->where('created_at', 'DESC')
             ->get();
         return $query;
     }

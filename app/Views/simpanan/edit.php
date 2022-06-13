@@ -6,8 +6,9 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title"><?= $pages; ?></h4>
-                  <form class="forms-sample" method="POST" action="<?= base_url('dashboard/transaksi/simpanan/update'); ?>">
+                  <form class="forms-sample" method="POST" action="<?= base_url('dashboard/transaksi/simpanan/update/'.$data['nik']); ?>">
                   <?= csrf_field() ?>
+                    <input type="number" name="nik" class="form-control" id="exampleInputName1" placeholder="<?= $data['nik']; ?>" value="<?= $data['nik']; ?>" hidden>
                     <input type="text" hidden name="id_simpanan" class="form-control" id="exampleInputName1" value="<?= $data['id_simpanan']; ?>">
                     <div class="form-group">
                       <label for="exampleInputName1">Nominal</label>

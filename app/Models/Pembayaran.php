@@ -17,7 +17,8 @@ class Pembayaran extends Model
     protected $allowedFields    = [
         'id_angsuran',
         'nominal',
-        'biaya_admin'
+        'biaya_admin',
+        'created_at'
     ];
 
     // Dates

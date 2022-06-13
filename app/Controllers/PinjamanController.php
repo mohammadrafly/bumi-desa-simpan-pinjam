@@ -71,6 +71,7 @@ class PinjamanController extends BaseController
         }
         $kode = substr(str_shuffle(str_repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 6)), 0, 6);
         $model = new pinjaman();
+        $nik = $this->request->getVar('nik');
         $model->insert([
             'nik'   => $this->request->getVar('nik'),
             'nominal' => $this->request->getVar('nominal'),
@@ -80,15 +81,16 @@ class PinjamanController extends BaseController
             'kode_penarikan' => $kode
         ]);
         session()->setFlashData('message','Berhasil menambah pinjaman');
-        return redirect()->to('dashboard/transaksi');
+        return redirect()->to('dashboard/transaksi/pinjaman/pengguna/'.$nik);
     }
 
-    public function edit($id = null)
+    public function edit($id, $nik)
     {
         $model = new pinjaman();
         $data = [
             'data' => $model->where('id_pinjaman', $id)->first(),
             'pages'=> 'Edit pinjaman',
+            'nik'  => $nik,
         ];
         return view('pinjaman/edit', $data);
     }
@@ -116,6 +118,7 @@ class PinjamanController extends BaseController
         }
         $model = new pinjaman();
         $id = $this->request->getVar('id_pinjaman');
+        $nik = $this->request->getVar('nik');
         $data = [
             'nominal' => $this->request->getVar('nominal'),
             'biaya_admin' => $this->request->getVar('biaya_admin'),
@@ -123,16 +126,16 @@ class PinjamanController extends BaseController
             'status_pinjaman' => $this->request->getVar('status_pinjaman'),
         ];
         $model->update($id, $data);
-        session()->setFlashData('berhasil','pinjaman telah diupdate!');
-        return $this->response->redirect(site_url('dashboard/transaksi'));
+        session()->setFlashData('success','Berhasil update pinjaman');
+        return redirect()->to('dashboard/transaksi/pinjaman/pengguna/'.$nik);
     }
 
-    public function delete($id = null)
+    public function delete($id, $nik)
     {
         $model = new pinjaman();
         $model->where('id_pinjaman', $id)->delete();
-        session()->setFlashData('berhasil', 'Pinjaman berhasil dihapus!');
-        return $this->response->redirect(site_url('dashboard/transaksi'));
+        session()->setFlashData('success', 'Pinjaman berhasil dihapus!');
+        return $this->response->redirect(site_url('dashboard/transaksi/pinjaman/pengguna/'.$nik));
     }
 
     public function export()
@@ -143,10 +146,10 @@ class PinjamanController extends BaseController
         $spreadsheet = new Spreadsheet();
         // tulis header/nama kolom 
         $spreadsheet->setActiveSheetIndex(0)
-                    ->setCellValue('A1', 'ID Pinjaman')
-                    ->setCellValue('B1', 'NIK')
-                    ->setCellValue('C1', 'Biaya Admin')
-                    ->setCellValue('D1', 'Jenis Pinjaman')
+                    ->setCellValue('A1', 'Laporan Pinjaman')
+                    ->setCellValue('B1', 'ID Pinjaman')
+                    ->setCellValue('C1', 'Nik')
+                    ->setCellValue('D1', 'Jenis')
                     ->setCellValue('E1', 'Nominal')
                     ->setCellValue('F1', 'Kode Penarikan')
                     ->setCellValue('G1', 'Dibuat');
@@ -155,9 +158,8 @@ class PinjamanController extends BaseController
         // tulis data pinjaman ke cell
         foreach($data as $data) {
             $spreadsheet->setActiveSheetIndex(0)
-                        ->setCellValue('A' . $column, $data['id_pinjaman'])
-                        ->setCellValue('B' . $column, $data['nik'])
-                        ->setCellValue('C' . $column, $data['biaya_admin'])
+                        ->setCellValue('B' . $column, $data['id_pinjaman'])
+                        ->setCellValue('C' . $column, $data['nik'])
                         ->setCellValue('D' . $column, $data['jenis_pinjaman'])
                         ->setCellValue('E' . $column, $data['nominal'])
                         ->setCellValue('F' . $column, $data['kode_penarikan'])
@@ -166,7 +168,7 @@ class PinjamanController extends BaseController
         }
         // tulis dalam format .xlsx
         $writer = new Xlsx($spreadsheet);
-        $fileName = 'Rekap pinjaman';
+        $fileName = 'Rekap pinjaman_'.date('Y-m-d');
 
         // Redirect hasil generate xlsx ke web client
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -176,14 +178,15 @@ class PinjamanController extends BaseController
         $writer->save('php://output');
     }
 
-    public function view($id = null)
+    public function view($id, $nik)
     {
         helper('number');
         $model = new Pinjaman();
         $content = $model->where('id_pinjaman', $id)->first();
         $data = [
             'content' => $content,
-            'pages'   => 'Pinjaman'
+            'pages'   => 'Pinjaman',
+            'nik'     => $nik
         ];
         //print_r($simpan);
         return view('pinjaman/view', $data);

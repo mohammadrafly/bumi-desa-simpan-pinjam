@@ -88,6 +88,14 @@
                       </div>
                       <div class="col-md-6">
                         <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Nomor HP</label>
+                          <div class="col-sm-9">
+                            <input class="form-control" type="number" placeholder="Nomor HP" name="phone" value="<?= $content['phone']; ?>"/>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Foto Diri</label>
                           <div class="col-sm-9">
                           <?php if($content['foto_diri'] === NULL): ?>
@@ -105,7 +113,7 @@
                 </div>
               </div>
             </div>
-
+<!--  
             <div class="col-12 grid-margin">
               <div class="card">
                 <div class="card-body">
@@ -155,5 +163,5 @@
                 </div>
               </div>
             </div>
-
+-->
 <?= $this->endSection() ?>

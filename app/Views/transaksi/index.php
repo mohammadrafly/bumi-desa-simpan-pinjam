@@ -16,37 +16,34 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <div class="table-responsive">
-                      <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>NIK</th>
-                                <th>Option</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <table id="example" class="table table-striped" style="width:100%">
+                      <thead>
+                          <tr>
+                              <th>No</th>
+                              <th>Nama</th>
+                              <th>NIK</th>
+                              <th>Option</th>
+                          </tr>
+                      </thead>
+                      <tbody>
                             <?php if($content): ?>
                             <?php 
                             $no = 1;
                             foreach($content as $row): ?>
                             <tr>
                                 <td><?php echo $no++; ?></td>
-                                <td><?php echo $row['name']; ?></td>
-                                <td><?php echo $row['nik']; ?></td>
+                                <td><?php echo $row->name; ?></td>
+                                <td><?php echo $row->nik; ?></td>
                                 <td>
-                                    <a href="<?= base_url('dashboard/transaksi/simpanan/pengguna/'.$row['nik']); ?>" class="btn-sm btn-primary text-white">Simpanan</a>
-                                    <a href="<?= base_url('dashboard/transaksi/pinjaman/pengguna/'.$row['nik']); ?>" class="btn-sm btn-primary text-white">Pinjaman</a>
-                                    <a href="<?= base_url('dashboard/transaksi/angsuran/pengguna/'.$row['nik']); ?>" class="btn-sm btn-primary text-white">Angsuran</a>
+                                    <a href="<?= base_url('dashboard/transaksi/simpanan/pengguna/'.$row->nik); ?>" class="btn-sm btn-primary text-white">Simpanan</a>
+                                    <a href="<?= base_url('dashboard/transaksi/pinjaman/pengguna/'.$row->nik); ?>" class="btn-sm btn-primary text-white">Pinjaman</a>
+                                    <a href="<?= base_url('dashboard/transaksi/angsuran/pengguna/'.$row->nik); ?>" class="btn-sm btn-primary text-white">Angsuran</a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
                             <?php endif; ?>
-                        </tbody>
-                      </table>
-                    <?= $pager->links('content', 'bootstrap_pagination'); ?>
-                    </div>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>

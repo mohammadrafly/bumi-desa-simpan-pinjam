@@ -14,10 +14,11 @@
                 <div class="mt-3">
                   <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Masuk</button>
                 </div>
+                <!-- 
                 <div class="mt-3">
                   <h6 class="fw-light">Belum punya Akun?<a href="<?= base_url('register') ?>">Daftar</a></h6>
                 </div>     
               </form>
-            
+             -->
 
 <?= $this->endSection() ?>

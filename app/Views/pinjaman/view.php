@@ -305,6 +305,9 @@ a {
                                     <td class="content-block">
                                         <a href="<?= base_url('dashboard/transaksi/pinjaman/pdf/'.$content['id_pinjaman']); ?>">Print</a>
                                     </td>
+                                    <td class="content-block">
+                                        <a href="<?= base_url('dashboard/transaksi/pinjaman/pengguna/'.$content['nik']); ?>">Kembali</a>
+                                    </td>
                                 </tr>
                             </tbody></table>
                         </td>

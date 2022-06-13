@@ -22,7 +22,8 @@ class User extends Model
         'role',
         'alamat',
         'gender',
-        'foto_diri'
+        'foto_diri',
+        'phone'
     ];
 
     // Dates
@@ -52,7 +53,17 @@ class User extends Model
     public function getUser()
     {
         $query = $this->db->table('users')
+                          ->where('id !=', session()->get('id'))
                           ->get();
+        return $query;
+    }
+
+    public function GetUserWithoutSU()
+    {
+        $query = $this->table('users')
+                ->where('role !=', 'superadmin')
+                ->where('role !=', 'admin')
+                ->get();
         return $query;
     }
 }

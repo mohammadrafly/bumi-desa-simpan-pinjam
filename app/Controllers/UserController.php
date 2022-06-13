@@ -46,11 +46,11 @@ class UserController extends BaseController
                 ]
             ],
             'nik' => [
-                'rules' => 'required|min_length[4]|max_length[50]',
+                'rules' => 'required|min_length[16]|max_length[16]',
                 'errors' => [
                     'required' => '{field} harus diisi',
-                    'min_length' => '{field} minimal 4 Karakter',
-                    'max_length' => '{field} maksimal 50 Karakter',
+                    'min_length' => '{field} minimal 16 Karakter',
+                    'max_length' => '{field} maksimal 16 Karakter',
                 ]
             ],
             'password' => [

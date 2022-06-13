@@ -31,7 +31,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Id pembayaran</th>
-                                <th>Biaya Admin</th>
+                                <th>Nadzar</th>
                                 <th>Nominal</th>
                                 <th>Waktu Transaksi</th>
                                 <th>Option</th>
@@ -49,7 +49,11 @@
                                 <td><?= number_to_currency($row->nominal, 'IDR'); ?></td>
                                 <td><?= $row->created_at; ?></td>
                                 <td>
-                                    <a href="<?= base_url('dashboard/transaksi/pembayaran/view/'.$row->id_pembayaran); ?>" class="btn-sm btn-primary text-white"><i class="mdi mdi-eye"></i></a>
+                                    <a href="<?= base_url('dashboard/transaksi/pembayaran/view/'.$row->id_pembayaran); ?>" 
+                                      class="btn-sm btn-primary text-white"><i class="mdi mdi-eye"></i></a>
+                                    <a href="<?= base_url('PembayaranController/delete/'.$row->id_pembayaran); ?>" 
+                                      class="btn-sm btn-danger"><i class="mdi mdi-delete-forever"></i>
+                                    </a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>

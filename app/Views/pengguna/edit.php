@@ -18,6 +18,10 @@
                       <input type="text" name="username" class="form-control" id="exampleInputName1" placeholder="Username" value="<?= $data['username']; ?>">
                     </div>
                     <div class="form-group">
+                      <label for="exampleInputPassword4">Nomor HP</label>
+                      <input type="number" name="phone" class="form-control" id="exampleInputPassword4" placeholder="Nomor HP" value="<?= $data['phone']; ?>">
+                    </div>
+                    <div class="form-group">
                       <label for="exampleInputName1">NIK</label>
                       <input type="text" name="nik" class="form-control" id="exampleInputName1" placeholder="NIK" value="<?= $data['nik']; ?>" disabled>
                     </div>
@@ -46,7 +50,7 @@
                           <option value="Sarpaan RT 01/RW 01">Sarpaan RT 01/RW 01</option>
                           <option value="Sarpaan RT 02/RW 01">Sarpaan RT 02/RW 01</option>
                           <option value="Sarpaan RT 03/RW 01">Sarpaan RT 03/RW 01</option>
-                          <option value="Tal Bantal RT 03/RW 01">Tal Bantal RT 03/RW 01</option>
+                          <option value="Tal Bantal RT 03/RW 01">Tal Bantal RT 01/RW 02</option>
                           <option value="Tal Bantal RT 02/RW 02">Tal Bantal RT 02/RW 02</option>
                           <option value="Tal Bantal RT 03/RW 02">Tal Bantal RT 03/RW 02</option>
                           <option value="Podak RT 01/RW 03">Podak RT 01/RW 03</option>
@@ -58,7 +62,6 @@
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary me-2">Submit</button>
-                    <button class="btn btn-light">Cancel</button>
                   </form>
                 </div>
               </div>

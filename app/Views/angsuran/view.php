@@ -281,29 +281,36 @@ a {
                                 <tr>
                                     <td class="content-block">
                                         <table class="invoice">
-                                            <tbody><tr>
-                                                <td>ID <?= $pages ?> <?php echo $content['id_angsuran']; ?><br><?php echo $content['created_at']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <table class="invoice-items" cellpadding="0" cellspacing="0">
-                                                        <tbody><tr>
-                                                            <td><?= $pages ?></td>
-                                                            <td class="alignright"><?php echo number_to_currency($content['nominal'], 'IDR'); ?></td>
-                                                        </tr>
-                                                        <tr class="total">
-                                                            <td class="alignright" width="80%">Total</td>
-                                                            <td class="alignright"><?php echo number_to_currency($content['nominal'], 'IDR'); ?></td>
-                                                        </tr>
-                                                    </tbody></table>
-                                                </td>
-                                            </tr>
-                                        </tbody></table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>ID <?= $pages ?> <?php echo $content['id_angsuran']; ?><br><?php echo $content['created_at']; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <table class="invoice-items" cellpadding="0" cellspacing="0">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td><?= $pages ?></td>
+                                                                <td class="alignright"><?php echo number_to_currency($content['nominal'], 'IDR'); ?></td>
+                                                            </tr>
+                                                            <tr class="total">
+                                                                <td class="alignright" width="80%">Total</td>
+                                                                <td class="alignright"><?php echo number_to_currency($content['nominal'], 'IDR'); ?></td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="content-block">
                                         <a href="<?= base_url('dashboard/transaksi/angsuran/pdf/'.$content['id_angsuran']); ?>">Print</a>
+                                    </td>
+                                    <td class="content-block">
+                                        <a href="<?= base_url('dashboard/transaksi/angsuran/pengguna/'.$content['nik']); ?>">Kembali</a>
                                     </td>
                                 </tr>
                             </tbody></table>

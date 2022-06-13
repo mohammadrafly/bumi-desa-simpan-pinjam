@@ -46,12 +46,12 @@ class permohonan extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getPermohonan($id)
+    public function getPermohonan()
     {
         return $this->select()
             ->join('users', 'permohonan.nik = users.nik')
             ->orderBY('created_at', 'DESC')
-            ->paginate($id);
+            ->get();
     }
 
     public function getPHbyID($id)

@@ -74,6 +74,7 @@ class ProfileController extends BaseController
             $data = [
                 'name' => $this->request->getVar('name'),
                 'username' => $this->request->getVar('username'),
+                'phone' => $this->request->getVar('phone'),
                 'alamat' => $this->request->getVar('alamat'),
                 'gender' => $this->request->getVar('gender'),
                 'foto_diri' => $randName,
@@ -88,6 +89,7 @@ class ProfileController extends BaseController
                 'name' => $this->request->getVar('name'),
                 'username' => $this->request->getVar('username'),
                 'alamat' => $this->request->getVar('alamat'),
+                'phone' => $this->request->getVar('phone'),
                 'gender' => $this->request->getVar('gender'),
             ];
             $model->update($id, $data);

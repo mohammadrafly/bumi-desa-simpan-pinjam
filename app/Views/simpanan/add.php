@@ -8,9 +8,10 @@
                   <h4 class="card-title"><?= $pages; ?></h4>
                   <form class="forms-sample" method="POST" action="<?= base_url('dashboard/transaksi/simpanan/store'); ?>">
                   <?= csrf_field() ?>
+                    <input type="number" name="nik" class="form-control" id="exampleInputName1" placeholder="<?= $nik; ?>" value="<?= $nik; ?>" hidden>
                     <div class="form-group">
                       <label for="exampleInputName1">NIK</label>
-                      <input type="number" name="nik" class="form-control" id="exampleInputName1" placeholder="<?= $nik; ?>" value="<?= $nik; ?>">
+                      <input type="number" name="nik" class="form-control" id="exampleInputName1" placeholder="<?= $nik; ?>" value="<?= $nik; ?>" disabled>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputName1">Nominal</label>
@@ -25,12 +26,7 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleSelectGender">Tanggal</label>
-                        <div class="input-group date" data-provide="datepicker">
-                            <input type="text" name="created_at" class="form-control">
-                            <div class="input-group-addon">
-                                <span class="glyphicon glyphicon-th"></span>
-                            </div>
-                        </div>
+                            <input type="date" name="created_at" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-primary me-2">Submit</button>
                     <button class="btn btn-light">Cancel</button>
