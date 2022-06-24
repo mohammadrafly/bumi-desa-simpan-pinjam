@@ -68,4 +68,12 @@ class User extends Model
                 ->get();
         return $query;
     }
+
+    public function GetUserWithoutSU()
+    {
+        $query = $this->table('users')
+                ->where('role !=', 'superadmin')
+                ->where('role !=', 'admin');
+        return $query;
+    }
 }

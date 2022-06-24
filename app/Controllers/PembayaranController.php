@@ -23,7 +23,7 @@ class PembayaranController extends BaseController
     {
         helper('number');
         $pager = \Config\Services::pager();
-        $model = new pembayaran();
+        $model = new Pembayaran();
         $content = $model->getPBbyID($id)->getResult();
         $data = [
             'content'   => $content,
