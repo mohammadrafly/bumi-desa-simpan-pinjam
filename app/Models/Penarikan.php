@@ -48,7 +48,9 @@ class Penarikan extends Model
     public function getPenarikan()
     {
         $query = $this->db->table('penarikan')
+            //menggabungkan/join antara 2 table
             ->join('simpanan', 'simpanan.id_simpanan = penarikan.id_simpanan')
+            //ambil data yang sudah di query
             ->get();
         return $query;
     }
@@ -56,8 +58,10 @@ class Penarikan extends Model
     public function getPRbyID($id)
     {
         $query = $this->db->table('penarikan')
+            //set alias agar tidak terjadi koalisi/crash antar kolom
             ->select('penarikan.*, simpanan.nominal AS nominal_simpanan')
             ->join('simpanan', 'simpanan.id_simpanan = penarikan.id_simpanan', 'left')
+            //ambil data sesuai parameter
             ->where('penarikan.id_simpanan', $id)
             ->get();
         return $query;
@@ -67,6 +71,7 @@ class Penarikan extends Model
     {
         $query = $this->db->table('penarikan')
             ->join('simpanan', 'simpanan.id_simpanan = penarikan.id_simpanan')
+            //mengurutkan data sesuai parameter
             ->orderBy('created_at', 'DESC')
             ->limit(6)
             ->get();
@@ -77,6 +82,7 @@ class Penarikan extends Model
     {
         $query = $this->db->table('penarikan')
                 ->where(['id'=>session()->get('id')])
+                //hitung semua row di table
                 ->countAllResults();
         return $query;
     }

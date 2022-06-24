@@ -24,14 +24,22 @@ class BackEndGuard implements FilterInterface
      * @return mixed
      */
     public function before(RequestInterface $request, $arguments = null)
-    {
-        if (session()->get('role') == "superadmin") {
-            //do something here
-        } elseif (session()->get('role') == "customer") {
-            session()->setFlashdata('error', 'Oops anda tidak memiliki akses ke halaman ini!');
-	        return redirect()->to(base_url('dashboard'));
-        } elseif (session()->get('role') == "admin") {
-            //do something here
+    {   
+        //statement mengambil boolean value true or false
+        if (!session()->get('WesLogin')) {
+            session()->setFlashdata('error', 'Silahkan login terlebih dahulu');
+            return redirect()->to(site_url('/'));
+        } elseif (session()->get('WesLogin')) {
+            //statement pemisah role
+            //jika seorang admin maka PASS
+            if (session()->get('role') == "superadmin") {
+                
+            } elseif (session()->get('role') == "customer") { //jika seorang customer maka PASS dan dialihkan ke dashboard
+                session()->setFlashdata('error', 'Oops anda tidak memiliki akses ke halaman ini!');
+                return redirect()->to(base_url('dashboard'));
+            } elseif (session()->get('role') == "admin") { //jika seorang admin maka PASS
+
+            }
         }
     }
 
@@ -49,6 +57,6 @@ class BackEndGuard implements FilterInterface
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        //
+        
     }
 }

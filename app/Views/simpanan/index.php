@@ -40,7 +40,7 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="table-responsive">
-                      <table class="table table-hover">
+                      <table id="example" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -79,9 +79,10 @@
                                     <a href="<?= base_url('dashboard/transaksi/simpanan/edit/'.$row->id_simpanan.'/'.$nik); ?>" class="btn-sm btn-warning text-white"><i class="mdi mdi-table-edit"></i></a>
                                     <a href="<?= base_url('dashboard/transaksi/simpanan/delete/'.$row->id_simpanan.'/'.$nik); ?>" class="btn-sm btn-danger text-white"><i class="mdi mdi-delete-forever"></i></a>
                                     <a href="<?= base_url('dashboard/transaksi/simpanan/view/'.$row->id_simpanan.'/'.$nik); ?>" class="btn-sm btn-primary text-white"><i class="mdi mdi-eye"></i></a>
-                                    <a href="<?= base_url('dashboard/transaksi/penarikan/add/'.$row->id_simpanan.'/'.$row->nominal.'/'.$nik); ?>" class="btn-sm btn-secondary text-black"><i class="icon-plus"></i> Add Penarikan</a>
+                                    <a href="<?= base_url('dashboard/transaksi/penarikan/add/'.$row->id_simpanan.'/'.$row->nominal.'/'.$nik); ?>" 
+                                      class="btn-sm btn-secondary text-black"><i class="icon-plus"></i> Add Penarikan</a>
                                     <a href="<?= base_url('dashboard/transaksi/penarikan/simpanan/'.$row->id_simpanan); ?>" 
-                                      class="btn-sm btn-secondary text-black"<i class="icon-credit-card"></i>Penarikan</a>
+                                      class="btn-sm btn-secondary text-black"><i class="icon-credit-card"></i>Penarikan</a>
                                 <?php endif ?>
                                 </td>
                             </tr>

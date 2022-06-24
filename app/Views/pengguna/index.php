@@ -35,7 +35,7 @@
                                 <th>Gender</th>
                                 <th>NIK</th>
                                 <th>Role</th>
-                                <th>Joined</th>
+                                <th>Waktu Bergabung</th>
                                 <?php if(session()->get('role') === 'superadmin'): ?>
 
                                 <?php elseif(session()->get('role') === 'admin'): ?>

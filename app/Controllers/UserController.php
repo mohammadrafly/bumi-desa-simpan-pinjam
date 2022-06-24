@@ -7,6 +7,7 @@ use App\Models\User;
 
 class UserController extends BaseController
 {
+    //view login
     public function index()
     {
         $data = [
@@ -16,6 +17,7 @@ class UserController extends BaseController
         return view('auth/login', $data);
     }
 
+    //view register
     public function register()
     {
         $data = [
@@ -25,6 +27,7 @@ class UserController extends BaseController
         return view('auth/register' ,$data);
     }
 
+    //register
     public function store()
     {
         if (!$this->validate([
@@ -89,16 +92,22 @@ class UserController extends BaseController
         }
     } 
 
+    //login user
     public function login()
     {
         $model = new User();
+        //ambil data input
         $username = $this->request->getVar('username');
         $password = $this->request->getVar('password');
+        //cari username ada tau tidak
         $dataUser = $model->where([
             'username' => $username,
         ])->first();
+        //statement jika $dataUser = TRUE
         if ($dataUser) {
+            //verifikasi password benar atau tidak
             if (password_verify($password, $dataUser['password'])) {
+                //set data untuk menampilkan data sesuai user login
                 session()->set([
                     'username'  => $dataUser['username'],
                     'password'  => $dataUser['password'],
@@ -115,6 +124,7 @@ class UserController extends BaseController
                 session()->setFlashdata('error', 'Username & Password Salah');
                 return redirect()->to('/');
             }
+        //statement jika $dataUser = FALSE
         } else {
             session()->setFlashdata('error', 'Username & Password Salah');
             return redirect()->to('/');
@@ -123,6 +133,7 @@ class UserController extends BaseController
 
     public function logout()
     {
+        //hapus session 
         session()->destroy();
         return redirect()->to('/');
     }

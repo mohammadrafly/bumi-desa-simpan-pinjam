@@ -10,6 +10,7 @@ use App\Models\User;
 
 class PinjamanController extends BaseController
 {
+    //ambil sesuai id user
     public function index($id = null)
     {
         helper('number');
@@ -27,6 +28,7 @@ class PinjamanController extends BaseController
         return view('pinjaman/index', $data);
     }
 
+    //tambah sesuai id user
     public function add($id = null)
     {
         $data = [
@@ -86,6 +88,7 @@ class PinjamanController extends BaseController
 
     public function edit($id, $nik)
     {
+        helper('number');
         $model = new pinjaman();
         $data = [
             'data' => $model->where('id_pinjaman', $id)->first(),
@@ -98,18 +101,10 @@ class PinjamanController extends BaseController
     public function update()
     {
         if (!$this->validate([
-            'nominal' => [
-                'rules' => 'required|min_length[4]|max_length[255]',
-                'errors' => [
-                    'required' => '{field} Harus diisi',
-                    'min_length' => '{field} Minimal 4 Karakter',
-                    'max_length' => '{field} Maksimal 255 Karakter',
-                ]
-            ],
-            'jenis_pinjaman' => [
+            'status_pinjaman' => [
                 'rules' => 'required',
                 'error' => [
-                    'required' => 'jenis_pinjaman harus diisi',
+                    'required' => 'Status Pinjaman harus diisi',
                 ],
             ],
         ])) {
@@ -120,9 +115,6 @@ class PinjamanController extends BaseController
         $id = $this->request->getVar('id_pinjaman');
         $nik = $this->request->getVar('nik');
         $data = [
-            'nominal' => $this->request->getVar('nominal'),
-            'biaya_admin' => $this->request->getVar('biaya_admin'),
-            'jenis_pinjaman' => $this->request->getVar('jenis_pinjaman'),
             'status_pinjaman' => $this->request->getVar('status_pinjaman'),
         ];
         $model->update($id, $data);
@@ -141,30 +133,39 @@ class PinjamanController extends BaseController
     public function export()
     {
         $model = new pinjaman();
-        $data = $model->findAll();
+        $data = $model->getPinjaman()->getResult();
 
         $spreadsheet = new Spreadsheet();
-        // tulis header/nama kolom 
+
+        $spreadsheet->getActiveSheet()->getStyle('D')->getNumberFormat()
+                ->setFormatCode('#,##0.00');
+        $spreadsheet->getActiveSheet()->mergeCells('A1:G1');
+        $spreadsheet->getActiveSheet()->getStyle('A1')
+                ->getAlignment()
+                ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->getActiveSheet()->getStyle('B')->getNumberFormat()
+                ->setFormatCode('0000000000000000');
         $spreadsheet->setActiveSheetIndex(0)
-                    ->setCellValue('A1', 'Laporan Pinjaman')
-                    ->setCellValue('B1', 'ID Pinjaman')
-                    ->setCellValue('C1', 'Nik')
-                    ->setCellValue('D1', 'Jenis')
-                    ->setCellValue('E1', 'Nominal')
-                    ->setCellValue('F1', 'Kode Penarikan')
-                    ->setCellValue('G1', 'Dibuat');
-        
-        $column = 2;
-        // tulis data pinjaman ke cell
+                ->setCellValue('A1', 'Laporan Pinjaman')
+                ->setCellValue('A2', 'ID Pinjaman')
+                ->setCellValue('B2', 'NIK')
+                ->setCellValue('C2', 'Nama')
+                ->setCellValue('D2', 'Nominal')
+                ->setCellValue('E2', 'Kode Pinjaman')
+                ->setCellValue('F2', 'Jenis')
+                ->setCellValue('G2', 'Dibuat');
+        $column = 3;
+        // tulis data angsuran ke cell
         foreach($data as $data) {
-            $spreadsheet->setActiveSheetIndex(0)
-                        ->setCellValue('B' . $column, $data['id_pinjaman'])
-                        ->setCellValue('C' . $column, $data['nik'])
-                        ->setCellValue('D' . $column, $data['jenis_pinjaman'])
-                        ->setCellValue('E' . $column, $data['nominal'])
-                        ->setCellValue('F' . $column, $data['kode_penarikan'])
-                        ->setCellValue('G' . $column, $data['created_at']);
-            $column++;
+        $spreadsheet->setActiveSheetIndex(0)
+                ->setCellValue('A' . $column, $data->id_pinjaman)
+                ->setCellValue('B' . $column, $data->nik)
+                ->setCellValue('C' . $column, $data->name)
+                ->setCellValue('D' . $column, $data->nominal)
+                ->setCellValue('E' . $column, $data->kode_penarikan)
+                ->setCellValue('F' . $column, $data->jenis_pinjaman)
+                ->setCellValue('G' . $column, $data->created_at);
+        $column++;
         }
         // tulis dalam format .xlsx
         $writer = new Xlsx($spreadsheet);

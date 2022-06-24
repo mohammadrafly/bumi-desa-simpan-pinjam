@@ -9,12 +9,11 @@ class TransaksiController extends BaseController
 {
     public function index()
     {
-        $pager = \Config\Services::pager();
         $model = new User();
         $data = [
-            'content' => $model->GetUserWithoutSU()->getResult(),
+            //ambil data tanpa superuser
+            'content' => $model->AmbilUserTanpaSuperUser()->getResult(),
             'pages'   => 'Data Transaksi',
-            'pager'  => $model->pager,
         ];
         //dd($data);
         return view('transaksi/index', $data);

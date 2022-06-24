@@ -38,8 +38,6 @@
                     <div class="form-group">
                       <label for="exampleSelectGender">Role</label>
                         <select name="role" class="form-control" id="exampleSelectGender">
-                          <option value="admin">Admin</option>
-                          <option value="superadmin">Superadmin</option>
                           <option value="customer">Customer</option>
                         </select>
                     </div>

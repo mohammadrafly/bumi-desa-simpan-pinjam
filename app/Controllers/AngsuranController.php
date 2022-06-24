@@ -9,24 +9,26 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class AngsuranController extends BaseController
-{
+{   
+
     public function index($id = null)
     {
+        //helper angka untuk convert angka ke format tertentu
         helper('number');
-        $pager = \Config\Services::pager();
         $model = new Angsuran();
         $users = new User();
+        //ambil angsuran by id
         $content = $model->getASbyID($id)->getResult();
         $data = [
             'content'   => $content,
             'pages'     => 'Data angsuran',
-            'pager'     => $model->pager,
             'user'      => $users->where('nik', $id)->first(),
         ];
         //dd($content);
         return view('angsuran/index', $data);
     }
 
+    //tambah sesuai nik
     public function add($id = null)
     {
         $data = [
@@ -38,6 +40,7 @@ class AngsuranController extends BaseController
 
     public function store()
     {
+        //validasi inputan
         if (!$this->validate([
             'nik' => [
                 'rules' => 'required|min_length[11]',
@@ -62,9 +65,11 @@ class AngsuranController extends BaseController
             session()->setFlashdata('error', $this->validator->listErrors());
             return redirect()->back()->withInput();
         }
+        //generate 6 huruf acak
         $kode = substr(str_shuffle(str_repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 6)), 0, 6);
         $model = new Angsuran();
         $nik = $this->request->getVar('nik');
+        //insert data ke db
         $model->insert([
             'nik'   => $this->request->getVar('nik'),
             'nominal' => $this->request->getVar('nominal'),
@@ -111,6 +116,7 @@ class AngsuranController extends BaseController
             'waktu' => $this->request->getVar('waktu'),
             'status_angsuran' => $this->request->getVar('status_angsuran'),
         ];
+        //update
         $model->update($id, $data);
         session()->setFlashData('berhasil','angsuran telah diupdate!');
         return redirect()->to('dashboard/transaksi/angsuran/pengguna/'.$nik);
@@ -127,31 +133,41 @@ class AngsuranController extends BaseController
     public function export()
     {
         $model = new Angsuran();
-        $data = $model->findAll();
+        //ambil semua data
+        $data = $model->getAngsuran()->getResult();
 
         $spreadsheet = new Spreadsheet();
         // tulis header/nama kolom 
+        $spreadsheet->getActiveSheet()->getStyle('D')->getNumberFormat()
+                    ->setFormatCode('#,##0.00');
+        $spreadsheet->getActiveSheet()->mergeCells('A1:G1');
+        $spreadsheet->getActiveSheet()->getStyle('A1')
+                    ->getAlignment()
+                    ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->getActiveSheet()->getStyle('E')->getNumberFormat()
+                    ->setFormatCode('0000000000000000');
         $spreadsheet->setActiveSheetIndex(0)
                     ->setCellValue('A1', 'Laporan Angsuran')
-                    ->setCellValue('B1', 'ID Angsuran')
-                    ->setCellValue('C1', 'Nominal')
-                    ->setCellValue('D1', 'Nik')
-                    ->setCellValue('E1', 'Waktu')
-                    ->setCellValue('F1', 'Kode')
-                    ->setCellValue('G1', 'Status')
-                    ->setCellValue('H1', 'Dibuat');
-        
-        $column = 2;
+                    ->setCellValue('A2', 'ID Angsuran')
+                    ->setCellValue('B2', 'Nama')
+                    ->setCellValue('C2', 'Status')
+                    ->setCellValue('D2', 'Nominal')
+                    ->setCellValue('E2', 'NIK')
+                    ->setCellValue('F2', 'Kode Angsuran')
+                    ->setCellValue('G2', 'Waktu')
+                    ->setCellValue('H2', 'Dibuat');
+        $column = 3;
         // tulis data angsuran ke cell
         foreach($data as $data) {
             $spreadsheet->setActiveSheetIndex(0)
-                        ->setCellValue('B' . $column, $data['id_angsuran'])
-                        ->setCellValue('C' . $column, $data['waktu'])
-                        ->setCellValue('D' . $column, $data['status_angsuran'])
-                        ->setCellValue('E' . $column, $data['nominal'])
-                        ->setCellValue('F' . $column, $data['nik'])
-                        ->setCellValue('G' . $column, $data['kode_pembayaran'])
-                        ->setCellValue('H' . $column, $data['created_at']);
+                        ->setCellValue('A' . $column, $data->id_angsuran)
+                        ->setCellValue('B' . $column, $data->name)
+                        ->setCellValue('C' . $column, $data->status_angsuran)
+                        ->setCellValue('D' . $column, $data->nominal)
+                        ->setCellValue('E' . $column, $data->nik)
+                        ->setCellValue('F' . $column, $data->kode_pembayaran)
+                        ->setCellValue('G' . $column, $data->waktu)
+                        ->setCellValue('H' . $column, $data->created_at);
             $column++;
         }
         // tulis dalam format .xlsx
@@ -182,6 +198,7 @@ class AngsuranController extends BaseController
     public function pdf($id = null)
     {
         helper('number');
+        //library dompdf
         $dompdf = new \Dompdf\Dompdf();
         $model = new Angsuran();
         $angsuran = $model->where('id_angsuran', $id)->first();
@@ -195,6 +212,7 @@ class AngsuranController extends BaseController
         $dompdf->stream("angsuran ID:".$id.".pdf");
     }
 
+    //sesuai nik anggota
     public function indexPersonal($id = null)
     {
         helper('number');

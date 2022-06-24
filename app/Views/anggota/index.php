@@ -25,7 +25,7 @@
                                 <th>No</th>
                                 <th>Nama</th>
                                 <th>Phone</th>
-                                <th>Nik</th>
+                                <th>NIK</th>
                                 <th>Alamat</th>
                                 <?php if(session()->get('role') === 'superadmin'): ?>
 
@@ -49,9 +49,6 @@
 
                                 <?php elseif(session()->get('role') === 'admin'): ?>
                                 <td>
-                                    <a href="<?= base_url('dashboard/pengguna/ganti/password/'.$row->id); ?>" 
-                                    class="btn-sm btn-primary"><i class="mdi mdi-account-convert"></i>
-                                    </a>
                                     <a href="<?= base_url('dashboard/pengguna/edit/'.$row->id); ?>" 
                                     class="btn-sm btn-warning"><i class="mdi mdi-table-edit"></i>
                                     </a>

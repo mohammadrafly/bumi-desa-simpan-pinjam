@@ -287,13 +287,22 @@ a {
                                             <tr>
                                                 <td>
                                                     <table class="invoice-items" cellpadding="0" cellspacing="0">
-                                                        <tbody><tr>
+                                                        <tbody>
+                                                        <tr>
                                                             <td><?= $pages ?></td>
                                                             <td class="alignright"><?php echo number_to_currency($content['nominal'], 'IDR'); ?></td>
                                                         </tr>
+                                                        <tr>
+                                                            <td>Nadzar</td>
+                                                            <td class="alignright"><?php echo number_to_currency($content['biaya_admin'], 'IDR'); ?></td>
+                                                        </tr>
                                                         <tr class="total">
                                                             <td class="alignright" width="80%">Total</td>
-                                                            <td class="alignright"><?php echo number_to_currency($content['nominal'], 'IDR'); ?></td>
+                                                            <?php 
+                                                            $nadzar = $content['biaya_admin'];
+                                                            $nominal = $content['nominal'];
+                                                            $result = $nadzar + $nominal; ?>
+                                                            <td class="alignright"><?php echo number_to_currency($result, 'IDR'); ?></td>
                                                         </tr>
                                                     </tbody></table>
                                                 </td>

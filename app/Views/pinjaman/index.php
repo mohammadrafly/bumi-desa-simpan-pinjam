@@ -12,13 +12,6 @@
                     </li>
                   </ul>
                   <div>
-                  <?php if(session()->get('role') === 'superadmin'): ?>
-
-                  <?php elseif(session()->get('role') === 'admin'): ?>
-                    <div class="btn-wrapper">
-                      <a href="<?= base_url('dashboard/transaksi/pinjaman/add/'.$user['nik']); ?>" class="btn btn-otline-dark align-items-center"><i class="icon-plus"></i> Add Pinjaman</a>
-                    </div>
-                  <?php endif ?>
                   </div>
                 </div>
               </div>
@@ -26,7 +19,7 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="table-responsive">
-                      <table class="table table-hover">
+                      <table id="example" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th>No</th>

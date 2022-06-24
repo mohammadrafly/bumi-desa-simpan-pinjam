@@ -48,9 +48,13 @@ class Angsuran extends Model
 
     public function getAngsuran()
     {
+        //ambil table
         $query = $this->db->table('angsuran')
+            //join antara table menggunakan foreign key
             ->join('users', 'users.nik = angsuran.nik')
-            ->where('created_at', 'DESC')
+            //mengurutkan data sesuai parameter
+            ->orderBy('created_at', 'DESC')
+            //ambil data yang sudah di query
             ->get();
         return $query;
     }
@@ -59,6 +63,7 @@ class Angsuran extends Model
     {
         $query = $this->db->table('angsuran')
             ->join('users', 'users.nik = angsuran.nik', 'left')
+            //mencari sesuai parameter
             ->where('angsuran.nik', $id)
             ->get();
         return $query;
@@ -69,6 +74,7 @@ class Angsuran extends Model
         $query = $this->db->table('angsuran')
             ->join('users', 'users.nik = angsuran.nik')
             ->orderBy('created_at', 'DESC')
+            //limit data sesuai parameter
             ->limit(6)
             ->get();
         return $query;
@@ -77,7 +83,9 @@ class Angsuran extends Model
     function allAngsuranByID()
     {
         $query = $this->db->table('angsuran')
+                //ambil data sesuai parameter
                 ->where(['id'=>session()->get('id')])
+                //menghitung semua data yang ada di table
                 ->countAllResults();
         return $query;
     }

@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jun 08, 2022 at 07:14 PM
--- Server version: 5.7.33
--- PHP Version: 8.1.6
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 21 Jun 2022 pada 05.56
+-- Versi server: 10.4.24-MariaDB
+-- Versi PHP: 8.0.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `angsuran`
+-- Struktur dari tabel `angsuran`
 --
 
 CREATE TABLE `angsuran` (
@@ -34,32 +34,36 @@ CREATE TABLE `angsuran` (
   `waktu` int(11) NOT NULL,
   `status_angsuran` enum('BELUM LUNAS','LUNAS') NOT NULL,
   `kode_pembayaran` varchar(6) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated-at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated-at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `angsuran`
+-- Dumping data untuk tabel `angsuran`
 --
 
 INSERT INTO `angsuran` (`id_angsuran`, `nik`, `nominal`, `waktu`, `status_angsuran`, `kode_pembayaran`, `created_at`, `updated-at`) VALUES
-(29, '3529017011600002', '3000000', 10, 'BELUM LUNAS', 'PGMUMY', '2022-06-09 01:14:31', '2022-06-09 01:14:31'),
-(28, '3529012012680001', '5000000', 10, 'BELUM LUNAS', 'JQXKZN', '2022-06-09 01:10:04', '2022-06-09 01:10:04'),
-(27, '3529015305770001', '5000000', 10, 'BELUM LUNAS', 'WDZMUU', '2022-06-09 01:01:58', '2022-06-09 01:01:58'),
-(26, '3529015705040003', '5000000', 10, 'BELUM LUNAS', 'LWNUYL', '2022-06-09 00:58:31', '2022-06-09 00:58:31'),
-(25, '3529014519700009', '5000000', 10, 'BELUM LUNAS', 'TEQFGM', '2022-06-09 00:55:42', '2022-06-09 00:55:42'),
-(24, '3529014505700006', '5000000', 10, 'BELUM LUNAS', 'FMYJVW', '2022-06-09 00:45:10', '2022-06-09 00:45:10'),
-(23, '3529015008710003', '5000000', 10, 'BELUM LUNAS', 'SIGFUV', '2022-06-09 00:32:32', '2022-06-09 00:32:32'),
-(22, '3539016705790006', '5000000', 10, 'BELUM LUNAS', 'TPKXJG', '2022-06-09 00:27:34', '2022-06-09 00:27:34'),
-(21, '3528032710820003', '4000000', 10, 'BELUM LUNAS', 'GTPSAX', '2022-06-09 00:20:54', '2022-06-09 00:20:54'),
-(20, '3529011604680015', '5000000', 10, 'BELUM LUNAS', 'SUAGXT', '2022-06-09 00:07:28', '2022-06-09 00:07:28'),
+(18, '3529030208761154', '4000000', 10, 'BELUM LUNAS', 'CWLFDE', '2022-06-09 00:01:46', '2022-06-09 00:01:46'),
 (19, '3529011202720002', '4000000', 10, 'BELUM LUNAS', 'OWXPWW', '2022-06-09 00:04:21', '2022-06-09 00:04:21'),
-(18, '3529030208761154', '4000000', 10, 'BELUM LUNAS', 'CWLFDE', '2022-06-09 00:01:46', '2022-06-09 00:01:46');
+(20, '3529011604680015', '5000000', 10, 'BELUM LUNAS', 'SUAGXT', '2022-06-09 00:07:28', '2022-06-09 00:07:28'),
+(21, '3528032710820003', '4000000', 10, 'BELUM LUNAS', 'GTPSAX', '2022-06-09 00:20:54', '2022-06-09 00:20:54'),
+(22, '3539016705790006', '5000000', 10, 'BELUM LUNAS', 'TPKXJG', '2022-06-09 00:27:34', '2022-06-09 00:27:34'),
+(23, '3529015008710003', '5000000', 10, 'BELUM LUNAS', 'SIGFUV', '2022-06-09 00:32:32', '2022-06-09 00:32:32'),
+(24, '3529014505700006', '5000000', 10, 'BELUM LUNAS', 'FMYJVW', '2022-06-09 00:45:10', '2022-06-09 00:45:10'),
+(25, '3529014519700009', '5000000', 10, 'BELUM LUNAS', 'TEQFGM', '2022-06-09 00:55:42', '2022-06-09 00:55:42'),
+(26, '3529015705040003', '5000000', 10, 'BELUM LUNAS', 'LWNUYL', '2022-06-09 00:58:31', '2022-06-09 00:58:31'),
+(27, '3529015305770001', '5000000', 10, 'BELUM LUNAS', 'WDZMUU', '2022-06-09 01:01:58', '2022-06-09 01:01:58'),
+(28, '3529012012680001', '5000000', 10, 'BELUM LUNAS', 'JQXKZN', '2022-06-09 01:10:04', '2022-06-09 01:10:04'),
+(29, '3529017011600002', '3000000', 10, 'BELUM LUNAS', 'PGMUMY', '2022-06-09 01:14:31', '2022-06-09 01:14:31'),
+(31, '3529014402950004', '1000000', 10, 'BELUM LUNAS', 'MKOJGL', '2022-06-13 21:04:41', '2022-06-13 21:04:41'),
+(32, '3529013006670041', '3000000', 10, 'BELUM LUNAS', 'XZRNBK', '2022-06-13 21:06:20', '2022-06-13 21:06:20'),
+(33, '3529015706060002', '2000000', 10, 'BELUM LUNAS', 'TUQBAQ', '2022-06-13 21:07:17', '2022-06-13 21:07:17'),
+(34, '3529015013660008', '1000000', 10, 'BELUM LUNAS', 'NJFLMB', '2022-06-13 21:08:36', '2022-06-13 21:08:36');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pembayaran`
+-- Struktur dari tabel `pembayaran`
 --
 
 CREATE TABLE `pembayaran` (
@@ -68,11 +72,11 @@ CREATE TABLE `pembayaran` (
   `nominal` varchar(255) NOT NULL,
   `biaya_admin` varchar(255) NOT NULL,
   `created_at` varchar(255) NOT NULL,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `pembayaran`
+-- Dumping data untuk tabel `pembayaran`
 --
 
 INSERT INTO `pembayaran` (`id_pembayaran`, `id_angsuran`, `nominal`, `biaya_admin`, `created_at`, `updated_at`) VALUES
@@ -113,12 +117,13 @@ INSERT INTO `pembayaran` (`id_pembayaran`, `id_angsuran`, `nominal`, `biaya_admi
 (51, 27, '500000', '50000', '2022-06-09 01:02:53', '2022-06-09 01:02:53'),
 (52, 28, '500000', '50000', '2022-06-09 01:10:31', '2022-06-09 01:10:31'),
 (53, 28, '500000', '50000', '2022-06-09 01:10:51', '2022-06-09 01:10:51'),
-(54, 29, '300000', '30000', '2022-06-09 01:15:15', '2022-06-09 01:15:15');
+(54, 29, '300000', '30000', '2022-06-09 01:15:15', '2022-06-09 01:15:15'),
+(58, 31, '100000', '10000', '2022-06-05', '2022-06-13 21:05:23');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `penarikan`
+-- Struktur dari tabel `penarikan`
 --
 
 CREATE TABLE `penarikan` (
@@ -127,14 +132,14 @@ CREATE TABLE `penarikan` (
   `nominal` varchar(255) NOT NULL,
   `kode_penarikan` varchar(6) NOT NULL,
   `status_penarikan` enum('TELAH DIAMBIL','BELUM DIAMBIL') NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `permohonan`
+-- Struktur dari tabel `permohonan`
 --
 
 CREATE TABLE `permohonan` (
@@ -143,15 +148,24 @@ CREATE TABLE `permohonan` (
   `judul_permohonan` varchar(255) NOT NULL,
   `nominal_permohonan` varchar(255) NOT NULL,
   `jenis_permohonan` enum('SIMPAN','PINJAM','PENARIKAN') NOT NULL,
-  `status_permohonan` enum('HOLD','DITERIMA','DITOLAK') NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `status_permohonan` enum('MENUNGGU','DITERIMA','DITOLAK') NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `permohonan`
+--
+
+INSERT INTO `permohonan` (`id_permohonan`, `nik`, `judul_permohonan`, `nominal_permohonan`, `jenis_permohonan`, `status_permohonan`, `created_at`, `updated_at`) VALUES
+(26, '3529015013660008', 'pinjaman ', '1000000', 'PINJAM', 'DITERIMA', '2022-06-20 08:32:03', '2022-06-20 08:32:03'),
+(22, '3529013006670041', 'pinjaman ', '3000000', 'PINJAM', 'DITERIMA', '2022-06-20 08:17:39', '2022-06-20 08:17:39'),
+(23, '3529015706060002', 'pinjaman ', '2000000', 'PINJAM', 'DITERIMA', '2022-06-20 08:20:07', '2022-06-20 08:20:07');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pinjaman`
+-- Struktur dari tabel `pinjaman`
 --
 
 CREATE TABLE `pinjaman` (
@@ -162,11 +176,11 @@ CREATE TABLE `pinjaman` (
   `jenis_pinjaman` enum('BIASA') NOT NULL,
   `status_pinjaman` enum('BELUM DIAMBIL','TELAH DIAMBIL') NOT NULL,
   `created_at` varchar(255) NOT NULL,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `pinjaman`
+-- Dumping data untuk tabel `pinjaman`
 --
 
 INSERT INTO `pinjaman` (`id_pinjaman`, `nominal`, `nik`, `kode_penarikan`, `jenis_pinjaman`, `status_pinjaman`, `created_at`, `updated_at`) VALUES
@@ -181,12 +195,16 @@ INSERT INTO `pinjaman` (`id_pinjaman`, `nominal`, `nik`, `kode_penarikan`, `jeni
 (24, '5000000', '3529015705040003', 'KRXHGC', 'BIASA', 'TELAH DIAMBIL', '2022-03-05', '2022-06-09 00:57:41'),
 (25, '5000000', '3529015305770001', 'GZYXGW', 'BIASA', 'TELAH DIAMBIL', '2022-04-05', '2022-06-09 01:01:24'),
 (26, '5000000', '3529012012680001', 'ZVKKQI', 'BIASA', 'TELAH DIAMBIL', '2022-04-05', '2022-06-09 01:09:38'),
-(27, '3000000', '3529017011600002', 'QRQAWX', 'BIASA', 'TELAH DIAMBIL', '2022-05-14', '2022-06-09 01:13:59');
+(27, '3000000', '3529017011600002', 'QRQAWX', 'BIASA', 'TELAH DIAMBIL', '2022-05-14', '2022-06-09 01:13:59'),
+(28, '3000000', '3529013006670041', 'SZEWPM', 'BIASA', 'TELAH DIAMBIL', '2022-06-05', '2022-06-09 02:54:59'),
+(30, '1000000', '3529014402950004', 'LVUPCT', 'BIASA', 'TELAH DIAMBIL', '2022-05-14', '2022-06-13 21:04:04'),
+(31, '2000000', '3529015706060002', 'OXVRBC', 'BIASA', 'BELUM DIAMBIL', '2022-06-05', '2022-06-13 21:06:55'),
+(32, '1000000', '3529015013660008', 'RVDVGP', 'BIASA', 'TELAH DIAMBIL', '2022-06-05', '2022-06-13 21:07:49');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `simpanan`
+-- Struktur dari tabel `simpanan`
 --
 
 CREATE TABLE `simpanan` (
@@ -197,13 +215,57 @@ CREATE TABLE `simpanan` (
   `jenis_simpanan` enum('POKOK','SUKARELA') NOT NULL,
   `status_simpanan` enum('BELUM DEPOSIT','TELAH DEPOSIT') NOT NULL,
   `created_at` varchar(255) NOT NULL,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `simpanan`
+--
+
+INSERT INTO `simpanan` (`id_simpanan`, `nik`, `nominal`, `kode_deposit`, `jenis_simpanan`, `status_simpanan`, `created_at`, `updated_at`) VALUES
+(35, '3529011604680005', '100000', 'ENULWE', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-15 01:57:48'),
+(34, '3529014402950004', '100000', 'XJNONU', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-15 01:57:23'),
+(71, '3529011805660005', '100000', 'ZAXCJM', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-20 13:34:34'),
+(36, '3529011604680015', '100000', 'TEHBNB', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-15 01:58:20'),
+(37, '3529011101790002', '100000', 'CAWYUG', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-15 01:58:50'),
+(38, '3529012304740002', '100000', 'XTERHI', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-15 01:59:15'),
+(39, '3529010510940007', '100000', 'IEIDTF', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-15 01:59:38'),
+(40, '3529015706060002', '100000', 'FBBMXM', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-15 02:00:28'),
+(41, '3529010605390002', '100000', 'XMEBXU', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-15 02:01:03'),
+(42, '3529010911870004', '100000', 'BJDWZF', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-15 02:01:34'),
+(43, '3529010510660005', '100000', 'HTAFRN', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-15 02:02:15'),
+(44, '3529017011600002', '100000', 'VIJTVM', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-15 02:03:10'),
+(45, '3529016211710002', '100000', 'CLMYBA', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-15 02:03:45'),
+(46, '3529014105730002', '100000', 'UNLZNA', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-15 02:04:21'),
+(47, '3529015305770001', '100000', 'NONJJW', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-19 21:08:17'),
+(48, '3528046312700140', '100000', 'PNGZYV', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-19 21:08:59'),
+(49, '3529016606700001', '100000', 'BZDJRG', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-19 21:09:46'),
+(50, '3529016711850001', '100000', 'YNCXUD', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-19 21:10:26'),
+(51, '3529016811810005', '100000', 'GRQENI', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-19 21:11:05'),
+(52, '3529012509970001', '100000', 'PWHDMM', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-19 21:13:26'),
+(53, '3529010508770006', '100000', 'SKPRAZ', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-19 21:14:57'),
+(54, '3511221104865002', '100000', 'QVWEPD', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-19 21:29:05'),
+(55, '3529013011700002', '100000', 'QAUVRX', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-20 11:52:56'),
+(56, '3528032710820003', '100000', 'VDLKJX', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-20 11:53:44'),
+(57, '3529014505700006', '100000', 'DXEDKF', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-20 11:54:30'),
+(58, '3539016705790006', '100000', 'HIATXT', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-20 11:54:57'),
+(59, '3529015008710003', '100000', 'BHUEOP', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-20 11:55:21'),
+(60, '3529011202720002', '100000', 'UNVHTF', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-20 11:55:58'),
+(61, '3529013402960009', '100000', 'XRYTTO', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-20 11:56:28'),
+(62, '3529017112710002', '100000', 'TZBKHX', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-20 11:56:52'),
+(63, '3529030208761154', '100000', 'TIUQZV', 'POKOK', 'BELUM DEPOSIT', '2022-06-05', '2022-06-20 11:57:19'),
+(64, '3529013006670041', '100000', 'MAYOUI', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-20 11:57:49'),
+(65, '3529015705040003', '100000', 'VATYYW', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-20 11:58:31'),
+(66, '3529015013660008', '100000', 'WAKEWR', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-20 11:59:19'),
+(67, '3529014519700009', '100000', 'GIEBFN', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-20 11:59:41'),
+(68, '3529012012680001', '100000', 'EWYZNP', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-20 12:00:04'),
+(69, '3529014306660002', '100000', 'UCSOIR', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-20 12:01:26'),
+(70, '3515115012900003', '100000', 'ATGRQM', 'POKOK', 'TELAH DEPOSIT', '2022-06-05', '2022-06-20 12:02:57');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -215,20 +277,19 @@ CREATE TABLE `users` (
   `role` enum('superadmin','admin','customer') NOT NULL,
   `gender` enum('laki-laki','perempuan') DEFAULT NULL,
   `password` varchar(255) NOT NULL,
-  `alamat` text,
+  `alamat` text DEFAULT NULL,
   `foto_diri` varchar(255) DEFAULT NULL,
-  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `phone`, `nik`, `role`, `gender`, `password`, `alamat`, `foto_diri`, `created`, `updated_at`) VALUES
-(8, 'admin bumdes', 'admin', 81907861308, '3512361293182639', 'admin', 'laki-laki', '$2a$12$2rdrERdG1A9YxMg6dOm/P..0KqJfYwAPAk8Bh982AvISoFsQINSOq', 'Sarpaan RT 03/RW 01', '1653898358_0e9a388d637433480155.png', '2022-05-12 07:34:45', '2022-05-12 07:34:45'),
-(5, 'bumdes', 'superadmin', 0, '3512361231826318', 'superadmin', 'laki-laki', '$2a$12$VztwJpBNyGlt2IopJmP.VuleiZThrfUCg1nJ4WO0BOVVvTyHqWS4O', 'Sarpaan RT 01/RW 01', NULL, '2022-05-11 03:04:03', '2022-05-11 03:04:03'),
-(15, 'Enin', 'Enin', 81997125698, '3529011805660005', 'customer', 'laki-laki', '$2y$10$d7D1p854F2OmCKkw7p.7sO/TS61Ymqt/42z3lAcWcmi7dwmEgIvRG', 'Sarpaan RT 01/RW 01', NULL, '2022-06-08 21:01:53', '2022-06-08 21:01:53'),
+(5, 'superadmin', 'superadmin', 0, '3512361231826318', 'superadmin', 'laki-laki', '$2a$12$VztwJpBNyGlt2IopJmP.VuleiZThrfUCg1nJ4WO0BOVVvTyHqWS4O', 'Sarpaan RT 01/RW 01', NULL, '2022-05-11 03:04:03', '2022-05-11 03:04:03'),
+(15, 'Enin', 'Enin', 81997125698, '3529011805660005', 'customer', 'laki-laki', '$2y$10$mFdaaxKkiZN4cvoQoancB.ZTYE47LfYB7ATXTR0mLK/j7MF7Xl5GC', 'Sarpaan RT 01/RW 01', NULL, '2022-06-08 21:01:53', '2022-06-08 21:01:53'),
 (16, 'Feny Aulia Rahmadhani', 'Feny Aulia Rahmadhani', 81912400066, '3529014402950004', 'customer', 'perempuan', '$2y$10$DxyOfNAij1.8N.l8mFmS0.PpysgFBpPhNsUhib.flNszuJubdr91m', 'Tal Bantal RT 03/RW 01', NULL, '2022-06-08 22:12:11', '2022-06-08 22:12:11'),
 (17, 'Achmad Rasyidi', 'Achmad Rasyidi', 87850679068, '3529011604680005', 'customer', 'laki-laki', '$2y$10$OTouJfM9vy7upnl3vDq1vezDDuqWGKqcMnyA3/KY5QcUbO5TPiJrO', 'Podak RT 01/RW 03', NULL, '2022-06-08 22:13:50', '2022-06-08 22:13:50'),
 (18, 'Yogi Gunawan', 'Yogi Gunawan', 81939051189, '3529011604680015', 'customer', 'laki-laki', '$2y$10$mPnr39DiD/2iTD9OOtUSAemYxi3G2wjf5yBw3fwil8HcbBaexoeY6', 'Tal Bantal RT 03/RW 01', NULL, '2022-06-08 22:16:46', '2022-06-08 22:16:46'),
@@ -239,7 +300,7 @@ INSERT INTO `users` (`id`, `name`, `username`, `phone`, `nik`, `role`, `gender`,
 (23, 'Yani Nurita', 'Yani Nurita', 81933870958, '3529015706060002', 'customer', 'perempuan', '$2y$10$2nAtfsh4YsLJwi3tofOTbOCn/DvF3nOBuEifHCZedbYuXZsbP4y4m', 'Tal Bantal RT 03/RW 02', NULL, '2022-06-08 22:24:48', '2022-06-08 22:24:48'),
 (24, 'Zainal Arifin', 'Zainal Arifin', 85232889969, '3529010605390002', 'customer', 'laki-laki', '$2y$10$4JcebNNJUbjWRJeVOd1XtOquAqNrdHEoaxoT4MzdpvW6ukueIBGwm', 'Tal Bantal RT 02/RW 02', NULL, '2022-06-08 22:26:13', '2022-06-08 22:26:13'),
 (25, 'Bambang Rudi Hartono', 'Bambang Rudi Hartono', 81937531351, '3529010911870004', 'customer', 'laki-laki', '$2y$10$LDFzWPcWl/4xA3r1jg6.feM3RGC0El4O28Noppfobw/VVt6FDyw4e', 'Tal Bantal RT 03/RW 02', NULL, '2022-06-08 22:27:24', '2022-06-08 22:27:24'),
-(26, 'Taufik Rahman', 'Taufik Rahman', 87777211450, '3529010510660005', 'admin', 'laki-laki', '$2y$10$p2ROt1239qOPF5NimMYgcePXPrKYXhSkCiZygrSq0QDC91C97hnBS', 'Tal Bantal RT 02/RW 02', NULL, '2022-06-08 22:31:56', '2022-06-08 22:31:56'),
+(26, 'Taufik Rahman', 'Taufik Rahman', 87777211450, '3529010510660005', 'customer', 'laki-laki', '$2y$10$p2ROt1239qOPF5NimMYgcePXPrKYXhSkCiZygrSq0QDC91C97hnBS', 'Tal Bantal RT 02/RW 02', NULL, '2022-06-08 22:31:56', '2022-06-08 22:31:56'),
 (27, 'Munawara', 'Munawara', 82338954793, '3529017011600002', 'customer', 'perempuan', '$2y$10$54Cx9eeuVS.DAiw86MqbY.Ej8WaMENR2aYEkeJpXRrshMnEmFkHGi', 'Tal Bantal RT 02/RW 02', NULL, '2022-06-08 22:33:08', '2022-06-08 22:33:08'),
 (28, 'Mistuna', 'Mistuna', 85104106301, '3529016211710002', 'customer', 'laki-laki', '$2y$10$QQzvg17.Upo9io1I1YEH5.G2yUHXQ7LSVmQ5C3fqtzynZUEiMyfIm', 'Tal Bantal RT 02/RW 02', NULL, '2022-06-08 22:33:50', '2022-06-08 22:33:50'),
 (29, 'Tuti Suryaningsih', 'Tuti Suryaningsih', 85236723464, '3529015305770001', 'customer', 'perempuan', '$2y$10$dgCfDNPw415DSxFX/N/67e3TuypGcA6bVz/xS8qUMm7dkncq7QVoa', 'Tal Bantal RT 02/RW 02', NULL, '2022-06-08 22:35:14', '2022-06-08 22:35:14'),
@@ -266,107 +327,102 @@ INSERT INTO `users` (`id`, `name`, `username`, `phone`, `nik`, `role`, `gender`,
 (50, 'Alfian Dwi K', 'Alfian Dwi K', 83853092572, '3529015013660008', 'customer', 'laki-laki', '$2y$10$F7aOCZrfnUO6Vv8wMvNB.uEPliRxYhI14PbmrwusQ0.luCF6NFnMS', 'Tal Bantal RT 02/RW 02', NULL, '2022-06-09 00:50:31', '2022-06-09 00:50:31'),
 (51, 'Faizal Amin', 'Faizal Amin', 81703262347, '3529025811810009', 'admin', 'laki-laki', '$2y$10$oAHc1FbrNNs8Px6lGxKnqeQ12WpGDx9vlkR.tXTWV2nW892fqDNZe', 'Tal Bantal RT 03/RW 01', NULL, '2022-06-09 00:51:45', '2022-06-09 00:51:45'),
 (52, 'Triyuliana W', 'Triyuliana W', 81743992949, '3529014519700009', 'customer', 'perempuan', '$2y$10$VfrGlq/CKkw46RdD9hWikux9gVquzDeOn86MD3zTPTGGnod94J87q', 'Tal Bantal RT 03/RW 02', NULL, '2022-06-09 00:54:30', '2022-06-09 00:54:30'),
-(53, 'Mistahor Rahman', 'Mistahor Rahman', 85231651447, '3529012012680001', 'customer', 'laki-laki', '$2y$10$rExK9ewaBrIEzas7fhekReE1G5eHjMIvfHknNHFY/.0G5zLtvCsla', 'Tal Bantal RT 03/RW 02', NULL, '2022-06-09 01:08:55', '2022-06-09 01:08:55');
+(53, 'Mistahor Rahman', 'Mistahor Rahman', 85231651447, '3529012012680001', 'customer', 'laki-laki', '$2y$10$rExK9ewaBrIEzas7fhekReE1G5eHjMIvfHknNHFY/.0G5zLtvCsla', 'Tal Bantal RT 03/RW 02', NULL, '2022-06-09 01:08:55', '2022-06-09 01:08:55'),
+(54, 'admin', 'admin', 81703992966, '3598863477508096', 'admin', 'laki-laki', '$2a$12$5Esd7vZf2c5sVBMFowTke.4THgPY..aVtXt7y5cygflkcsQIHCX9.', 'Sarpaan RT 01/RW 01', NULL, '2022-06-09 14:10:01', '2022-06-09 14:10:01');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `angsuran`
+-- Indeks untuk tabel `angsuran`
 --
 ALTER TABLE `angsuran`
-  ADD PRIMARY KEY (`id_angsuran`),
-  ADD KEY `phone` (`nik`);
+  ADD PRIMARY KEY (`id_angsuran`);
 
 --
--- Indexes for table `pembayaran`
+-- Indeks untuk tabel `pembayaran`
 --
 ALTER TABLE `pembayaran`
   ADD PRIMARY KEY (`id_pembayaran`),
   ADD KEY `id_angsuran` (`id_angsuran`);
 
 --
--- Indexes for table `penarikan`
+-- Indeks untuk tabel `penarikan`
 --
 ALTER TABLE `penarikan`
-  ADD PRIMARY KEY (`id_penarikan`),
-  ADD KEY `nik` (`id_simpanan`);
+  ADD PRIMARY KEY (`id_penarikan`);
 
 --
--- Indexes for table `permohonan`
+-- Indeks untuk tabel `permohonan`
 --
 ALTER TABLE `permohonan`
-  ADD PRIMARY KEY (`id_permohonan`),
-  ADD KEY `phone` (`nik`);
+  ADD PRIMARY KEY (`id_permohonan`);
 
 --
--- Indexes for table `pinjaman`
+-- Indeks untuk tabel `pinjaman`
 --
 ALTER TABLE `pinjaman`
-  ADD PRIMARY KEY (`id_pinjaman`),
-  ADD KEY `phone` (`nik`);
+  ADD PRIMARY KEY (`id_pinjaman`);
 
 --
--- Indexes for table `simpanan`
+-- Indeks untuk tabel `simpanan`
 --
 ALTER TABLE `simpanan`
-  ADD PRIMARY KEY (`id_simpanan`),
-  ADD UNIQUE KEY `nik` (`nik`),
-  ADD KEY `phone` (`nik`);
+  ADD PRIMARY KEY (`id_simpanan`);
 
 --
--- Indexes for table `users`
+-- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nik` (`nik`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `angsuran`
+-- AUTO_INCREMENT untuk tabel `angsuran`
 --
 ALTER TABLE `angsuran`
-  MODIFY `id_angsuran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_angsuran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
--- AUTO_INCREMENT for table `pembayaran`
+-- AUTO_INCREMENT untuk tabel `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
--- AUTO_INCREMENT for table `penarikan`
+-- AUTO_INCREMENT untuk tabel `penarikan`
 --
 ALTER TABLE `penarikan`
-  MODIFY `id_penarikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_penarikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
--- AUTO_INCREMENT for table `permohonan`
+-- AUTO_INCREMENT untuk tabel `permohonan`
 --
 ALTER TABLE `permohonan`
-  MODIFY `id_permohonan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_permohonan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
--- AUTO_INCREMENT for table `pinjaman`
+-- AUTO_INCREMENT untuk tabel `pinjaman`
 --
 ALTER TABLE `pinjaman`
-  MODIFY `id_pinjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_pinjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
--- AUTO_INCREMENT for table `simpanan`
+-- AUTO_INCREMENT untuk tabel `simpanan`
 --
 ALTER TABLE `simpanan`
-  MODIFY `id_simpanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_simpanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -12,6 +12,7 @@ use App\Models\Penarikan;
 
 class DashboardController extends BaseController
 {
+    //tampil view laporan
     public function laporan()
     {
         $data = [
@@ -20,6 +21,7 @@ class DashboardController extends BaseController
         return view('laporan/index', $data);
     }
 
+    //dashboard
     public function index()
     {
         helper('number');
@@ -29,18 +31,8 @@ class DashboardController extends BaseController
         $angsuran = new Angsuran();
         $pembayaran = new Pembayaran();
         $penarikan = new Penarikan();
-        /*$usersSimpanan = $simpanan->select('MONTH(created_at) AS time, COUNT(id_simpanan) AS total')
-        ->groupBy('MONTH(created_at)')
-        ->get();
-        $usersPinjaman = $pinjaman->select('MONTH(created_at) AS waktu, COUNT(id_pinjaman) AS jumlah')
-        ->groupBy('MONTH(created_at)')
-        ->get();
-        $usersByRole = $user->select('role AS roles, COUNT(id) AS ids')
-        ->groupBy('role')
-        ->get();
-        $data = $permohonan->getPermohonan()->getResult();
-        */
-        //sum
+
+        //mengtotal semua nominal di table tertentu
 		$resultPinjaman = $pinjaman->select('sum(nominal) as sumQuantities')->first();
 		$totalPinjaman = $resultPinjaman['sumQuantities'];
 
@@ -56,15 +48,6 @@ class DashboardController extends BaseController
         $resultPenarikan = $penarikan->select('sum(nominal) as sumQuantities')->first();
         $totalPenarikan = $resultPenarikan['sumQuantities'];
 
-        $usersSimpanan = $simpanan->select('MONTH(simpanan.created_at) AS time, COUNT(id_simpanan) AS total')
-        ->join('users', 'users.nik = simpanan.nik')
-        ->groupBy('MONTH(simpanan.created_at)')
-        ->get();
-        $usersPinjaman = $pinjaman->select('MONTH(pinjaman.created_at) AS waktu, COUNT(id_pinjaman) AS jumlah')
-        ->join('users', 'users.nik = pinjaman.nik')
-        ->groupBy('MONTH(pinjaman.created_at)')
-        ->get();
-
         $data = [
             'pages' => 'Dashboard',
             'total_pinjaman' => $totalPinjaman,
@@ -72,10 +55,9 @@ class DashboardController extends BaseController
             'total_angsuran' => $totalAngsuran,
             'total_pembayaran' => $totalPembayaran,
             'total_penarikan' => $totalPenarikan,
+            //limit tampil data
             'pinjaman' => $pinjaman->getPinjamanLimit6()->getResult(),
             'simpanan' => $simpanan->getSimpananLimit6()->getResult(),
-            'grafikSimpanan' => $usersSimpanan,
-            'grafikPinjaman' => $usersPinjaman,
         ];
         return view('dashboard/index', $data);
     }

@@ -49,8 +49,10 @@ class permohonan extends Model
     public function getPermohonan()
     {
         return $this->select()
+            //join antara table
             ->join('users', 'permohonan.nik = users.nik')
-            ->orderBY('created_at', 'DESC')
+            //mengurutkan data sesuai parameter
+            ->orderBy('created_at', 'DESC')
             ->get();
     }
 
@@ -58,6 +60,7 @@ class permohonan extends Model
     {
         $query = $this->db->table('permohonan')
             ->join('users', 'users.nik = permohonan.nik', 'left')
+            //ambil data sesuai parameter
             ->where('permohonan.nik', $id)
             ->get();
         return $query;
@@ -68,6 +71,7 @@ class permohonan extends Model
         $query = $this->db->table('permohonan')
             ->join('users', 'users.nik = permohonan.nik')
             ->orderBy('created_at', 'DESC')
+            //limit data sesuai parameter
             ->limit(6)
             ->get();
         return $query;
@@ -77,6 +81,7 @@ class permohonan extends Model
     {
         $query = $this->db->table('permohonan')
                 ->where(['id'=>session()->get('id')])
+                //hitung semua row
                 ->countAllResults();
         return $query;
     }

@@ -11,6 +11,7 @@ use App\Models\User;
 
 class PenarikanController extends BaseController
 {
+    //tampil sesaui id
     public function index($id = null)
     {
         helper('number');
@@ -73,8 +74,7 @@ class PenarikanController extends BaseController
         ];
       
         $check = $simpanan->where('nik', $nik)->first();
-        if ($data['nominal'] < $check['nominal']){
-            
+        if ($data['nominal'] >=$check['nominal']){
             if ($model->insert($data)){
                 $simpanan = new Simpanan();
                 $result = $nominal_simpanan - $nominal_penarikan;
@@ -133,6 +133,7 @@ class PenarikanController extends BaseController
         return $this->response->redirect(site_url('dashboard/transaksi/penarikan/simpanan/'.$id_simpanan));
     }
 
+    //delete sesuai id
     public function delete($id = null, $id_simpanan = null)
     {
         $model = new Penarikan();
@@ -147,24 +148,27 @@ class PenarikanController extends BaseController
         $data = $model->findAll();
 
         $spreadsheet = new Spreadsheet();
-        // tulis header/nama kolom 
+
+        $spreadsheet->getActiveSheet()->getStyle('B')->getNumberFormat()
+                    ->setFormatCode('#,##0.00');
+        $spreadsheet->getActiveSheet()->mergeCells('A1:E1');
+        $spreadsheet->getActiveSheet()->getStyle('A1')
+                    ->getAlignment()
+                    ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
         $spreadsheet->setActiveSheetIndex(0)
                     ->setCellValue('A1', 'Laporan Penarikan')
-                    ->setCellValue('B1', 'ID Penarikan')
-                    ->setCellValue('C1', 'Nik')
-                    ->setCellValue('D1', 'Nominal')
-                    ->setCellValue('E1', 'Kode')
-                    ->setCellValue('F1', 'Dibuat');
-        
-        $column = 2;
-        // tulis data penarikan ke cell
+                    ->setCellValue('A2', 'ID Penarikan')
+                    ->setCellValue('B2', 'Nominal')
+                    ->setCellValue('C2', 'Kode')
+                    ->setCellValue('D2', 'Dibuat');
+        $column = 3;
+        // tulis data angsuran ke cell
         foreach($data as $data) {
             $spreadsheet->setActiveSheetIndex(0)
-                        ->setCellValue('B' . $column, $data['id_penarikan'])
-                        ->setCellValue('C' . $column, $data['nik'])
-                        ->setCellValue('D' . $column, $data['nominal'])
-                        ->setCellValue('E' . $column, $data['kode_penarikan'])
-                        ->setCellValue('F' . $column, $data['created_at']);
+                    ->setCellValue('A' . $column, $data['id_penarikan'])
+                    ->setCellValue('B' . $column, $data['nominal'])
+                    ->setCellValue('C' . $column, $data['kode_penarikan'])
+                    ->setCellValue('D' . $column, $data['created_at']);
             $column++;
         }
         // tulis dalam format .xlsx

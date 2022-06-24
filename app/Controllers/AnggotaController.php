@@ -2,23 +2,20 @@
 
 namespace App\Controllers;
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use App\Controllers\BaseController;
 use App\Models\User;
 
 class AnggotaController extends BaseController
 {
     public function index()
-    {
-        $pager = \Config\Services::pager();
+    {   
+        //$model untuk memanggil model User
         $model = new User();
+        //data array//var content memanggil model user tanpa superuser//var pages berisi value Data Anggota
         $data = [
-            'content' => $model->GetUserWithoutSU()->getResult(),
+            'content' => $model->AmbilUserTanpaSuperUser()->getResult(),
             'pages'   => 'Data Anggota',
-            'pengguna'  => $model->pager,
         ];
-        //dd($data);
         return view('anggota/index', $data);
     }
 }

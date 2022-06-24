@@ -27,11 +27,7 @@
                   <?php if(session()->get('role') === 'superadmin'): ?>
 
                   <?php elseif(session()->get('role') === 'admin'): ?>
-                   <!--  
-                    <div class="btn-wrapper">
-                      <a href="<?= base_url('dashboard/permohonan/add'); ?>" class="btn btn-otline-dark align-items-center"><i class="icon-plus"></i> Add permohonan</a>
-                    </div>
-                    -->
+                  
                   <?php endif ?>
                   </div>
                 </div>
@@ -67,11 +63,11 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $row->id_permohonan; ?></td>
                                 <td><?= $row->judul_permohonan; ?></td>
-                                <td><?= $row->nominal_permohonan; ?></td>
+                                <td><?= number_to_currency($row->nominal_permohonan, 'IDR'); ?></td>
                                 <td><?= $row->name; ?></td>
                                 <td><?= $row->jenis_permohonan; ?></td>
                                 <td>
-                                    <?php if($row->status_permohonan === 'HOLD'): ?>
+                                    <?php if($row->status_permohonan === 'MENUNGGU'): ?>
                                       <span class="badge bg-warning text-white"><?= $row->status_permohonan ?></span>
                                     <?php elseif($row->status_permohonan === 'DITERIMA'): ?>
                                       <span class="badge bg-success text-white"><?= $row->status_permohonan ?></span>
@@ -84,8 +80,12 @@
                                 <?php if(session()->get('role') === 'superadmin'): ?>
 
                                 <?php elseif(session()->get('role') === 'admin'): ?>
+                                  <?php if($row->status_permohonan === 'DITERIMA'): ?>
+                                    <a href="<?= base_url('dashboard/permohonan/delete/'.$row->id_permohonan); ?>" class="btn-sm btn-danger text-white"><i class="mdi mdi-delete-forever"></i></a>
+                                  <?php elseif($row->status_permohonan): ?>
                                     <a href="<?= base_url('dashboard/permohonan/edit/'.$row->id_permohonan); ?>" class="btn-sm btn-warning text-white"><i class="mdi mdi-table-edit"></i></a>
                                     <a href="<?= base_url('dashboard/permohonan/delete/'.$row->id_permohonan); ?>" class="btn-sm btn-danger text-white"><i class="mdi mdi-delete-forever"></i></a>
+                                  <?php endif ?>
                                 <?php endif ?>
                                 </td>
                             </tr>

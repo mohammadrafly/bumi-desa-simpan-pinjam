@@ -93,6 +93,7 @@
     <div class="container-fluid page-body-wrapper">
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
+        <!-- jika role superadmin/admin akan menampilkan menu di bawah ini-->
             <?php if(session()->get('role') === 'superadmin' || session()->get('role') === 'admin'): ?>
           <li class="nav-item">
             <a class="nav-link" href="<?= base_url('dashboard'); ?>">
@@ -132,6 +133,7 @@
               <span class="menu-title">Laporan</span>
             </a>
           </li>
+          <!-- jika role customer maka akan mendapatkan menu di bawah ini -->
             <?php elseif(session()->get('role') === 'customer'): ?>
           <li class="nav-item">
             <a class="nav-link" href="<?= base_url('dashboard'); ?>">
@@ -217,6 +219,17 @@
     $(document).ready(function () {
     $('#example').DataTable();
 });
+  </script>
+  <script>
+    function myFunction(event) {
+      console.log(event.target.value)
+
+      if (event.target.value === "POKOK") {
+        document.getElementById("nominal").value = 10000;
+      } else if (event.target.value === "SUKARELA") {
+        document.getElementById("nominal").value = 0;
+      }
+    };
   </script>
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>

@@ -50,7 +50,10 @@ class Simpanan extends Model
     public function getSimpanan()
     {
         $query = $this->db->table('simpanan')
+            //menggabugkan antar 2 table
             ->join('users', 'users.nik = simpanan.nik')
+            //mengurutkan data sesuai parameter
+            ->orderBy('created_at', 'DESC')
             ->get();
         return $query;
     }
@@ -59,6 +62,7 @@ class Simpanan extends Model
     {
         $query = $this->db->table('simpanan')
             ->join('users', 'users.nik = simpanan.nik', 'left')
+            //ambil data sesuai parameter
             ->where('simpanan.nik', $id)
             ->get();
         return $query;
@@ -69,7 +73,8 @@ class Simpanan extends Model
         $query = $this->db->table('simpanan')
             ->join('users', 'users.nik = simpanan.nik')
             ->orderBy('simpanan.created_at', 'DESC')
-            ->limit(6)
+            //limit data sesuai parameter
+            ->limit(10)
             ->get();
         return $query;
     }
@@ -78,6 +83,7 @@ class Simpanan extends Model
     {
         $query = $this->db->table('simpanan')
                 ->where(['id'=>session()->get('id')])
+                //hitung semua row
                 ->countAllResults();
         return $query;
     }

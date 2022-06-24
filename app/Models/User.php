@@ -53,14 +53,16 @@ class User extends Model
     public function getUser()
     {
         $query = $this->db->table('users')
-                          ->where('id !=', session()->get('id'))
-                          ->get();
+                //mengecualikan data sesuai parameter
+                ->where('id !=', session()->get('id'))
+                ->get();
         return $query;
     }
 
-    public function GetUserWithoutSU()
+    public function AmbilUserTanpaSuperUser()
     {
         $query = $this->table('users')
+                //mengecualikan data sesuai parameter
                 ->where('role !=', 'superadmin')
                 ->where('role !=', 'admin')
                 ->get();

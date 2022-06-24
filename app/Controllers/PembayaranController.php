@@ -9,6 +9,7 @@ use App\Models\Pembayaran;
 
 class PembayaranController extends BaseController
 {
+    //delete sesuai id
     public function delete($id)
     {
         $model = new Pembayaran();
@@ -17,6 +18,7 @@ class PembayaranController extends BaseController
         return $this->response->redirect(site_url('dashboard/transaksi'));
     }
 
+    //tampil sesaui id
     public function index($id = null)
     {
         helper('number');
@@ -80,22 +82,27 @@ class PembayaranController extends BaseController
 
         $spreadsheet = new Spreadsheet();
         // tulis header/nama kolom 
+        $spreadsheet->getActiveSheet()->getStyle('C')->getNumberFormat()
+                ->setFormatCode('#,##0.00');
+        $spreadsheet->getActiveSheet()->mergeCells('A1:D1');
+        $spreadsheet->getActiveSheet()->getStyle('A1')
+                ->getAlignment()
+                ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
         $spreadsheet->setActiveSheetIndex(0)
-                    ->setCellValue('A1', 'Laporan Pembayaran')
-                    ->setCellValue('B1', 'ID Pembayaran')
-                    ->setCellValue('C1', 'ID Angsuran')
-                    ->setCellValue('D1', 'Nominal')
-                    ->setCellValue('E1', 'Waktu Transaksi');
-        
-        $column = 2;
-        // tulis data pembayaran ke cell
+                ->setCellValue('A1', 'Laporan Pembayaran')
+                ->setCellValue('A2', 'ID Pembayaran')
+                ->setCellValue('B2', 'ID Angsuran')
+                ->setCellValue('C2', 'Nominal')
+                ->setCellValue('D2', 'Waktu Transaksi');
+        $column = 3;
+        // tulis data angsuran ke cell
         foreach($data as $data) {
-            $spreadsheet->setActiveSheetIndex(0)
-                        ->setCellValue('B' . $column, $data['id_pembayaran'])
-                        ->setCellValue('C' . $column, $data['id_angsuran'])
-                        ->setCellValue('D' . $column, $data['nominal'])
-                        ->setCellValue('E' . $column, $data['created_at']);
-            $column++;
+        $spreadsheet->setActiveSheetIndex(0)
+                ->setCellValue('A' . $column, $data['id_pembayaran'])
+                ->setCellValue('B' . $column, $data['id_angsuran'])
+                ->setCellValue('C' . $column, $data['nominal'])
+                ->setCellValue('D' . $column, $data['created_at']);
+        $column++;
         }
         // tulis dalam format .xlsx
         $writer = new Xlsx($spreadsheet);

@@ -44,7 +44,7 @@ $routes->group('dashboard', ['filter' => 'authGuard'], function ($routes) {
         $routes->post('update', 'ProfileController::update');
         $routes->get('faq', 'ProfileController::faq');
     });
-    $routes->get('laporan', 'DashboardController::laporan' );
+    $routes->get('laporan', 'DashboardController::laporan', ['filter' => 'backEndGuard']);
     $routes->group('my/permohonan', function ($routes) {
         $routes->get('u/(:num)', 'PermohonanController::indexPersonal/$1');
         $routes->get('u/(:num)/new', 'PermohonanController::addPersonal/$1');
@@ -102,7 +102,7 @@ $routes->group('dashboard', ['filter' => 'authGuard'], function ($routes) {
             $routes->get('view/(:num)/(:num)', 'PinjamanController::view/$1/$2');
             $routes->get('pdf/(:num)', 'PinjamanController::pdf/$1');
         });
-        $routes->group('simpanan', function ($routes) {
+        $routes->group('simpanan', ['filter' => 'backEndGuard'], function ($routes) {
             $routes->get('pengguna/(:num)', 'SimpananController::index/$1');
             $routes->get('add/(:num)', 'SimpananController::add/$1');
             $routes->post('store', 'SimpananController::store');
@@ -113,7 +113,7 @@ $routes->group('dashboard', ['filter' => 'authGuard'], function ($routes) {
             $routes->get('view/(:num)/(:num)', 'SimpananController::view/$1/$2');
             $routes->get('pdf/(:num)', 'SimpananController::pdf/$1');
         });
-        $routes->group('angsuran', function ($routes) {
+        $routes->group('angsuran', ['filter' => 'backEndGuard'], function ($routes) {
             $routes->get('pengguna/(:num)', 'AngsuranController::index/$1');
             $routes->get('add/(:num)', 'AngsuranController::add/$1');
             $routes->post('store', 'AngsuranController::store');
@@ -124,7 +124,7 @@ $routes->group('dashboard', ['filter' => 'authGuard'], function ($routes) {
             $routes->get('view/(:num)', 'AngsuranController::view/$1');
             $routes->get('pdf/(:num)', 'AngsuranController::pdf/$1');
         });
-        $routes->group('pembayaran', function ($routes) {
+        $routes->group('pembayaran', ['filter' => 'backEndGuard'], function ($routes) {
             $routes->get('angsuran/(:num)', 'PembayaranController::index/$1');
             $routes->get('add/(:num)', 'PembayaranController::add/$1');
             $routes->post('store', 'PembayaranController::store');
@@ -135,7 +135,7 @@ $routes->group('dashboard', ['filter' => 'authGuard'], function ($routes) {
             $routes->get('view/(:num)', 'PembayaranController::view/$1');
             $routes->get('pdf/(:num)', 'PembayaranController::pdf/$1');
         });
-        $routes->group('penarikan', function ($routes) {
+        $routes->group('penarikan', ['filter' => 'backEndGuard'], function ($routes) {
             $routes->get('simpanan/(:num)', 'PenarikanController::index/$1');
             $routes->get('add/(:num)/(:num)/(:num)', 'PenarikanController::add/$1/$2/$3');
             $routes->post('store', 'PenarikanController::store');

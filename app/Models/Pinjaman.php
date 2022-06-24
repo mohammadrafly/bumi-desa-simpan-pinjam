@@ -50,7 +50,10 @@ class Pinjaman extends Model
     public function getPinjaman()
     {
         $query = $this->db->table('pinjaman')
+            //join antara 2 table
             ->join('users', 'users.nik = pinjaman.nik')
+            //mengurutkan data sesuai parameter
+            ->orderBy('created_at', 'DESC')
             ->get();
         return $query;
     }
@@ -59,6 +62,7 @@ class Pinjaman extends Model
     {
         $query = $this->db->table('pinjaman')
             ->join('users', 'users.nik = pinjaman.nik', 'left')
+            //ambil data sesuai parameter
             ->where('pinjaman.nik', $id)
             ->get();
         return $query;
@@ -69,6 +73,7 @@ class Pinjaman extends Model
         $query = $this->db->table('pinjaman')
             ->join('users', 'users.nik = pinjaman.nik')
             ->orderBy('pinjaman.created_at', 'DESC')
+            //limit data sesuai parameter
             ->limit(10)
             ->get();
         return $query;
@@ -78,6 +83,7 @@ class Pinjaman extends Model
     {
         $query = $this->db->table('pinjaman')
                 ->where(['id'=>session()->get('id')])
+                //hitung semua row
                 ->countAllResults();
         return $query;
     }

@@ -17,12 +17,10 @@ class PenggunaController extends BaseController
 {
     public function index()
     {
-        $pager = \Config\Services::pager();
         $model = new User();
         $data = [
             'content' => $model->getUser()->getResult(),
             'pages'   => 'Data Pengguna',
-            'pengguna'  => $model->pager,
         ];
         //dd($data);
         return view('pengguna/index', $data);
@@ -61,6 +59,7 @@ class PenggunaController extends BaseController
                     'required' => '{field} Harus diisi',
                     'min_length' => '{field} Minimal 16 Karakter',
                     'max_length' => '{field} Maksimal 16 Karakter',
+                    'is_unique' => '{field} NIK sudah terpakai'
                 ]
             ],
             'phone' => [
@@ -69,6 +68,7 @@ class PenggunaController extends BaseController
                     'required' => '{field} Harus diisi',
                     'min_length' => '{field} Minimal 11 Karakter',
                     'max_length' => '{field} Maksimal 13 Karakter',
+                    'is_unique' => '{field} Sudah dipakai!'
                 ]
             ],
             'alamat' => [
@@ -196,28 +196,33 @@ class PenggunaController extends BaseController
         $data = $model->findAll();
 
         $spreadsheet = new Spreadsheet();
-        // tulis header/nama kolom 
+
+        $spreadsheet->getActiveSheet()->mergeCells('A1:G1');
+        $spreadsheet->getActiveSheet()->getStyle('A1')
+                    ->getAlignment()
+                    ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->getActiveSheet()->getStyle('F')->getNumberFormat()
+                    ->setFormatCode('0000000000000000');
         $spreadsheet->setActiveSheetIndex(0)
                     ->setCellValue('A1', 'Laporan Pengguna')
-                    ->setCellValue('B1', 'ID Pengguna')
-                    ->setCellValue('C1', 'Username')
-                    ->setCellValue('D1', 'Nama')
-                    ->setCellValue('E1', 'Role')
-                    ->setCellValue('F1', 'Alamat')
-                    ->setCellValue('G1', 'Nik')
-                    ->setCellValue('H1', 'Join');
-        
-        $column = 2;
-        // tulis data user ke cell
+                    ->setCellValue('A2', 'ID Pengguna')
+                    ->setCellValue('B2', 'Username')
+                    ->setCellValue('C2', 'Nama')
+                    ->setCellValue('D2', 'Role')
+                    ->setCellValue('E2', 'Alamat')
+                    ->setCellValue('F2', 'NIK')
+                    ->setCellValue('G2', 'Join');
+        $column = 3;
+        // tulis data angsuran ke cell
         foreach($data as $data) {
             $spreadsheet->setActiveSheetIndex(0)
-                        ->setCellValue('B' . $column, $data['id'])
-                        ->setCellValue('C' . $column, $data['username'])
-                        ->setCellValue('D' . $column, $data['name'])
-                        ->setCellValue('E' . $column, $data['role'])
-                        ->setCellValue('F' . $column, $data['alamat'])
-                        ->setCellValue('G' . $column, $data['nik'])
-                        ->setCellValue('H' . $column, $data['created']);
+                    ->setCellValue('A' . $column, $data['id'])
+                    ->setCellValue('B' . $column, $data['username'])
+                    ->setCellValue('C' . $column, $data['name'])
+                    ->setCellValue('D' . $column, $data['role'])
+                    ->setCellValue('E' . $column, $data['alamat'])
+                    ->setCellValue('F' . $column, $data['nik'])
+                    ->setCellValue('G' . $column, $data['created']);
             $column++;
         }
         // tulis dalam format .xlsx
@@ -233,6 +238,7 @@ class PenggunaController extends BaseController
         $writer->save('php://output');
     }
 
+    //ambil password sesuai id
     public function gantiPassword($id = null)
     {
         $model = new User();
@@ -267,7 +273,6 @@ class PenggunaController extends BaseController
             session()->setFlashdata('error', $this->validator->listErrors());
             return redirect()->back()->withInput();
         }
-
         $model = new User();
         $id = $this->request->getVar('id');
         $data = [

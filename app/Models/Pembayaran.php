@@ -47,8 +47,11 @@ class Pembayaran extends Model
 
     public function getPembayaran()
     {
+        //ambil data dari table
         $query = $this->db->table('pembayaran')
+            //join menggabungkan antara 2 table dengan foreign key
             ->join('angsuran', 'angsuran.id_angsuran = pembayaran.id_angsuran')
+            //ambil data yang sudah di query
             ->get();
         return $query;
     }
@@ -56,8 +59,10 @@ class Pembayaran extends Model
     public function getPBbyID($id)
     {
         $query = $this->db->table('pembayaran')
+            //set nama alias agar tidak terjadi koalisi/crash antar kolom
             ->select('pembayaran.*, angsuran.nominal AS nominal_angsuran')
             ->join('angsuran', 'angsuran.id_angsuran = pembayaran.id_angsuran', 'left')
+            //ambil data sesuai parameter
             ->where('pembayaran.id_angsuran', $id)
             ->get();
         return $query;
@@ -67,7 +72,9 @@ class Pembayaran extends Model
     {
         $query = $this->db->table('pembayaran')
             ->join('angsuran', 'angsuran.id_angsuran = pembayaran.id_angsuran')
+            //mengurutkan data sesuai parameter
             ->orderBy('created_at', 'DESC')
+            //limit data sesuai parameter
             ->limit(6)
             ->get();
         return $query;

@@ -27,9 +27,7 @@
                     <div class="form-group">
                       <label for="exampleSelectGender">Jenis Permohonan</label>
                         <select name="jenis_permohonan" class="form-control" id="exampleSelectGender">
-                          <option value="SIMPAN">SIMPAN</option>
                           <option value="PINJAM">PINJAM</option>
-                          <option value="PENARIKAN">PENARIKAN</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary me-2">Submit</button>

@@ -60,12 +60,6 @@ class SimpananController extends BaseController
                     'required' => '{field} harus diisi',
                 ],
             ],
-            'created_at' => [
-                'rules' => 'required',
-                'error' => [
-                    'required' => '{field} harus diisi',
-                ],
-            ],
         ])) {
             session()->setFlashdata('error', $this->validator->listErrors());
             return redirect()->back()->withInput();
@@ -77,7 +71,6 @@ class SimpananController extends BaseController
             'nik'   => $nik,
             'nominal' => $this->request->getVar('nominal'),
             'jenis_simpanan' => $this->request->getVar('jenis_simpanan'),
-            'created_at' => $this->request->getVar('created_at'),
             'status_simpanan' => 'BELUM DEPOSIT',
             'kode_deposit' => $kode
         ]);
@@ -141,29 +134,38 @@ class SimpananController extends BaseController
     public function export()
     {
         $model = new Simpanan();
-        $data = $model->findAll();
+        $data = $model->getSimpanan()->getResult();
 
         $spreadsheet = new Spreadsheet();
-        // tulis header/nama kolom 
+
+        $spreadsheet->getActiveSheet()->getStyle('D')->getNumberFormat()
+                    ->setFormatCode('#,##0.00');
+        $spreadsheet->getActiveSheet()->mergeCells('A1:F1');
+        $spreadsheet->getActiveSheet()->getStyle('A1')
+                    ->getAlignment()
+                    ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->getActiveSheet()->getStyle('B')->getNumberFormat()
+                    ->setFormatCode('0000000000000000');
         $spreadsheet->setActiveSheetIndex(0)
                     ->setCellValue('A1', 'Laporan Simpanan')
-                    ->setCellValue('B1', 'ID Simpanan')
-                    ->setCellValue('C1', 'Nik')
-                    ->setCellValue('D1', 'Jenis')
-                    ->setCellValue('E1', 'Nominal')
-                    ->setCellValue('F1', 'Status')
-                    ->setCellValue('G1', 'Dibuat');
-        
-        $column = 2;
-        // tulis data simpanan ke cell
+                    ->setCellValue('A2', 'ID Simpanan')
+                    ->setCellValue('B2', 'NIK')
+                    ->setCellValue('C2', 'Nama')
+                    ->setCellValue('D2', 'Nominal')
+                    ->setCellValue('E2', 'Status')
+                    ->setCellValue('F2', 'Jenis')
+                    ->setCellValue('G2', 'Dibuat');
+        $column = 3;
+        // tulis data angsuran ke cell
         foreach($data as $data) {
             $spreadsheet->setActiveSheetIndex(0)
-                        ->setCellValue('B' . $column, $data['id_simpanan'])
-                        ->setCellValue('C' . $column, $data['nik'])
-                        ->setCellValue('D' . $column, $data['jenis_simpanan'])
-                        ->setCellValue('E' . $column, $data['nominal'])
-                        ->setCellValue('F' . $column, $data['status_simpanan'])
-                        ->setCellValue('G' . $column, $data['created_at']);
+                    ->setCellValue('A' . $column, $data->id_simpanan)
+                    ->setCellValue('B' . $column, $data->nik)
+                    ->setCellValue('C' . $column, $data->name)
+                    ->setCellValue('D' . $column, $data->nominal)
+                    ->setCellValue('E' . $column, $data->status_simpanan)
+                    ->setCellValue('F' . $column, $data->jenis_simpanan)
+                    ->setCellValue('G' . $column, $data->created_at);
             $column++;
         }
         // tulis dalam format .xlsx

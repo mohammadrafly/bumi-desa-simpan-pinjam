@@ -12,11 +12,11 @@
                     <input type="text" hidden name="id_pinjaman" class="form-control" id="exampleInputName1" value="<?= $data['id_pinjaman']; ?>">
                     <div class="form-group">
                       <label for="exampleInputName1">Nominal</label>
-                      <input type="text" name="nominal" class="form-control" id="exampleInputName1" placeholder="Nominal" value="<?= $data['nominal']; ?>">
+                      <input type="text" name="nominal" class="form-control" id="exampleInputName1" placeholder="Nominal" value="<?= number_to_currency($data['nominal'], 'IDR'); ?>" disabled>
                     </div>
                     <div class="form-group">
                       <label for="exampleSelectstatu_pinjaman">Jenis Pinjaman</label>
-                        <select name="jenis_pinjaman" value="<?= $data['jenis_pinjaman']; ?>" class="form-control" id="exampleSelectstatu_pinjaman">
+                        <select name="jenis_pinjaman" value="<?= $data['jenis_pinjaman']; ?>" class="form-control" id="exampleSelectstatu_pinjaman" disabled>
                           <option selected value="<?= $data['jenis_pinjaman']; ?>"><?= $data['jenis_pinjaman']; ?></option>
                         </select>
                     </div>

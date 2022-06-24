@@ -35,7 +35,7 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="table-responsive">
-                      <table class="table table-hover">
+                      <table id="example" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -61,7 +61,7 @@
                                 <td><?= $row->nik; ?></td>
                                 <td><?= $row->jenis_permohonan; ?></td>
                                 <td>
-                                    <?php if($row->status_permohonan === 'HOLD'): ?>
+                                    <?php if($row->status_permohonan === 'MENUNGGU'): ?>
                                       <span class="badge bg-warning text-white"><?= $row->status_permohonan ?></span>
                                     <?php elseif($row->status_permohonan === 'DITERIMA'): ?>
                                       <span class="badge bg-success text-white"><?= $row->status_permohonan ?></span>

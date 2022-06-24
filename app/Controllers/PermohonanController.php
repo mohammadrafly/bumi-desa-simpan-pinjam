@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\Permohonan;
+use App\Models\Pinjaman;
 use App\Models\User;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -12,6 +13,7 @@ class PermohonanController extends BaseController
 {
     public function index()
     {
+        helper('number');
         $pager = \Config\Services::pager();
         $model = new Permohonan();
         $data = [
@@ -73,7 +75,7 @@ class PermohonanController extends BaseController
             'judul_permohonan' => $this->request->getVar('judul_permohonan'),
             'nominal_permohonan'   => $this->request->getVar('nominal_permohonan'),
             'jenis_permohonan' => $this->request->getVar('jenis_permohonan'),
-            'statu_permohonan' => 'HOLD',
+            'status_permohonan' => 'MENUNGGU',
         ]);
         session()->setFlashData('success','Berhasil menambah permohonan');
         return redirect()->to('dashboard/permohonan');
@@ -81,6 +83,7 @@ class PermohonanController extends BaseController
 
     public function edit($id = null)
     {
+        helper('number');
         $model = new Permohonan();
         $data = [
             'data' => $model->where('id_permohonan', $id)->first(),
@@ -104,13 +107,40 @@ class PermohonanController extends BaseController
         }
 
         $model = new Permohonan();
+        $pinjaman = new Pinjaman();
         $id = $this->request->getVar('id_permohonan');
         $data = [
             'status_permohonan' => $this->request->getVar('status_permohonan'),
         ];
-        $model->update($id, $data);
-        session()->setFlashData('berhasil','permohonan telah diupdate!');
-        return $this->response->redirect(site_url('dashboard/permohonan'));
+        $kode = substr(str_shuffle(str_repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 6)), 0, 6);
+        $data_pinjaman = [
+            'nominal' => $this->request->getVar('nominal_permohonan'),
+            'nik' => $this->request->getVar('nik'),
+            'kode_penarikan' => $kode,
+            'jenis_pinjaman' => 'BIASA',
+            'status_pinjaman' => 'BELUM DIAMBIL'
+        ];
+        if ($data['status_permohonan'] === 'DITERIMA') {
+            if ($model->update($id, $data)) {
+                if ($pinjaman->insert($data_pinjaman)) {
+                    session()->setFlashData('success','Berhasil update & menambahkan pinjaman!');
+                    return redirect()->to('dashboard/permohonan');
+                } else {
+                    session()->setFlashData('error','Gagal update & menambahkan pinjaman!');
+                    return redirect()->to('dashboard/permohonan');
+                }
+            } else {
+                session()->setFlashData('error','Gagal update!');
+                return redirect()->to('dashboard/permohonan');
+            }
+        } elseif ($model->update($id, $data)) {
+            session()->setFlashData('success','Berhasil update data!');
+            return redirect()->to('dashboard/permohonan');
+        } else {
+            session()->setFlashData('error','Gagal Mengambil Value DITERIMA!');
+            return redirect()->to('dashboard/permohonan');
+        }
+        //dd($data_pinjaman);
     }
 
     public function delete($id = null)
@@ -124,31 +154,40 @@ class PermohonanController extends BaseController
     public function export()
     {
         $model = new Permohonan();
-        $data = $model->findAll();
+        $data = $model->getPermohonan()->getResult();
 
         $spreadsheet = new Spreadsheet();
-        // tulis header/nama kolom 
+
+        $spreadsheet->getActiveSheet()->getStyle('D')->getNumberFormat()
+                    ->setFormatCode('#,##0.00');
+        $spreadsheet->getActiveSheet()->mergeCells('A1:G1');
+        $spreadsheet->getActiveSheet()->getStyle('A1')
+                    ->getAlignment()
+                    ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->getActiveSheet()->getStyle('B')->getNumberFormat()
+                    ->setFormatCode('0000000000000000');
         $spreadsheet->setActiveSheetIndex(0)
                     ->setCellValue('A1', 'Laporan Permohonan')
-                    ->setCellValue('B1', 'ID Permohonan')
-                    ->setCellValue('C1', 'Nik')
-                    ->setCellValue('D1', 'Judul')
-                    ->setCellValue('E1', 'Nominal')
-                    ->setCellValue('F1', 'Jenis')
-                    ->setCellValue('G1', 'Status')
-                    ->setCellValue('H1', 'Dibuat');
-        
-        $column = 2;
-        // tulis data pinjaman ke cell
+                    ->setCellValue('A2', 'ID Permohonan')
+                    ->setCellValue('B2', 'NIK')
+                    ->setCellValue('C2', 'Nama')
+                    ->setCellValue('D2', 'Judul')
+                    ->setCellValue('E2', 'Jenis')
+                    ->setCellValue('F2', 'Nominal')
+                    ->setCellValue('G2', 'Status')
+                    ->setCellValue('H2', 'Dibuat');
+        $column = 3;
+        // tulis data angsuran ke cell
         foreach($data as $data) {
             $spreadsheet->setActiveSheetIndex(0)
-                        ->setCellValue('B' . $column, $data['id_permohonan'])
-                        ->setCellValue('C' . $column, $data['nik'])
-                        ->setCellValue('D' . $column, $data['judul_permohonan'])
-                        ->setCellValue('E' . $column, $data['nominal_permohonan'])
-                        ->setCellValue('F' . $column, $data['jenis_permohonan'])
-                        ->setCellValue('G' . $column, $data['status_permohonan'])
-                        ->setCellValue('H' . $column, $data['created_at']);
+                    ->setCellValue('A' . $column, $data->id_permohonan)
+                    ->setCellValue('B' . $column, $data->nik)
+                    ->setCellValue('C' . $column, $data->name)
+                    ->setCellValue('D' . $column, $data->judul_permohonan)
+                    ->setCellValue('E' . $column, $data->jenis_permohonan)
+                    ->setCellValue('F' . $column, $data->nominal_permohonan)
+                    ->setCellValue('G' . $column, $data->status_permohonan)
+                    ->setCellValue('H' . $column, $data->created_at);
             $column++;
         }
         // tulis dalam format .xlsx
@@ -228,7 +267,7 @@ class PermohonanController extends BaseController
             'judul_permohonan' => $this->request->getVar('judul_permohonan'),
             'nominal_permohonan'   => $this->request->getVar('nominal_permohonan'),
             'jenis_permohonan' => $this->request->getVar('jenis_permohonan'),
-            'statu_permohonan' => 'HOLD',
+            'status_permohonan' => 'MENUNGGU',
         ]);
         session()->setFlashData('success','Berhasil menambah permohonan');
         return redirect()->to('dashboard/my/permohonan/u/'.$id);
