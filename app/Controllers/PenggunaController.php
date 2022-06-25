@@ -79,12 +79,6 @@ class PenggunaController extends BaseController
                     'max_length' => '{field} Maksimal 255 Karakter',
                 ]
             ],
-            'role' => [
-                'rules' => 'required',
-                'error' => [
-                    'required' => 'Role harus diisi',
-                ],
-            ],
             'password' => [
                 'rules' => 'required|min_length[4]|max_length[35]',
                 'errors' => [
@@ -105,7 +99,7 @@ class PenggunaController extends BaseController
             'gender' => $this->request->getVar('gender'),
             'nik'   => $this->request->getVar('nik'),
             'alamat' => $this->request->getVar('alamat'),
-            'role' => $this->request->getVar('role'),
+            'role' => 'customer',
             'password' => password_hash($this->request->getVar('password'), PASSWORD_BCRYPT),
         ]);
         session()->setFlashData('message','Berhasil menambah Pengguna');
@@ -193,8 +187,10 @@ class PenggunaController extends BaseController
     public function export()
     {
         $model = new User();
-        $data = $model->findAll();
-
+        $start = $this->request->getVar('tgl_mulai');
+        $end = $this->request->getVar('tgl_akhir');
+        $data = $model->RangeDate($start, $end)->getResult();
+        //dd($data);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getActiveSheet()->mergeCells('A1:G1');
@@ -216,19 +212,18 @@ class PenggunaController extends BaseController
         // tulis data angsuran ke cell
         foreach($data as $data) {
             $spreadsheet->setActiveSheetIndex(0)
-                    ->setCellValue('A' . $column, $data['id'])
-                    ->setCellValue('B' . $column, $data['username'])
-                    ->setCellValue('C' . $column, $data['name'])
-                    ->setCellValue('D' . $column, $data['role'])
-                    ->setCellValue('E' . $column, $data['alamat'])
-                    ->setCellValue('F' . $column, $data['nik'])
-                    ->setCellValue('G' . $column, $data['created']);
+                    ->setCellValue('A' . $column, $data->id)
+                    ->setCellValue('B' . $column, $data->username)
+                    ->setCellValue('C' . $column, $data->name)
+                    ->setCellValue('D' . $column, $data->role)
+                    ->setCellValue('E' . $column, $data->alamat)
+                    ->setCellValue('F' . $column, $data->nik)
+                    ->setCellValue('G' . $column, $data->created);
             $column++;
         }
         // tulis dalam format .xlsx
         $writer = new Xlsx($spreadsheet);
-        $date = date('Y-m-d');
-        $fileName = 'Rekap Pengguna_'.$date;
+        $fileName = 'Rekap Pengguna_'.$start.'_-_'.$end;
 
         // Redirect hasil generate xlsx ke web client
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -281,5 +276,14 @@ class PenggunaController extends BaseController
         $model->update($id, $data);
         session()->setFlashData('berhasil','Pengguna telah diupdate!');
         return $this->response->redirect(site_url('dashboard/pengguna'));
+    }
+
+    public function laporanIndex()
+    {
+        $data = [
+            'pages'   => 'Laporan Pengguna',
+        ];
+        //dd($data);
+        return view('pengguna/laporan', $data);
     }
 }

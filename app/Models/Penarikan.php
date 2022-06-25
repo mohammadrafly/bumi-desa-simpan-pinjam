@@ -78,12 +78,12 @@ class Penarikan extends Model
         return $query;
     }
 
-    function allPenarikanByID()
+    public function RangeDate($start, $end)
     {
         $query = $this->db->table('penarikan')
-                ->where(['id'=>session()->get('id')])
-                //hitung semua row di table
-                ->countAllResults();
+                ->where('created_at BETWEEN "'. date('Y-m-d', strtotime($start)). '" AND "'. date('Y-m-d', strtotime($end)).'"')
+                ->orderBy('created_at', 'DESC')
+                ->get();
         return $query;
     }
 }

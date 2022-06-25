@@ -134,8 +134,10 @@ class AngsuranController extends BaseController
     {
         $model = new Angsuran();
         //ambil semua data
-        $data = $model->getAngsuran()->getResult();
-
+        $start = $this->request->getVar('tgl_mulai');
+        $end = $this->request->getVar('tgl_akhir');
+        $data = $model->RangeDate($start, $end)->getResult();
+        //dd($data);
         $spreadsheet = new Spreadsheet();
         // tulis header/nama kolom 
         $spreadsheet->getActiveSheet()->getStyle('D')->getNumberFormat()
@@ -172,7 +174,7 @@ class AngsuranController extends BaseController
         }
         // tulis dalam format .xlsx
         $writer = new Xlsx($spreadsheet);
-        $fileName = 'Rekap angsuran_'.date('Y-m-d');
+        $fileName = 'Rekap angsuran_'.$start.'_-_'.$end;
 
         // Redirect hasil generate xlsx ke web client
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -225,5 +227,14 @@ class AngsuranController extends BaseController
         ];
         //dd($data);
         return view('angsuran/angsuran', $data);
+    }
+
+    public function laporanIndex()
+    {
+        $data = [
+            'pages'   => 'Laporan Angsuran',
+        ];
+        //dd($data);
+        return view('angsuran/laporan', $data);
     }
 }

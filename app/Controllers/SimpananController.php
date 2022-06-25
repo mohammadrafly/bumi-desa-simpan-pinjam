@@ -6,6 +6,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use App\Controllers\BaseController;
 use App\Models\Simpanan;
+use App\Models\Pinjaman;
 use App\Models\User;
 
 class SimpananController extends BaseController
@@ -134,8 +135,10 @@ class SimpananController extends BaseController
     public function export()
     {
         $model = new Simpanan();
-        $data = $model->getSimpanan()->getResult();
-
+        $start = $this->request->getVar('tgl_mulai');
+        $end = $this->request->getVar('tgl_akhir');
+        $data = $model->RangeDate($start, $end)->getResult();
+        //dd($data);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getActiveSheet()->getStyle('D')->getNumberFormat()
@@ -170,7 +173,7 @@ class SimpananController extends BaseController
         }
         // tulis dalam format .xlsx
         $writer = new Xlsx($spreadsheet);
-        $fileName = 'Rekap simpanan_'.date('Y-m-d');
+        $fileName = 'Rekap simpanan_'.$start.'_-_'.$end;
 
         // Redirect hasil generate xlsx ke web client
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -225,5 +228,14 @@ class SimpananController extends BaseController
         ];
         //dd($data);
         return view('simpanan/simpanan', $data);
+    }
+
+    public function laporanIndex()
+    {
+        $data = [
+            'pages'   => 'Laporan Simpanan',
+        ];
+        //dd($data);
+        return view('simpanan/laporan', $data);
     }
 }

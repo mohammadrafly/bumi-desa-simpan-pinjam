@@ -133,8 +133,10 @@ class PinjamanController extends BaseController
     public function export()
     {
         $model = new pinjaman();
-        $data = $model->getPinjaman()->getResult();
-
+        $start = $this->request->getVar('tgl_mulai');
+        $end = $this->request->getVar('tgl_akhir');
+        $data = $model->RangeDate($start, $end)->getResult();
+        //dd($data);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getActiveSheet()->getStyle('D')->getNumberFormat()
@@ -169,7 +171,7 @@ class PinjamanController extends BaseController
         }
         // tulis dalam format .xlsx
         $writer = new Xlsx($spreadsheet);
-        $fileName = 'Rekap pinjaman_'.date('Y-m-d');
+        $fileName = 'Rekap pinjaman_'.$start.'_-_'.$end;
 
         // Redirect hasil generate xlsx ke web client
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -221,5 +223,14 @@ class PinjamanController extends BaseController
         ];
         //dd($data);
         return view('pinjaman/pinjaman', $data);
+    }
+
+    public function laporanIndex()
+    {
+        $data = [
+            'pages'   => 'Laporan Pinjaman',
+        ];
+        //dd($data);
+        return view('pinjaman/laporan', $data);
     }
 }

@@ -109,20 +109,41 @@
                     </div>
                   </div>
                 <?php elseif(session()->get('role') === 'customer'): ?>
-                        <div class="row flex-grow">
-                          <div class="col-12 grid-margin stretch-card">
-                            <div class="card card-rounded table-darkBGImg">
-                              <div class="card-body">
-                                <div class="col-sm-8">
-                                  <h3 class="text-white upgrade-info mb-0">
-                                    Enhance your <span class="fw-bold">Campaign</span> for better outreach
-                                  </h3>
-                                  <a href="<?= base_url('#'); ?>" class="btn btn-info upgrade-btn">Upgrade Account!</a>
-                                </div>
-                              </div>
+                  <div class="tab-content tab-content-basic">
+                    <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
+                      <div class="row">
+                        <div class="col-sm-4">
+                          
+                          <div class="statistics-details d-flex align-items-center justify-content-between">
+                            <div>
+                              <p class="statistics-title">Total Pinjaman Saya</p>
+                              <?php if($my_pinjaman): ?>
+                              <h3 class="rate-percentage"><?= number_to_currency($my_pinjaman, 'IDR') ;?></h3>
+                              <?php elseif(!$my_pinjaman): ?>
+                                <h3 class="rate-percentage">IDR 0</h3>
+                              <?php endif ?>             
+                            </div>
+                            <div>
+                              <p class="statistics-title">Total Simpanan Saya</p>
+                              <?php if($my_simpanan): ?>
+                              <h3 class="rate-percentage"><?= number_to_currency($my_simpanan, 'IDR') ;?></h3>
+                              <?php elseif(!$my_simpanan): ?>
+                                <h3 class="rate-percentage">IDR 0</h3>
+                              <?php endif ?>
+                            </div>
+                            <div>
+                              <p class="statistics-title">Total Angsuran Saya</p>
+                              <?php if($my_angsuran): ?>
+                              <h3 class="rate-percentage"><?= number_to_currency($my_angsuran, 'IDR') ;?></h3>
+                              <?php elseif(!$my_angsuran): ?>
+                                <h3 class="rate-percentage">IDR 0</h3>
+                              <?php endif ?>
                             </div>
                           </div>
                         </div>
+                      </div> 
+                    </div>
+                  </div>
                 <?php elseif(session()->get('role') === 'admin'): ?>
                   <div class="tab-content tab-content-basic">
                     <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 

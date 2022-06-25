@@ -36,12 +36,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                      <label for="exampleSelectGender">Role</label>
-                        <select name="role" class="form-control" id="exampleSelectGender">
-                          <option value="customer">Customer</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                       <label for="exampleSelectGender">Alamat</label>
                         <select name="alamat" class="form-control" id="exampleSelectGender">
                           <option value="Sarpaan RT 01/RW 01">Sarpaan RT 01/RW 01</option>

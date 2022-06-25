@@ -78,8 +78,10 @@ class PembayaranController extends BaseController
     public function export()
     {
         $model = new Pembayaran();
-        $data = $model->findAll();
-
+        $start = $this->request->getVar('tgl_mulai');
+        $end = $this->request->getVar('tgl_akhir');
+        $data = $model->RangeDate($start, $end)->getResult();
+        //dd($data);
         $spreadsheet = new Spreadsheet();
         // tulis header/nama kolom 
         $spreadsheet->getActiveSheet()->getStyle('C')->getNumberFormat()
@@ -98,15 +100,15 @@ class PembayaranController extends BaseController
         // tulis data angsuran ke cell
         foreach($data as $data) {
         $spreadsheet->setActiveSheetIndex(0)
-                ->setCellValue('A' . $column, $data['id_pembayaran'])
-                ->setCellValue('B' . $column, $data['id_angsuran'])
-                ->setCellValue('C' . $column, $data['nominal'])
-                ->setCellValue('D' . $column, $data['created_at']);
+                ->setCellValue('A' . $column, $data->id_pembayaran)
+                ->setCellValue('B' . $column, $data->id_angsuran)
+                ->setCellValue('C' . $column, $data->nominal)
+                ->setCellValue('D' . $column, $data->created_at);
         $column++;
         }
         // tulis dalam format .xlsx
         $writer = new Xlsx($spreadsheet);
-        $fileName = 'Rekap pembayaran_'.date('Y-m-d');
+        $fileName = 'Rekap pembayaran_'.$start.'_-_'.$end;
 
         // Redirect hasil generate xlsx ke web client
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -157,5 +159,14 @@ class PembayaranController extends BaseController
         ];
         //dd($data);
         return view('pembayaran/pembayaran', $data);
+    }
+
+    public function laporanIndex()
+    {
+        $data = [
+            'pages'   => 'Laporan Pembayaran',
+        ];
+        //dd($data);
+        return view('pembayaran/laporan', $data);
     }
 }

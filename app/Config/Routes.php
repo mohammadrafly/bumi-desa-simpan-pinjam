@@ -89,6 +89,15 @@ $routes->group('dashboard', ['filter' => 'authGuard'], function ($routes) {
         $routes->get('delete/(:num)', 'PermohonanController::delete/$1');
         $routes->get('export', 'PermohonanController::export');
     });
+    $routes->group('laporan', ['filter' => 'backEndGuard'], function ($routes) {
+        $routes->get('simpanan', 'SimpananController::laporanIndex');
+        $routes->get('pinjaman', 'PinjamanController::laporanIndex');
+        $routes->get('angsuran', 'AngsuranController::laporanIndex');
+        $routes->get('penarikan', 'PenarikanController::laporanIndex');
+        $routes->get('pembayaran', 'PembayaranController::laporanIndex');
+        $routes->get('permohonan', 'PermohonanController::laporanIndex');
+        $routes->get('pengguna', 'PenggunaController::laporanIndex');
+    });
     $routes->group('transaksi', ['filter' => 'backEndGuard'], function ($routes) {
         $routes->get('/', 'TransaksiController::index');
         $routes->group('pinjaman', function ($routes) {

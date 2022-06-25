@@ -55,6 +55,9 @@ class DashboardController extends BaseController
             'total_angsuran' => $totalAngsuran,
             'total_pembayaran' => $totalPembayaran,
             'total_penarikan' => $totalPenarikan,
+            'my_pinjaman' => $pinjaman->allPinjamanByID(),
+            'my_simpanan' => $simpanan->allSimpananByID(),
+            'my_angsuran' => $angsuran->allAngsuranByID(),
             //limit tampil data
             'pinjaman' => $pinjaman->getPinjamanLimit6()->getResult(),
             'simpanan' => $simpanan->getSimpananLimit6()->getResult(),

@@ -82,9 +82,19 @@ class Pinjaman extends Model
     function allPinjamanByID()
     {
         $query = $this->db->table('pinjaman')
-                ->where(['id'=>session()->get('id')])
+                ->where(['nik' => session()->get('nik')])
                 //hitung semua row
                 ->countAllResults();
+        return $query;
+    }
+
+    public function RangeDate($start, $end)
+    {
+        $query = $this->db->table('pinjaman')
+                ->join('users', 'users.nik = pinjaman.nik', 'left')
+                ->where('created_at BETWEEN "'. date('Y-m-d', strtotime($start)). '" AND "'. date('Y-m-d', strtotime($end)).'"')
+                ->orderBy('created_at', 'DESC')
+                ->get();
         return $query;
     }
 }

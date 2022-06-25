@@ -145,8 +145,10 @@ class PenarikanController extends BaseController
     public function export()
     {
         $model = new Penarikan();
-        $data = $model->findAll();
-
+        $start = $this->request->getVar('tgl_mulai');
+        $end = $this->request->getVar('tgl_akhir');
+        $data = $model->RangeDate($start, $end)->getResult();
+        //dd($data);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getActiveSheet()->getStyle('B')->getNumberFormat()
@@ -173,7 +175,7 @@ class PenarikanController extends BaseController
         }
         // tulis dalam format .xlsx
         $writer = new Xlsx($spreadsheet);
-        $fileName = 'Rekap penarikan_'.date('Y-m-d');
+        $fileName = 'Rekap penarikan_'.$start.'_-_'.$end;
 
         // Redirect hasil generate xlsx ke web client
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -225,5 +227,14 @@ class PenarikanController extends BaseController
         ];
         //dd($data);
         return view('penarikan/penarikan', $data);
+    }
+
+    public function laporanIndex()
+    {
+        $data = [
+            'pages'   => 'Laporan Penarikan',
+        ];
+        //dd($data);
+        return view('penarikan/laporan', $data);
     }
 }

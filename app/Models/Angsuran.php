@@ -84,9 +84,19 @@ class Angsuran extends Model
     {
         $query = $this->db->table('angsuran')
                 //ambil data sesuai parameter
-                ->where(['id'=>session()->get('id')])
+                ->where(['nik' => session()->get('nik')])
                 //menghitung semua data yang ada di table
                 ->countAllResults();
+        return $query;
+    }
+
+    public function RangeDate($start, $end)
+    {
+        $query = $this->db->table('angsuran')
+                ->join('users', 'users.nik = angsuran.nik', 'left')
+                ->where('created_at BETWEEN "'. date('Y-m-d', strtotime($start)). '" AND "'. date('Y-m-d', strtotime($end)).'"')
+                ->orderBy('created_at', 'DESC')
+                ->get();
         return $query;
     }
 }

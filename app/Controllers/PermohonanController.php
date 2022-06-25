@@ -154,8 +154,10 @@ class PermohonanController extends BaseController
     public function export()
     {
         $model = new Permohonan();
-        $data = $model->getPermohonan()->getResult();
-
+        $start = $this->request->getVar('tgl_mulai');
+        $end = $this->request->getVar('tgl_akhir');
+        $data = $model->RangeDate($start, $end)->getResult();
+        //dd($data);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getActiveSheet()->getStyle('D')->getNumberFormat()
@@ -192,7 +194,7 @@ class PermohonanController extends BaseController
         }
         // tulis dalam format .xlsx
         $writer = new Xlsx($spreadsheet);
-        $fileName = 'Rekap Permohonan_'.date('Y-m-d');
+        $fileName = 'Rekap Permohonan_'.$start.'_-_'.$end;
 
         // Redirect hasil generate xlsx ke web client
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -271,5 +273,14 @@ class PermohonanController extends BaseController
         ]);
         session()->setFlashData('success','Berhasil menambah permohonan');
         return redirect()->to('dashboard/my/permohonan/u/'.$id);
+    }
+
+    public function laporanIndex()
+    {
+        $data = [
+            'pages'   => 'Laporan Permohonan',
+        ];
+        //dd($data);
+        return view('permohonan/laporan', $data);
     }
 }

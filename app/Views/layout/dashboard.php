@@ -128,10 +128,22 @@
           </li>
           <li class="nav-item nav-category">Lainnya</li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('dashboard/laporan'); ?>">
-              <i class="menu-icon mdi mdi-chart-bubble"></i>
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <i class="menu-icon mdi mdi-chart-line"></i>
               <span class="menu-title">Laporan</span>
+              <i class="menu-arrow"></i> 
             </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url('dashboard/laporan/simpanan') ;?>">Simpanan</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url('dashboard/laporan/pinjaman') ;?>">Pinjaman</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url('dashboard/laporan/angsuran') ;?>">Angsuran</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url('dashboard/laporan/penarikan') ;?>">Penarikan</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url('dashboard/laporan/pembayaran') ;?>">Pembayaran</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url('dashboard/laporan/permohonan') ;?>">Permohonan</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url('dashboard/laporan/pengguna') ;?>">Pengguna</a></li>
+              </ul>
+            </div>
           </li>
           <!-- jika role customer maka akan mendapatkan menu di bawah ini -->
             <?php elseif(session()->get('role') === 'customer'): ?>

@@ -79,4 +79,13 @@ class Pembayaran extends Model
             ->get();
         return $query;
     }
+
+    public function RangeDate($start, $end)
+    {
+        $query = $this->db->table('pembayaran')
+                ->where('created_at BETWEEN "'. date('Y-m-d', strtotime($start)). '" AND "'. date('Y-m-d', strtotime($end)).'"')
+                ->orderBy('created_at', 'DESC')
+                ->get();
+        return $query;
+    }
 }
