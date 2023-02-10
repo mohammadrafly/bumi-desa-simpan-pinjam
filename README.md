@@ -12,9 +12,6 @@
   </p>
 </div>
 
-<!-- GETTING STARTED -->
-## Getting Started
-
 ## BUMDES
 Ikuti langkah-langkah dibawah ini:
 
