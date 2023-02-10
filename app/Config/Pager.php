@@ -20,11 +20,10 @@ class Pager extends BaseConfig
      *
      * @var array<string, string>
      */
-    public $templates = [
+    public array $templates = [
         'default_full'   => 'CodeIgniter\Pager\Views\default_full',
         'default_simple' => 'CodeIgniter\Pager\Views\default_simple',
         'default_head'   => 'CodeIgniter\Pager\Views\default_head',
-        'bootstrap_pagination'   => 'App\Views\pagers\bootstrap_pagination',
     ];
 
     /**
@@ -33,8 +32,6 @@ class Pager extends BaseConfig
      * --------------------------------------------------------------------------
      *
      * The default number of results shown in a single page.
-     *
-     * @var int
      */
-    public $perPage = 20;
+    public int $perPage = 20;
 }
